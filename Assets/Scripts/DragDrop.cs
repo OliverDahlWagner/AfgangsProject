@@ -6,6 +6,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 {
 
     public GameObject canvas;
+    private GameObject startParent;
 
     private bool isOverDropZone = false;
 
@@ -21,6 +22,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        startParent = transform.parent.gameObject;  // when we start dragging save the parent object
         startPosition = transform.position;
     }
 
@@ -35,7 +37,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
       
         
-        /*transform.SetParent(canvas.transform, true);*/
+        transform.SetParent(canvas.transform, true); // here we pull the card out of hand zone, in unity you can see the card in main canvas
     }
 
 
@@ -48,6 +50,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         else
         {
             transform.position = startPosition;
+            transform.SetParent(startParent.transform, false); // because the card is no longer in the hand zone, it will need to placed back
         }
     }
 

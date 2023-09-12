@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9163641141831517393}
   - component: {fileID: 2653199489217366208}
   - component: {fileID: 4035410665615318138}
-  - component: {fileID: 1923648648942740376}
+  - component: {fileID: -3028311053922616919}
   - component: {fileID: 4943978669005038851}
   - component: {fileID: 3452907943711315613}
   m_Layer: 8
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -622, y: -88.5}
-  m_SizeDelta: {x: 151.428, y: 243.784}
+  m_SizeDelta: {x: 1.4, y: 2.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9163641141831517393
 CanvasRenderer:
@@ -92,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bc86dd431a5bc48867110e5d0670f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1923648648942740376
+  canvas: {fileID: 0}
+--- !u!114 &-3028311053922616919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,10 +102,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8285546800131638688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2be5913cfea7be648a8ebb334328c980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  canvas: {fileID: 0}
 --- !u!61 &4943978669005038851
 BoxCollider2D:
   m_ObjectHideFlags: 0
