@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Logic
+  - TestTag
+  - PlayerCard
+  - EnemyCard
+  - PlayerZone
+  - EnemyZone
   layers:
   - Default
   - TransparentFX
@@ -17,8 +22,8 @@ TagManager:
   - Cards
   - Zoom
   - 
-  - 
-  - 
+  - EnemyDropZone
+  - PlayerDropZone
   - 
   - 
   - 

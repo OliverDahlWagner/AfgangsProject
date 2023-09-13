@@ -43,9 +43,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isOverDropZone)
+        if (isOverDropZone && dropZone.transform.childCount <= 2) // I write 2 here ... 
         {
             transform.SetParent(dropZone.transform, false);
+            Debug.Log(dropZone.transform.childCount); // but it prints 3 here, when maxed ?
         }
         else
         {
@@ -57,7 +58,16 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isOverDropZone = true;
-        dropZone = collision.gameObject; // here we set the gameobject to the collision object (the dropzone)
+
+        if (gameObject.CompareTag(collision.gameObject.tag))
+        {
+            dropZone = collision.gameObject; // here we set the gameobject to the collision object (the dropzone)
+        }
+        else
+        {
+            isOverDropZone = false;
+        }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
