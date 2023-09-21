@@ -26,10 +26,9 @@ public class CardZoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         zoomCard.transform.SetParent(canvas.transform, true); // the new cards that are created will not be in the canvas so we are setting them there
 
         zoomCard.layer = LayerMask.NameToLayer("Zoom"); // this is one solution to this (avoid collisionfrom hover card with dropzone) you could instantiate the zoomcard without a collider or something else
-        
-        var rectTransform = zoomCard.GetComponent<RectTransform>(); // get recttransform component from zoomcard
-        rectTransform.sizeDelta = new Vector2((float)2.2, (float)3.4); // a 50% size increase
-        
+
+        zoomCard.transform.localScale = new Vector3((float)1.5, (float)1.5, (float)1.5);
+
         /*Debug.Log("zoom card position" + zoomCard.transform.position);*/
     }
     public void OnPointerExit(PointerEventData eventData) // we want to delete the object if we aint hovering the hovered object
