@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8829427384152715015}
   - component: {fileID: 545202381143593276}
   - component: {fileID: 7716976259811414070}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: f9eb079007866254fb41fc3778578959, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: b5e69fa1afbcbae43a89c5aafe7b8384, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2114139875267914834}
   - component: {fileID: 8233350919407429544}
   - component: {fileID: 6083977793243099378}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4674121494706360123}
   - component: {fileID: 8700274886717372021}
   - component: {fileID: 8753876277719779419}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Health Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 3283328741835786988}
   - component: {fileID: 7636341374455862669}
   - component: {fileID: 5253277364734162100}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 3170264509676797369}
   - component: {fileID: 1377623911485570427}
   - component: {fileID: 6184830157732162740}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: f9eb079007866254fb41fc3778578959, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: b5e69fa1afbcbae43a89c5aafe7b8384, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 1335893163721302868}
   - component: {fileID: 8492573159329982473}
   - component: {fileID: 7249365688885880980}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Artwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 6105121952725124644}
   - component: {fileID: 4036436684984368523}
   - component: {fileID: 8393233101382583876}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 4911737589448312670}
   - component: {fileID: 298675104185004022}
   - component: {fileID: 5434608758006767387}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: f9eb079007866254fb41fc3778578959, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: b5e69fa1afbcbae43a89c5aafe7b8384, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 7298510683307335389}
   - component: {fileID: 1467912666320158596}
   - component: {fileID: 4902635511352597743}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Power Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,10 +715,11 @@ GameObject:
   - component: {fileID: 4035410665615318138}
   - component: {fileID: -3028311053922616919}
   - component: {fileID: 122563641837229648}
+  - component: {fileID: 7803698787899461738}
   - component: {fileID: 4943978669005038851}
   - component: {fileID: 3452907943711315613}
-  m_Layer: 8
-  m_Name: Card
+  m_Layer: 5
+  m_Name: Hunter - Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +734,7 @@ RectTransform:
   m_GameObject: {fileID: 8285546800131638688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1335893163721302868}
@@ -826,10 +827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517f95959007fd545b76f5c9e7f043b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardIdd: 0
-  cardName: Oliver
-  cardDescription: He is Oliver
-  cardArtwork: {fileID: 0}
+  cardId: 1
+  cardName: Hunter
+  cardDescription: He is a hunter
+  cardArtwork: {fileID: -2413806693520163455, guid: b5e69fa1afbcbae43a89c5aafe7b8384, type: 3}
   cardCost: 2
   cardPower: 2
   cardHealth: 3
@@ -839,6 +840,18 @@ MonoBehaviour:
   costText: {fileID: 6083977793243099378}
   powerText: {fileID: 4902635511352597743}
   healthText: {fileID: 8753876277719779419}
+--- !u!114 &7803698787899461738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285546800131638688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2d3596e7f9b2e44acbcf522c8f195a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &4943978669005038851
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -897,7 +910,7 @@ GameObject:
   - component: {fileID: 901598538902680775}
   - component: {fileID: 230208095372476278}
   - component: {fileID: 1258715492333338103}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Description Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +990,7 @@ GameObject:
   - component: {fileID: 6191764506432692860}
   - component: {fileID: 5889487611789455927}
   - component: {fileID: 5195694394035278584}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

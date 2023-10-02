@@ -20,7 +20,7 @@ public class CardZoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!gameObject.CompareTag("PlayerZone")){return;} // this will need changing if the tags change (or end up doing something differnt)
+        if (!gameObject.CompareTag("PlayerCard")){return;} // this will need changing if the tags change (or end up doing something differnt)
         
         zoomCard = Instantiate(gameObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + (float)3.25), Quaternion.identity); // a static position above the card
         zoomCard.transform.SetParent(canvas.transform, true); // the new cards that are created will not be in the canvas so we are setting them there

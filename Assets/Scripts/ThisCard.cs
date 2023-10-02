@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class ThisCard : MonoBehaviour
 {
-    public int cardIdd;
+    public int cardId;
     [SerializeField] private string cardName;
     [SerializeField] private string cardDescription;
     [SerializeField] private Sprite cardArtwork;
-    [SerializeField] private int cardCost;
-    [SerializeField] private int cardPower;
-    [SerializeField] private int cardHealth;
+    [SerializeField] public int cardCost;
+    [SerializeField] public int cardPower;
+    [SerializeField] public int cardHealth;
 
     public Text nameText;
     public Text descriptionText;
@@ -24,7 +24,7 @@ public class ThisCard : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("start is run");
+        /*Debug.Log("start is run");*/
        // Clone the card from the database
         /*CopyCardData(CardDataBase.cardList[thisCardId], thisCard);*/
 
@@ -53,6 +53,17 @@ public class ThisCard : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damageAmount)
+    {
+        cardHealth -= damageAmount;
+        
+        if (cardHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+   
+
     private void AssignValuesToCard()
     {
         nameText.text = cardName;
@@ -62,5 +73,11 @@ public class ThisCard : MonoBehaviour
         healthText.text = cardHealth.ToString();
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "EnemyZone")
+        {
+            Debug.Log("something");
+        }
+    }
 }
