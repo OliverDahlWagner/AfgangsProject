@@ -21,6 +21,9 @@ public class ThisCard : MonoBehaviour
     public Text costText;
     public Text powerText;
     public Text healthText;
+    
+    public bool hasAttacked = false;
+    public bool hasBeenPlaced = false;
 
     private void Start()
     {
