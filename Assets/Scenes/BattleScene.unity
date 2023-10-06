@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 756561036}
   - component: {fileID: 756561037}
   - component: {fileID: 756561038}
+  - component: {fileID: 756561039}
   m_Layer: 0
   m_Name: Battle System
   m_TagString: Untagged
@@ -825,6 +826,8 @@ MonoBehaviour:
   - {fileID: 511762912}
   playerHand: {fileID: 3251457195723849110}
   enemyHand: {fileID: 6784180021040684962}
+  playerAva: {fileID: 0}
+  enemyAva: {fileID: 0}
   state: 0
 --- !u!114 &756561038
 MonoBehaviour:
@@ -844,13 +847,29 @@ MonoBehaviour:
   - {fileID: 913189164}
   - {fileID: 718701329}
   - {fileID: 863764553}
-  playedCardCount: 0
   enemyPlayingDeck: []
+  enemyHand: []
+  enemyDropZones:
+  - {fileID: 7235132930248493584}
+  - {fileID: 397955867}
+  - {fileID: 511762912}
   theCards:
   - {fileID: 8285546800131638688, guid: 5600d0cb461bc154182de7839c14de1f, type: 3}
   - {fileID: 8285546800131638688, guid: 18370c58dc7c7a646afb0f6e81c2d88a, type: 3}
   PlayerArea: {fileID: 3251457195723849110}
   EnemyArea: {fileID: 6784180021040684962}
+--- !u!114 &756561039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756561035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502a8922a7999ad4ba2fb1c39fb2e2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &777904324 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8777654491266481663, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
@@ -1857,12 +1876,36 @@ PrefabInstance:
       value: Draw Card
       objectReference: {fileID: 0}
     - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 756561038}
     - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DrawCards, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8476004130000425785, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
       propertyPath: Card

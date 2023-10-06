@@ -18,7 +18,8 @@ public class DrawCards : MonoBehaviour
 
     private List<int> enemyDeck;
     public List<GameObject> enemyPlayingDeck;
-
+    public List<GameObject> enemyHand;
+    public List<GameObject> enemyDropZones;
     public List<GameObject> theCards; // if we do it like this all the cards will be in there. ON THE BUTTON
     // could maybe in future be made to a game-manager or a deck/hand manager (the button object in general)
 
@@ -30,6 +31,7 @@ public class DrawCards : MonoBehaviour
 
 
     private int playerHandsize = 4;
+    private int enemyHandsize = 4;
 
     void Awake()
     {
@@ -44,6 +46,7 @@ public class DrawCards : MonoBehaviour
             2, 2, 2, 1, 1, 1 // Example enemyDeck IDs of cards
         };
 
+      
 
         playerPlayingDeck = GetMatchingCards(playerPlayingDeck);
         enemyPlayingDeck = GetMatchingCards(enemyPlayingDeck);
@@ -55,18 +58,24 @@ public class DrawCards : MonoBehaviour
         DrawCard(enemyPlayingDeck, 4, EnemyArea, enemyTag);
 
         playerHandsize = PlayerArea.transform.childCount;
+        enemyHandsize = EnemyArea.transform.childCount;
         
         foreach (Transform child in PlayerArea.transform)
         {
             playerHand.Add(child.gameObject);
         }
-        playerHandCount = playerHand.Count;
+
+        foreach (Transform child in EnemyArea.transform)
+        {
+            enemyHand.Add(child.gameObject);
+        }
     }
 
     private void Update()
     {
         if (playerHandsize != PlayerArea.transform.childCount)
         {
+            Debug.Log("THIS SHOULD FUAAA");
             playerHand.Clear();
             foreach (Transform child in PlayerArea.transform)
             {
@@ -80,10 +89,17 @@ public class DrawCards : MonoBehaviour
 
     }
 
-    public void OnClick()  // in future maybe make a player and a enemy draw function. to avoid needing to have references 
+
+    public void OnClick(bool playerDrawing)  // The playerDrawing is true when button is clicked.
     {
-        DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
-        /*DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);*/
+        if (playerDrawing)
+        {
+            DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+        }
+        else
+        {
+            DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);
+        }
     }
 
 

@@ -113,6 +113,7 @@ public class BattleSystem : MonoBehaviour
     {
         IncreaseMana(enemyAva);
         Debug.Log("Enemy Turn");
+        GetComponent<AiSystem>().playCards();
         // now just make it do its thing, then end if conditions is meet
 
 
