@@ -24,6 +24,7 @@ public class ThisCard : MonoBehaviour
     
     public bool hasAttacked = false;
     public bool hasBeenPlaced = false;
+    public bool isOnBoard = false;
 
     private void Start()
     {
