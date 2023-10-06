@@ -11,6 +11,10 @@ public class DrawCards : MonoBehaviour
     private List<int> playerDeck;
     public List<GameObject> playerPlayingDeck;
     public List<GameObject> playerHand;
+    public List<GameObject> playerDropZones;
+    private int playerHandCount;
+    private int playerDropZonesChildren = 0;
+    private int playerManaInPlay = 0;
 
     private List<int> enemyDeck;
     public List<GameObject> enemyPlayingDeck;
@@ -56,6 +60,7 @@ public class DrawCards : MonoBehaviour
         {
             playerHand.Add(child.gameObject);
         }
+        playerHandCount = playerHand.Count;
     }
 
     private void Update()
@@ -70,6 +75,8 @@ public class DrawCards : MonoBehaviour
 
             playerHandsize = PlayerArea.transform.childCount;
         }
+        
+        
 
     }
 

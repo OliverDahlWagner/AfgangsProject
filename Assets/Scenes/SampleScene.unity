@@ -840,6 +840,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPlayingDeck: []
   playerHand: []
+  playerDropZones:
+  - {fileID: 913189164}
+  - {fileID: 718701329}
+  - {fileID: 863764553}
+  playedCardCount: 0
   enemyPlayingDeck: []
   theCards:
   - {fileID: 8285546800131638688, guid: 5600d0cb461bc154182de7839c14de1f, type: 3}
@@ -1336,9 +1341,9 @@ RectTransform:
   - {fileID: 1951691564582991391}
   - {fileID: 268411851}
   - {fileID: 1373847746}
+  - {fileID: 1673241136}
   - {fileID: 8959063689514085369}
   - {fileID: 8761388559520647853}
-  - {fileID: 1673241136}
   - {fileID: 885952880}
   - {fileID: 1936934105}
   m_Father: {fileID: 0}
@@ -1422,7 +1427,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 992011159}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

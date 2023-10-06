@@ -31,8 +31,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerHand;
     public GameObject enemyHand;
 
-    private Avatar playerAva;
-    private Avatar enemyAva;
+    public Avatar playerAva;
+    public Avatar enemyAva;
 
     public BattleState state;
 
@@ -42,12 +42,11 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.START;
         SetupBattle();
-        
+
         foreach (GameObject zone in playerDropZones)
         {
             if (zone.transform.childCount == 0)
             {
-                
             }
         }
     }
@@ -66,7 +65,7 @@ public class BattleSystem : MonoBehaviour
         }*/
         
     }
-    
+
 
     private void SetupBattle()
     {
@@ -90,13 +89,18 @@ public class BattleSystem : MonoBehaviour
         // Debug.Log(state.ToString());
     }
 
-    private void TurnHandler() // not a turnhandler (he does functions that call functions. not A function that calls functions)
-    {                               // and do some coroutines
+    private void
+        TurnHandler() // not a turnhandler (he does functions that call functions. not A function that calls functions)
+    {
+        // and do some coroutines
     }
 
     private void PlayerTurn()
     {
+        IncreaseMana(playerAva);
+
         Debug.Log("Player Turn");
+        
         // Debug.Log(playerHand.transform.childCount);
         // Debug.Log(playerHand.transform.GetChild(1).name); // no need for this shit. we have drawcards script on this gameobject
         //                                                     // go thorgh the playerplayingdeck given some variable that can used 
@@ -107,9 +111,11 @@ public class BattleSystem : MonoBehaviour
 
     private void EnemyTurn()
     {
+        IncreaseMana(enemyAva);
         Debug.Log("Enemy Turn");
         // now just make it do its thing, then end if conditions is meet
-        
+
+
         EndEnemyTurn();
     }
 
@@ -118,5 +124,54 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Ended EnemyTurn");
         state = BattleState.PLAYERTURN;
         PlayerTurn();
+    }
+
+    private void IncreaseMana(Avatar avatar)
+    {
+        avatar.currentMana += 1;
+        avatar.SetCurrentMana(avatar.currentMana);
+    }
+
+    public void ManaCostHandler(int manaCost)
+    {
+
+        playerAva.currentMana -= manaCost;
+        playerAva.SetCurrentMana(playerAva.currentMana);
+
+        // int totalMana = GetComponent<DrawCards>().playedManaCount;
+        //
+        // foreach (var dropZone in GetComponent<DrawCards>().playerDropZones)
+        // {
+        //     // Debug.Log(dropZone.transform.childCount + " indi dropzone count");
+        //     if (dropZone.transform.childCount != 0)
+        //     {
+        //         // manaInPlay = + dropZone.transform.GetChild(0).GetComponent<ThisCard>().cardCost;
+        //         totalMana += dropZone.transform.GetChild(0).GetComponent<ThisCard>().cardCost;
+        //     }
+        // }
+        //
+        //
+        // // Debug.Log(GetComponent<DrawCards>().playedManaCount);
+        // // find the diff
+        //
+        // // set new played mana
+        //
+        // if (GetComponent<DrawCards>().playedManaCount != totalMana)
+        // {
+        //     GetComponent<DrawCards>().playedManaCount = totalMana;
+        // }
+
+
+
+        // Debug.Log(manaInPlay);
+        // GetComponent<DrawCards>().playedManaCount = manaInPlay;
+        //
+        // var titi = GetComponent<DrawCards>().playerDropZones.Count;
+        // Debug.Log(titi + " whole dropzone count");
+        //
+        // foreach (var dropZone in GetComponent<DrawCards>().playerDropZones)
+        // {
+        //     Debug.Log(dropZone.transform.childCount + " indi dropzone count");
+        // }
     }
 }
