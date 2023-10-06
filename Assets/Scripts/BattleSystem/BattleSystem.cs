@@ -64,7 +64,9 @@ public class BattleSystem : MonoBehaviour
                 // and not in this loop, its just here im writing it (make a function)
             }
         }*/
+        
     }
+    
 
     private void SetupBattle()
     {
@@ -82,9 +84,10 @@ public class BattleSystem : MonoBehaviour
 
     public void endPlayerTurn()
     {
-        Debug.Log("end player clicked");
+        Debug.Log("end player turn clicked");
         state = BattleState.ENEMYTURN;
-        Debug.Log(state.ToString());
+        EnemyTurn();
+        // Debug.Log(state.ToString());
     }
 
     private void TurnHandler() // not a turnhandler (he does functions that call functions. not A function that calls functions)
@@ -94,17 +97,26 @@ public class BattleSystem : MonoBehaviour
     private void PlayerTurn()
     {
         Debug.Log("Player Turn");
-        Debug.Log(playerHand.transform.childCount);
-        Debug.Log(playerHand.transform.GetChild(1).name); // no need for this shit. we have drawcards script on this gameobject
-                                                            // go thorgh the playerplayingdeck given some variable that can used 
-                                                            // when being dragged or attacking
-        Debug.Log(GetComponent<DrawCards>().playerHand.Count);
-        Debug.Log(GetComponent<DrawCards>().playerHand[1].name);
+        // Debug.Log(playerHand.transform.childCount);
+        // Debug.Log(playerHand.transform.GetChild(1).name); // no need for this shit. we have drawcards script on this gameobject
+        //                                                     // go thorgh the playerplayingdeck given some variable that can used 
+        //                                                     // when being dragged or attacking
+        // Debug.Log(GetComponent<DrawCards>().playerHand.Count);
+        // Debug.Log(GetComponent<DrawCards>().playerHand[1].name);
     }
 
     private void EnemyTurn()
     {
         Debug.Log("Enemy Turn");
+        // now just make it do its thing, then end if conditions is meet
+        
+        EndEnemyTurn();
+    }
+
+    private void EndEnemyTurn()
+    {
+        Debug.Log("Ended EnemyTurn");
         state = BattleState.PLAYERTURN;
+        PlayerTurn();
     }
 }
