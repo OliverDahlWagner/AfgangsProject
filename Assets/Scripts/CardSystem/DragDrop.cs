@@ -75,7 +75,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         if (isOverDropZone && dropZone.transform.childCount < 1) // I write 2 here ... <=2
         {
             transform.SetParent(dropZone.transform, false);
-
+            transform.GetComponent<ThisCard>().isOnBoard = true;
             transform.GetComponent<ThisCard>().hasBeenPlaced = true;
 
             Debug.Log(dropZone.transform.childCount); // but it prints 3 here, when maxed ?
