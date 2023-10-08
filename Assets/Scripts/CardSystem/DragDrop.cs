@@ -107,11 +107,12 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isOverDropZone = true;
+        
 
         if (gameObject.CompareTag("PlayerCard") && collision.gameObject.CompareTag("PlayerZone") ||
             gameObject.CompareTag("EnemyCard") && collision.gameObject.CompareTag("EnemyZone"))
         {
+            isOverDropZone = true;
             if (1 == collision.gameObject.transform
                     .childCount) // so there wont be a indicator that it can be dropped if it contains card. Also a good check to have. Not really needed because of the check in endDrag
             {
@@ -126,18 +127,16 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 dropZone.GetComponent<Image>().color = new Color32(124, 193, 191, 255);
             }
         }
-        else
-        {
-            isOverDropZone = false;
-        }
-        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isOverDropZone = false;
-        if (dropZone != null) dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
-        dropZone = null;
+        if (collision.gameObject.CompareTag("PlayerZone"))
+        {
+            isOverDropZone = false;
+            if (dropZone != null) dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
+            dropZone = null;
+        }
     }
 
 
