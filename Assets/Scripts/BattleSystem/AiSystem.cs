@@ -68,7 +68,58 @@ public class AiSystem : MonoBehaviour
 
 
             }
+
+            
         }
+        Attack(2);
+    }
+
+    // All that this attack does is prioritise to attack cards first. However the cards attacked are random.
+    private void Attack(int damageAmount)
+    {
+        
+        // Figuring out which playerzones has cards in them, if any.
+        var playerZones = GetComponent<DrawCards>().playerDropZones;
+        List<int> attackableCardIndexes = new List<int>();
+        for (int i = 0; i < playerZones.Count; i++)
+        {
+            if(playerZones[i].transform.childCount > 0)
+            {
+                attackableCardIndexes.Add(i);
+            }
+        }
+
+
+        if(attackableCardIndexes.Count > 0)
+        {
+            // ATTACK A RANDOM AVAILABLE CARD
+            var random = new System.Random();
+
+            int targetIndex = attackableCardIndexes[random.Next(0, attackableCardIndexes.Count)];
+            playerZones[targetIndex].transform.GetChild(0);
+
+
+            Transform childTransform = playerZones[targetIndex].transform.GetChild(0);
+            ThisCard thisCardComponent = childTransform.GetComponent<ThisCard>();
+
+        
+            // Call the TakeDamage method on the ThisCard component.
+           thisCardComponent.TakeDamage(damageAmount);
+
+            }
+        else{
+            // ATTACK THE PLAYER CUZ NO PLAYERCARDS ON BOARD
+        }
+
+
+
+
+
+
+         //   int index = random.Next(playerZones.Count);
+
+
+
     }
 
 }
