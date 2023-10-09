@@ -27,15 +27,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (HasBeenPlacedThisRound())
-        {
-            return;
-        }
-
-        if (HasAttackedThisRound())
-        {
-            return;
-        }
+        if(CardNotMove()){return;}
 
         startParent = transform.parent.gameObject; // when we start dragging save the parent object
         startPosition = transform.position;
@@ -43,15 +35,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (HasBeenPlacedThisRound())
-        {
-            return;
-        }
+        if(CardNotMove()){return;}
 
-        if (HasAttackedThisRound())
-        {
-            return;
-        }
 
         Vector3 v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -66,15 +51,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (HasBeenPlacedThisRound())
-        {
-            return;
-        }
-
-        if (HasAttackedThisRound())
-        {
-            return;
-        }
+        if(CardNotMove()){return;}
 
         if (isOverDropZone 
             && dropZone.transform.childCount < 1) // I write 2 here ... <=2
@@ -137,15 +114,24 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             dropZone = null;
         }
     }
+    
+    private bool CardNotMove() // if any conditions is true, card wont move
+    {
+        return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn();
+    }
 
-
-    private bool HasAttackedThisRound()
+    private bool HasAttackedThisRound() // condition for not moving
     {
         return gameObject.GetComponent<ThisCard>().hasAttacked;
     }
 
-    private bool HasBeenPlacedThisRound()
+    private bool HasBeenPlacedThisRound() // condition for not moving
     {
         return gameObject.GetComponent<ThisCard>().hasBeenPlaced;
+    }
+
+    private bool IsNotPlayerTurn() // condition for not moving
+    {
+        return battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN;
     }
 }
