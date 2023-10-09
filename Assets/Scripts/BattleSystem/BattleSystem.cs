@@ -175,4 +175,12 @@ public class BattleSystem : MonoBehaviour
         //     Debug.Log(dropZone.transform.childCount + " indi dropzone count");
         // }
     }
+
+
+    // Will probably be put together with the first one at some point.
+    public void ManaCostHandlerEnemy(int manaCost)
+    {
+        enemyAva.currentMana -= manaCost;
+        enemyAva.SetCurrentMana(enemyAva.currentMana);
+    }
 }

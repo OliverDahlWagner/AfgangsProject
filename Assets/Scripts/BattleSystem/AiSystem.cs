@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class AiSystem : MonoBehaviour
 {
+
+    public GameObject battleSystem;
+
+
+
+    public void Awake() 
+    {
+        battleSystem = GameObject.Find("Battle System");
+    }
     public void playCards()
     {
         var cardsOnHand = GetComponent<DrawCards>().enemyHand;
@@ -14,7 +23,7 @@ public class AiSystem : MonoBehaviour
         GetComponent<DrawCards>().OnClick(false);
 
 
- 
+
 
         // Pick random card on hand
         var random = new System.Random();
@@ -31,33 +40,35 @@ public class AiSystem : MonoBehaviour
             }
         }
 
-        // If there are avaiable dropzones, play card in a random dropzone.
-        if (availableIndexes.Count > 0)
+        // CardCost
+        var cardCost = playingCard.transform.GetComponent<ThisCard>().cardCost;
+
+        // If there are avaiable dropzones & MANA, play card in a random dropzone.
+        if (availableIndexes.Count > 0 && battleSystem.GetComponent<BattleSystem>().enemyAva.currentMana >= cardCost)
         {
             indexDropZone = random.Next(availableIndexes.Count);
+            var dropZone = dropZones[availableIndexes[indexDropZone]];
+
+            if (dropZone.transform.childCount < 1)
+            {
+                playingCard.transform.SetParent(dropZone.transform, false);
+
+                playingCard.transform.GetComponent<ThisCard>().isOnBoard = true;
+                playingCard.transform.GetComponent<ThisCard>().hasBeenPlaced = true;
+
+                // Removes card from hand
+                cardsOnHand.RemoveAt(index);
+                GetComponent<DrawCards>().enemyHand = cardsOnHand;
+
+
+                // Mana cost
+                battleSystem.GetComponent<BattleSystem>().ManaCostHandlerEnemy(playingCard.transform.GetComponent<ThisCard>().cardCost);
+
+
+
+
+            }
         }
-        else
-        {
-            return;
-        }
-
-        var dropZone = dropZones[availableIndexes[indexDropZone]];
-        if (dropZone.transform.childCount < 1)
-        {
-            playingCard.transform.SetParent(dropZone.transform, false);
-
-            playingCard.transform.GetComponent<ThisCard>().isOnBoard = true;
-            playingCard.transform.GetComponent<ThisCard>().hasBeenPlaced = true;
-
-            cardsOnHand.RemoveAt(index);
-            GetComponent<DrawCards>().enemyHand = cardsOnHand;
-
-        }
-
-        // MANA STUFF?
-        // ATTACK STUFF?
-
-
     }
 
 }
