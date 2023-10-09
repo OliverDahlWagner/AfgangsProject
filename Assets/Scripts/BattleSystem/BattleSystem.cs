@@ -163,7 +163,4 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Player Lost!! u suck");
     }
     
-    
-    
-    
 }
