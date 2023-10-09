@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -53,17 +54,8 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        /*foreach (GameObject zone in playerDropZones)
-        {
-            if (zone.transform.childCount != 0)
-            {
-                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasAttacked = true;
-                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasBeenPlaced = true;
-                // need to be reset to false when a new round starts (being set to true is already being taken care of)
-                // and not in this loop, its just here im writing it (make a function)
-            }
-        }*/
-        
+        PlayerLost();
+        PlayerWon();
     }
 
 
@@ -97,10 +89,11 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayerTurn()
     {
+        RestCardActions(playerDropZones);
         IncreaseMana(playerAva);
-
-        Debug.Log("Player Turn");
         
+        Debug.Log("Player Turn");
+
         // Debug.Log(playerHand.transform.childCount);
         // Debug.Log(playerHand.transform.GetChild(1).name); // no need for this shit. we have drawcards script on this gameobject
         //                                                     // go thorgh the playerplayingdeck given some variable that can used 
@@ -135,44 +128,33 @@ public class BattleSystem : MonoBehaviour
 
     public void ManaCostHandler(int manaCost)
     {
-
         playerAva.currentMana -= manaCost;
         playerAva.SetCurrentMana(playerAva.currentMana);
-
-        // int totalMana = GetComponent<DrawCards>().playedManaCount;
-        //
-        // foreach (var dropZone in GetComponent<DrawCards>().playerDropZones)
-        // {
-        //     // Debug.Log(dropZone.transform.childCount + " indi dropzone count");
-        //     if (dropZone.transform.childCount != 0)
-        //     {
-        //         // manaInPlay = + dropZone.transform.GetChild(0).GetComponent<ThisCard>().cardCost;
-        //         totalMana += dropZone.transform.GetChild(0).GetComponent<ThisCard>().cardCost;
-        //     }
-        // }
-        //
-        //
-        // // Debug.Log(GetComponent<DrawCards>().playedManaCount);
-        // // find the diff
-        //
-        // // set new played mana
-        //
-        // if (GetComponent<DrawCards>().playedManaCount != totalMana)
-        // {
-        //     GetComponent<DrawCards>().playedManaCount = totalMana;
-        // }
-
-
-
-        // Debug.Log(manaInPlay);
-        // GetComponent<DrawCards>().playedManaCount = manaInPlay;
-        //
-        // var titi = GetComponent<DrawCards>().playerDropZones.Count;
-        // Debug.Log(titi + " whole dropzone count");
-        //
-        // foreach (var dropZone in GetComponent<DrawCards>().playerDropZones)
-        // {
-        //     Debug.Log(dropZone.transform.childCount + " indi dropzone count");
-        // }
     }
+
+    private void RestCardActions(List<GameObject> dropZonesList)
+    {
+        foreach (var zone in dropZonesList.Where(zone => zone.transform.childCount != 0)) // where a card is present
+        {
+            zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasAttacked = false;
+            zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasBeenPlaced = false;
+        }
+    }
+
+    private void PlayerWon()
+    {
+        if (state == BattleState.WON)
+        {
+            Debug.Log("You Won!!! Congrats!");
+        }
+    }
+
+    private void PlayerLost()
+    {
+        if (state == BattleState.LOST)
+        {
+            Debug.Log("You lost! U suck try again");
+        }
+    }
+    
 }

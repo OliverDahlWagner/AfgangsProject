@@ -19,7 +19,7 @@ public class AiSystem : MonoBehaviour
         // Pick random card on hand
         var random = new System.Random();
         int index = random.Next(cardsOnHand.Count);
-        var playingCard = cardsOnHand[index];
+        var playingCard = cardsOnHand[index];  // can cause a ArgumentOutOfRangeException: Index out of range
 
         // Find available dropzones
         List<int> availableIndexes = new List<int>();

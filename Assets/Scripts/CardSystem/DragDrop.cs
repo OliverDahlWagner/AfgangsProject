@@ -108,7 +108,6 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-
         if (gameObject.CompareTag("PlayerCard") && collision.gameObject.CompareTag("PlayerZone") ||
             gameObject.CompareTag("EnemyCard") && collision.gameObject.CompareTag("EnemyZone"))
         {
