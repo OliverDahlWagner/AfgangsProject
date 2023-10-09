@@ -23,9 +23,8 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData) // handle the targets
     {
-        var isOnBoard = gameObject.GetComponent<ThisCard>().isOnBoard;
-        if (gameObject.CompareTag("PlayerCard") && collisionTaget.gameObject.CompareTag("EnemyCard") & isOnBoard)  // this can hit card still in hand. need to make a variable so (bool isPlayed or something)
-        {                                                                                                                      // so only is played card interact    just another if below should work                       
+        if (gameObject.CompareTag("PlayerCard") && collisionTaget.gameObject.CompareTag("EnemyCard") && collisionTaget.gameObject.GetComponent<ThisCard>().isOnBoard)
+        {                                                                                                                                        
             var damageAmount = gameObject.GetComponent<ThisCard>().cardPower;
                 
             collisionTaget.gameObject.GetComponent<ThisCard>().TakeDamage(damageAmount);
@@ -35,7 +34,7 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
         
         if (gameObject.CompareTag("PlayerCard") &&
             collisionTaget.gameObject.CompareTag("EnemyAvatar")
-            && isOnBoard) // this work (will go in minus, but lost state is not made yet)
+            && gameObject.GetComponent<ThisCard>().isOnBoard) 
         {
             var damageAmount = gameObject.GetComponent<ThisCard>().cardPower;
                 

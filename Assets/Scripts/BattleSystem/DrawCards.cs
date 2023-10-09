@@ -20,6 +20,7 @@ public class DrawCards : MonoBehaviour
     public List<GameObject> enemyPlayingDeck;
     public List<GameObject> enemyHand;
     public List<GameObject> enemyDropZones;
+
     public List<GameObject> theCards; // if we do it like this all the cards will be in there. ON THE BUTTON
     // could maybe in future be made to a game-manager or a deck/hand manager (the button object in general)
 
@@ -46,20 +47,19 @@ public class DrawCards : MonoBehaviour
             2, 2, 2, 1, 1, 1 // Example enemyDeck IDs of cards
         };
 
-      
 
         playerPlayingDeck = GetMatchingCards(playerPlayingDeck);
         enemyPlayingDeck = GetMatchingCards(enemyPlayingDeck);
 
         Shuffle(playerPlayingDeck);
         Shuffle(enemyPlayingDeck);
-        
+
         DrawCard(playerPlayingDeck, 4, PlayerArea, playerTag);
         DrawCard(enemyPlayingDeck, 4, EnemyArea, enemyTag);
 
         playerHandsize = PlayerArea.transform.childCount;
         enemyHandsize = EnemyArea.transform.childCount;
-        
+
         foreach (Transform child in PlayerArea.transform)
         {
             playerHand.Add(child.gameObject);
@@ -73,21 +73,11 @@ public class DrawCards : MonoBehaviour
 
     private void Update()
     {
-        if (playerHandsize != PlayerArea.transform.childCount)
-        {
-            Debug.Log("THIS SHOULD FUAAA");
-            playerHand.Clear();
-            foreach (Transform child in PlayerArea.transform)
-            {
-                playerHand.Add(child.gameObject);
-            }
-
-            playerHandsize = PlayerArea.transform.childCount;
-        }
+        UpdatePlayerHand();
     }
 
 
-    public void OnClick(bool playerDrawing)  // The playerDrawing is true when button is clicked.
+    public void OnClick(bool playerDrawing) // The playerDrawing is true when button is clicked.
     {
         if (playerDrawing)
         {
@@ -154,23 +144,18 @@ public class DrawCards : MonoBehaviour
                 theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
-    
-    
+
+    private void UpdatePlayerHand()
+    {
+        if (playerHandsize != PlayerArea.transform.childCount)
+        {
+            playerHand.Clear();
+            foreach (Transform child in PlayerArea.transform)
+            {
+                playerHand.Add(child.gameObject);
+            }
+
+            playerHandsize = PlayerArea.transform.childCount;
+        }
+    }
 }
-
-
-// these are ways the playing deck of the player/enemy
-
-/*
-foreach (var x in enemyPlayingDeck)
-{
-    Debug.Log(x + " ----- Before card from enemyPlayingDeck "); 
-}
-*/
-
-/*
-foreach (var x in enemyPlayingDeck)
-{
-    Debug.Log(x + " ----- AFTER card from enemyPlayingDeck");
-}
-*/
