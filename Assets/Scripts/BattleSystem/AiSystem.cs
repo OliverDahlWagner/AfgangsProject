@@ -12,6 +12,7 @@ public class AiSystem : MonoBehaviour
     {
         battleSystem = GameObject.Find("Battle System");
     }
+
     public void playCards()
     {
         var cardsOnHand = GetComponent<DrawCards>().enemyHand;
@@ -32,6 +33,7 @@ public class AiSystem : MonoBehaviour
 
         // Find available dropzones
         List<int> availableIndexes = new List<int>();
+
         for (int i = 0; i < dropZones.Count; i++)
         {
             if (dropZones[i].transform.childCount < 1)
@@ -71,7 +73,32 @@ public class AiSystem : MonoBehaviour
 
             
         }
-        Attack(2);
+
+        // We can swap the available dropzones on its head.
+
+
+
+        chooseCardForAttack();
+    }
+
+    private void chooseCardForAttack()
+    {
+
+        // Figure out which AICardZones have cards in them and attack for each card out on the board. 
+        var AIZones = GetComponent<DrawCards>().enemyDropZones;
+        for (int i = 0; i < AIZones.Count; i++)
+        {
+            if (AIZones[i].transform.childCount > 0)
+            {
+                Debug.Log("HOW MANY TIMES DO WE ATTACK?");
+                Debug.Log(AIZones[i]);
+
+                Transform childTransform = AIZones[i].transform.GetChild(0);
+                ThisCard thisCardComponent = childTransform.GetComponent<ThisCard>();
+                Attack(childTransform.GetComponent<ThisCard>().cardPower);
+            }
+        }
+
     }
 
     // All that this attack does is prioritise to attack cards first. However the cards attacked are random.
@@ -83,13 +110,21 @@ public class AiSystem : MonoBehaviour
         List<int> attackableCardIndexes = new List<int>();
         for (int i = 0; i < playerZones.Count; i++)
         {
-            if(playerZones[i].transform.childCount > 0)
+            Debug.Log("NEVSAdasdsadsadas");
+            Debug.Log(playerZones[i]);
+            if (playerZones[i].transform.childCount > 0)
             {
+                Debug.Log("NEVER IF?");
+                Debug.Log(playerZones[i].transform.GetChild(0));
                 attackableCardIndexes.Add(i);
             }
         }
 
-
+        Debug.Log("ODD?");
+        Debug.Log(playerZones);
+        Debug.Log(playerZones.Count);
+        Debug.Log(attackableCardIndexes.Count);
+        Debug.Log(attackableCardIndexes);
         if(attackableCardIndexes.Count > 0)
         {
             // ATTACK A RANDOM AVAILABLE CARD
@@ -108,7 +143,9 @@ public class AiSystem : MonoBehaviour
 
             }
         else{
-            // ATTACK THE PLAYER CUZ NO PLAYERCARDS ON BOARD
+            // ATTACK THE PLAYER CUZ NO PLAYERCARDS ON BOARD'
+            GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
+
         }
 
 
@@ -116,7 +153,7 @@ public class AiSystem : MonoBehaviour
 
 
 
-         //   int index = random.Next(playerZones.Count);
+        //   int index = random.Next(playerZones.Count);
 
 
 
