@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class CardTargeting : MonoBehaviour, IEndDragHandler
 {
-    
+    public GameObject battleSystem;
     private GameObject collisionTaget;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        battleSystem = GameObject.Find("Battle System");
     }
 
     // Update is called once per frame
@@ -29,9 +29,7 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
             var damageAmount = gameObject.GetComponent<ThisCard>().cardPower;
                 
             collisionTaget.gameObject.GetComponent<ThisCard>().TakeDamage(damageAmount);
-            
             gameObject.GetComponent<ThisCard>().hasAttacked = true;
-            
             Debug.Log(gameObject.tag + " hit " + collisionTaget.gameObject.tag);
         }
         
@@ -43,6 +41,8 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
                 
             collisionTaget.gameObject.GetComponent<Avatar>().TakeDamage(damageAmount);
             Debug.Log(gameObject.tag + " hit " + collisionTaget.gameObject.tag);
+        
+            battleSystem.GetComponent<BattleSystem>().PlayerWon(); // will only do its thing if enemy dies
         }
 
     }
