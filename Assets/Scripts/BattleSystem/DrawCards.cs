@@ -84,9 +84,6 @@ public class DrawCards : MonoBehaviour
 
             playerHandsize = PlayerArea.transform.childCount;
         }
-        
-        
-
     }
 
 

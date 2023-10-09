@@ -134,4 +134,36 @@ public class BattleSystem : MonoBehaviour
         enemyAva.currentMana -= manaCost;
         enemyAva.SetCurrentMana(enemyAva.currentMana);
     }
+
+    public void PlayerWon() // function is fired after every attack at the enemy avatar
+    {
+        if(enemyAva.currentHP >= 1)
+        {
+            Debug.Log("enemy not dead yet");
+            return;
+        }
+        // Lock interaction with board and cards.
+        // when the player lock function is made for enemy turn just use it here;
+
+        state = BattleState.WON;
+        Debug.Log("Player Won");
+    }
+    
+    public void PlayerLost() // this function should be fired at the end of every enemy attacks at the player avatar
+    {
+        if(playerAva.currentHP >= 1)
+        {
+            Debug.Log("player not dead yet");
+            return;
+        }
+        // Lock interaction with board and cards.
+        // when the player lock function is made for enemy turn just use it here;
+
+        state = BattleState.LOST;
+        Debug.Log("Player Lost!! u suck");
+    }
+    
+    
+    
+    
 }
