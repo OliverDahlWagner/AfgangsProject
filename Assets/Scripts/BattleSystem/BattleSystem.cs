@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.AssetBundlePatching;
 using UnityEngine.UI;
 
 public enum BattleState
@@ -36,6 +37,9 @@ public class BattleSystem : MonoBehaviour
 
     public BattleState state;
 
+    public Button drawCardButton;
+    public Button endTurnButton;
+
     private int totalTurnActions = 3; // just an idea for now. DRAW, PLACE, ATTACK (any combination)
 
     void Start()
@@ -53,6 +57,7 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
+        LockUnlockButtons(state); // this works. the color changes to a lighter grey. We can maybe make a more clear indicator later
     }
 
 
@@ -161,6 +166,20 @@ public class BattleSystem : MonoBehaviour
 
         state = BattleState.LOST;
         Debug.Log("Player Lost!! u suck");
+    }
+
+    private void LockUnlockButtons(BattleState battleState)
+    {
+        if (state == BattleState.PLAYERTURN)
+        {
+            drawCardButton.interactable = true;
+            endTurnButton.interactable = true;
+        }
+        else
+        {
+            drawCardButton.interactable = false;
+            endTurnButton.interactable = false;
+        }
     }
     
 }

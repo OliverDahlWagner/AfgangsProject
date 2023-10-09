@@ -627,6 +627,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8476004130000425786, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
   m_PrefabInstance: {fileID: 675202738}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &675202740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+  m_PrefabInstance: {fileID: 675202738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &718701328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,6 +840,8 @@ MonoBehaviour:
   playerAva: {fileID: 0}
   enemyAva: {fileID: 0}
   state: 0
+  drawCardButton: {fileID: 2128127209}
+  endTurnButton: {fileID: 675202740}
 --- !u!114 &756561038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502a8922a7999ad4ba2fb1c39fb2e2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleSystem: {fileID: 0}
 --- !u!224 &777904324 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8777654491266481663, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
@@ -1535,6 +1549,17 @@ RectTransform:
   m_AnchoredPosition: {x: 687.45, y: -209.12}
   m_SizeDelta: {x: 545.1, y: 126.34}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2128127209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8476004130000425784, guid: b19fdf20391a7ba4cbb992536fe7a13f, type: 3}
+  m_PrefabInstance: {fileID: 8476004129829889415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &332271257276041611
 PrefabInstance:
   m_ObjectHideFlags: 0
