@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -54,8 +53,6 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        PlayerLost();
-        PlayerWon();
     }
 
 
@@ -81,25 +78,12 @@ public class BattleSystem : MonoBehaviour
         // Debug.Log(state.ToString());
     }
 
-    private void
-        TurnHandler() // not a turnhandler (he does functions that call functions. not A function that calls functions)
-    {
-        // and do some coroutines
-    }
-
     private void PlayerTurn()
     {
-        RestCardActions(playerDropZones);
+        ResetCardActions(playerDropZones);
         IncreaseMana(playerAva);
-        
-        Debug.Log("Player Turn");
 
-        // Debug.Log(playerHand.transform.childCount);
-        // Debug.Log(playerHand.transform.GetChild(1).name); // no need for this shit. we have drawcards script on this gameobject
-        //                                                     // go thorgh the playerplayingdeck given some variable that can used 
-        //                                                     // when being dragged or attacking
-        // Debug.Log(GetComponent<DrawCards>().playerHand.Count);
-        // Debug.Log(GetComponent<DrawCards>().playerHand[1].name);
+        Debug.Log("Player Turn");
     }
 
     private void EnemyTurn()
@@ -132,29 +116,22 @@ public class BattleSystem : MonoBehaviour
         playerAva.SetCurrentMana(playerAva.currentMana);
     }
 
-    private void RestCardActions(List<GameObject> dropZonesList)
+    private void ResetCardActions(List<GameObject> dropZoneList)
     {
-        foreach (var zone in dropZonesList.Where(zone => zone.transform.childCount != 0)) // where a card is present
+        foreach (GameObject zone in dropZoneList)
         {
-            zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasAttacked = false;
-            zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasBeenPlaced = false;
+            if (zone.transform.childCount != 0)
+            {
+                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasAttacked = false;
+                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasBeenPlaced = false;
+            }
         }
     }
 
-    private void PlayerWon()
+    // Will probably be put together with the first one at some point.
+    public void ManaCostHandlerEnemy(int manaCost)
     {
-        if (state == BattleState.WON)
-        {
-            Debug.Log("You Won!!! Congrats!");
-        }
+        enemyAva.currentMana -= manaCost;
+        enemyAva.SetCurrentMana(enemyAva.currentMana);
     }
-
-    private void PlayerLost()
-    {
-        if (state == BattleState.LOST)
-        {
-            Debug.Log("You lost! U suck try again");
-        }
-    }
-    
 }
