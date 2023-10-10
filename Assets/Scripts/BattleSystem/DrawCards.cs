@@ -9,10 +9,17 @@ using Random = UnityEngine.Random;
 public class DrawCards : MonoBehaviour
 {
     private List<int> playerDeck;
-    private List<GameObject> playerPlayingDeck;
+    public List<GameObject> playerPlayingDeck;
+    public List<GameObject> playerHand;
+    public List<GameObject> playerDropZones;
+    private int playerHandCount;
+    private int playerDropZonesChildren = 0;
+    private int playerManaInPlay = 0;
 
     private List<int> enemyDeck;
-    private List<GameObject> enemyPlayingDeck;
+    public List<GameObject> enemyPlayingDeck;
+    public List<GameObject> enemyHand;
+    public List<GameObject> enemyDropZones;
 
     public List<GameObject> theCards; // if we do it like this all the cards will be in there. ON THE BUTTON
     // could maybe in future be made to a game-manager or a deck/hand manager (the button object in general)
@@ -24,7 +31,10 @@ public class DrawCards : MonoBehaviour
     private String enemyTag = "EnemyCard";
 
 
-    void Start()
+    private int playerHandsize = 4;
+    private int enemyHandsize = 4;
+
+    void Awake()
     {
         // Depending on how we make the game, the way we get the deck will probably change
         playerDeck = new List<int>
@@ -43,12 +53,40 @@ public class DrawCards : MonoBehaviour
 
         Shuffle(playerPlayingDeck);
         Shuffle(enemyPlayingDeck);
-    }
 
-    public void OnClick()
-    {
         DrawCard(playerPlayingDeck, 4, PlayerArea, playerTag);
         DrawCard(enemyPlayingDeck, 4, EnemyArea, enemyTag);
+
+        playerHandsize = PlayerArea.transform.childCount;
+        enemyHandsize = EnemyArea.transform.childCount;
+
+        foreach (Transform child in PlayerArea.transform)
+        {
+            playerHand.Add(child.gameObject);
+        }
+
+        foreach (Transform child in EnemyArea.transform)
+        {
+            enemyHand.Add(child.gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        UpdatePlayerHand();
+    }
+
+
+    public void OnClick(bool playerDrawing) // The playerDrawing is true when button is clicked.
+    {
+        if (playerDrawing)
+        {
+            DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+        }
+        else
+        {
+            DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);
+        }
     }
 
 
@@ -87,8 +125,9 @@ public class DrawCards : MonoBehaviour
     // this function can be used for the starting draw. And a single draw
     private void DrawCard(List<GameObject> theDeck, int cardAmount, GameObject playerArea, String cardTag)
     {
-        if (theDeck.Count < cardAmount) // so we dont take cards that does exits. and wont fuck up
+        if (theDeck.Count == 0) // so we dont take cards that does exits. and wont fuck up
         {
+            Debug.Log("out of cards");
             return;
         }
 
@@ -99,29 +138,24 @@ public class DrawCards : MonoBehaviour
             GameObject dealtCard = Instantiate(theDeck[0], Vector3.zero, Quaternion.identity);
             dealtCard.transform.SetParent(playerArea.transform, false);
             dealtCard.tag = cardTag;
-            Debug.Log(dealtCard.GetComponent<ThisCard>().cardId + " --- the instantiated cards id");
+            /*Debug.Log(dealtCard.GetComponent<ThisCard>().cardId + " --- the instantiated cards id");*/
 
             theDeck.Remove(
                 theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
-    
-    
+
+    private void UpdatePlayerHand()
+    {
+        if (playerHandsize != PlayerArea.transform.childCount)
+        {
+            playerHand.Clear();
+            foreach (Transform child in PlayerArea.transform)
+            {
+                playerHand.Add(child.gameObject);
+            }
+
+            playerHandsize = PlayerArea.transform.childCount;
+        }
+    }
 }
-
-
-// these are ways the playing deck of the player/enemy
-
-/*
-foreach (var x in enemyPlayingDeck)
-{
-    Debug.Log(x + " ----- Before card from enemyPlayingDeck "); 
-}
-*/
-
-/*
-foreach (var x in enemyPlayingDeck)
-{
-    Debug.Log(x + " ----- AFTER card from enemyPlayingDeck");
-}
-*/

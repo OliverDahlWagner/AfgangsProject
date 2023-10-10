@@ -10,6 +10,7 @@ TagManager:
   - EnemyCard
   - PlayerZone
   - EnemyZone
+  - EnemyAvatar
   layers:
   - Default
   - TransparentFX
