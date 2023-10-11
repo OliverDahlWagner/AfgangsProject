@@ -43,7 +43,7 @@ public class AiSystem : MonoBehaviour
         }
 
         // CardCost
-        var cardCost = playingCard.transform.GetComponent<ThisCard>().cardCost;
+        var cardCost = playingCard.transform.GetComponent<Card>().cardCost;
 
         // If there are avaiable dropzones & MANA, play card in a random dropzone.
         if (availableIndexes.Count > 0 && battleSystem.GetComponent<BattleSystem>().enemyAva.currentMana >= cardCost)
@@ -55,8 +55,8 @@ public class AiSystem : MonoBehaviour
             {
                 playingCard.transform.SetParent(dropZone.transform, false);
 
-                playingCard.transform.GetComponent<ThisCard>().isOnBoard = true;
-                playingCard.transform.GetComponent<ThisCard>().hasBeenPlaced = true;
+                playingCard.transform.GetComponent<ChampionCard>().isOnBoard = true;
+                playingCard.transform.GetComponent<ChampionCard>().hasBeenPlaced = true;
 
                 // Removes card from hand
                 cardsOnHand.RemoveAt(index);
@@ -64,7 +64,7 @@ public class AiSystem : MonoBehaviour
 
 
                 // Mana cost
-                battleSystem.GetComponent<BattleSystem>().ManaCostHandlerEnemy(playingCard.transform.GetComponent<ThisCard>().cardCost);
+                battleSystem.GetComponent<BattleSystem>().ManaCostHandlerEnemy(playingCard.transform.GetComponent<Card>().cardCost);
 
 
 
@@ -92,8 +92,8 @@ public class AiSystem : MonoBehaviour
             {
 
                 Transform childTransform = AIZones[i].transform.GetChild(0);
-                ThisCard thisCardComponent = childTransform.GetComponent<ThisCard>();
-                Attack(childTransform.GetComponent<ThisCard>().cardPower);
+                ChampionCard thisCardComponent = childTransform.GetComponent<ChampionCard>();
+                Attack(childTransform.GetComponent<ChampionCard>().cardPower);
             }
         }
 
@@ -125,7 +125,7 @@ public class AiSystem : MonoBehaviour
 
 
             Transform childTransform = playerZones[targetIndex].transform.GetChild(0);
-            ThisCard thisCardComponent = childTransform.GetComponent<ThisCard>();
+            ChampionCard thisCardComponent = childTransform.GetComponent<ChampionCard>();
 
 
             // Call the TakeDamage method on the ThisCard component.

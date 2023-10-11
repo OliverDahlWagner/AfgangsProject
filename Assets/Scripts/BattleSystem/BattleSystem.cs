@@ -26,6 +26,10 @@ public class BattleSystem : MonoBehaviour
 
     public List<GameObject> playerDropZones;
     public List<GameObject> playerDropZonesChildren;
+    public List<GameObject> playerPlayedCards;
+
+    public GameObject playerSupportZone;
+    public GameObject enemySupportZone;
 
     public List<GameObject> enemyDropZones;
 
@@ -58,6 +62,7 @@ public class BattleSystem : MonoBehaviour
     private void Update()
     {
         LockUnlockButtons(state); // this works. the color changes to a lighter grey. We can maybe make a more clear indicator later
+        
     }
 
 
@@ -87,6 +92,16 @@ public class BattleSystem : MonoBehaviour
     {
         ResetCardActions(playerDropZones);
         IncreaseMana(playerAva);
+        
+        
+        foreach (var card in  playerPlayedCards)
+        {
+            if (card == null)
+            {
+                playerPlayedCards.Remove(card);
+            }
+        }
+        
 
         Debug.Log("Player Turn");
     }
@@ -99,7 +114,7 @@ public class BattleSystem : MonoBehaviour
         // now just make it do its thing, then end if conditions is meet
 
 
-        EndEnemyTurn();
+        EndEnemyTurn(); // might not be a need for endenemyturn()   just a if statement that checks win lost state if not then playerturn
     }
 
     private void EndEnemyTurn()
@@ -127,8 +142,8 @@ public class BattleSystem : MonoBehaviour
         {
             if (zone.transform.childCount != 0)
             {
-                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasAttacked = false;
-                zone.transform.GetChild(0).gameObject.GetComponent<ThisCard>().hasBeenPlaced = false;
+                zone.transform.GetChild(0).gameObject.GetComponent<ChampionCard>().hasAttacked = false;
+                zone.transform.GetChild(0).gameObject.GetComponent<ChampionCard>().hasBeenPlaced = false;
             }
         }
     }
@@ -168,7 +183,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Player Lost!! u suck");
     }
 
-    private void LockUnlockButtons(BattleState battleState)
+    private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
     {
         if (state == BattleState.PLAYERTURN)
         {
@@ -181,5 +196,5 @@ public class BattleSystem : MonoBehaviour
             endTurnButton.interactable = false;
         }
     }
-    
+
 }

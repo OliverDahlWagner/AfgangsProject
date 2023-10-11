@@ -714,7 +714,8 @@ GameObject:
   - component: {fileID: 2653199489217366208}
   - component: {fileID: 4035410665615318138}
   - component: {fileID: -3028311053922616919}
-  - component: {fileID: 122563641837229648}
+  - component: {fileID: -3100075497191852654}
+  - component: {fileID: 6298716395273395989}
   - component: {fileID: 1624670502541448259}
   - component: {fileID: 4943978669005038851}
   - component: {fileID: 3452907943711315613}
@@ -801,6 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bc86dd431a5bc48867110e5d0670f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleSystem: {fileID: 0}
   canvas: {fileID: 0}
 --- !u!114 &-3028311053922616919
 MonoBehaviour:
@@ -815,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
---- !u!114 &122563641837229648
+--- !u!114 &-3100075497191852654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -824,22 +826,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 8285546800131638688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 517f95959007fd545b76f5c9e7f043b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 38be327471b33ee4eadf71a18edc6810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardId: 2
-  cardName: Mage
+  cardType: 0
+  cardName: 'Mage '
   cardDescription: He is a Mage
   cardArtwork: {fileID: 0}
   cardCost: 7
-  cardPower: 7
-  cardHealth: 7
   nameText: {fileID: 5195694394035278584}
   descriptionText: {fileID: 1258715492333338103}
-  cardArtworkShower: {fileID: 0}
+  cardArtworkShower: {fileID: 7249365688885880980}
   costText: {fileID: 6083977793243099378}
+--- !u!114 &6298716395273395989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285546800131638688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b66aa675a39db348a90994924055b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPower: 7
+  cardHealth: 7
   powerText: {fileID: 4902635511352597743}
   healthText: {fileID: 8753876277719779419}
+  hasAttacked: 0
+  hasBeenPlaced: 0
+  isOnBoard: 0
 --- !u!114 &1624670502541448259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2d3596e7f9b2e44acbcf522c8f195a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleSystem: {fileID: 0}
 --- !u!61 &4943978669005038851
 BoxCollider2D:
   m_ObjectHideFlags: 0
