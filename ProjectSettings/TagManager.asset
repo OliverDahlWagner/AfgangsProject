@@ -11,6 +11,8 @@ TagManager:
   - PlayerZone
   - EnemyZone
   - EnemyAvatar
+  - PlayerSupportZone
+  - EnemySupportZone
   layers:
   - Default
   - TransparentFX

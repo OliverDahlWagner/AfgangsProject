@@ -21,25 +21,25 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
         
     }
 
-    public void OnEndDrag(PointerEventData eventData) // handle the targets
+    public void OnEndDrag(PointerEventData eventData) // handle the targets    // get en error try some PLAYERTURN State
     {
-        if (gameObject.CompareTag("PlayerCard") && collisionTaget.gameObject.CompareTag("EnemyCard") && collisionTaget.gameObject.GetComponent<ThisCard>().isOnBoard)
+        if (gameObject.CompareTag("PlayerCard") && collisionTaget.gameObject.CompareTag("EnemyCard") && collisionTaget.gameObject.GetComponent<ChampionCard>().isOnBoard)
         {                                                                                                                                        
-            var damageAmount = gameObject.GetComponent<ThisCard>().cardPower;
+            var damageAmount = gameObject.GetComponent<ChampionCard>().cardPower;
                 
-            collisionTaget.gameObject.GetComponent<ThisCard>().TakeDamage(damageAmount);
-            gameObject.GetComponent<ThisCard>().hasAttacked = true;
+            collisionTaget.gameObject.GetComponent<ChampionCard>().TakeDamage(damageAmount);
+            gameObject.GetComponent<ChampionCard>().hasAttacked = true;
             Debug.Log(gameObject.tag + " hit " + collisionTaget.gameObject.tag);
         }
         
         if (gameObject.CompareTag("PlayerCard") &&
             collisionTaget.gameObject.CompareTag("EnemyAvatar")
-            && gameObject.GetComponent<ThisCard>().isOnBoard) 
+            && gameObject.GetComponent<ChampionCard>().isOnBoard) 
         {
-            var damageAmount = gameObject.GetComponent<ThisCard>().cardPower;
+            var damageAmount = gameObject.GetComponent<ChampionCard>().cardPower;
                 
             collisionTaget.gameObject.GetComponent<Avatar>().TakeDamage(damageAmount);
-            gameObject.GetComponent<ThisCard>().hasAttacked = true;
+            gameObject.GetComponent<ChampionCard>().hasAttacked = true;
             Debug.Log(gameObject.tag + " hit " + collisionTaget.gameObject.tag);
         
             battleSystem.GetComponent<BattleSystem>().PlayerWon(); // will only do its thing if enemy dies

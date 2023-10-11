@@ -21,8 +21,7 @@ public class DrawCards : MonoBehaviour
     public List<GameObject> enemyHand;
     public List<GameObject> enemyDropZones;
 
-    public List<GameObject> theCards; // if we do it like this all the cards will be in there. ON THE BUTTON
-    // could maybe in future be made to a game-manager or a deck/hand manager (the button object in general)
+    public List<GameObject> theCards;
 
     public GameObject PlayerArea;
     public GameObject EnemyArea;
@@ -39,7 +38,7 @@ public class DrawCards : MonoBehaviour
         // Depending on how we make the game, the way we get the deck will probably change
         playerDeck = new List<int>
         {
-            1, 1, 1, 2, 2, 2 // Example playerDeck IDs of cards
+            1, 1, 1, 2, 2, 2, 3, 3 // Example playerDeck IDs of cards
         };
 
         enemyDeck = new List<int>
@@ -48,8 +47,8 @@ public class DrawCards : MonoBehaviour
         };
 
 
-        playerPlayingDeck = GetMatchingCards(playerPlayingDeck);
-        enemyPlayingDeck = GetMatchingCards(enemyPlayingDeck);
+        playerPlayingDeck = GetMatchingCards(playerPlayingDeck, true);
+        enemyPlayingDeck = GetMatchingCards(enemyPlayingDeck, false);
 
         Shuffle(playerPlayingDeck);
         Shuffle(enemyPlayingDeck);
@@ -91,13 +90,27 @@ public class DrawCards : MonoBehaviour
 
 
     // Function to get the GameObjects that match the IDs in playingDeck   (the shuffle could be placed in here)
-    private List<GameObject> GetMatchingCards(List<GameObject> givenDeck)
+    private List<GameObject> GetMatchingCards(List<GameObject> givenDeck, bool isPlayer)
     {
         givenDeck = new List<GameObject>();
 
-        foreach (int id in playerDeck)
+        if (isPlayer)
         {
-            GameObject card = theCards.Find(c => c.GetComponent<ThisCard>().cardId == id);
+            foreach (int id in playerDeck)
+            {
+                GameObject card = theCards.Find(c => c.GetComponent<Card>().cardId == id);
+                if (card != null)
+                {
+                    givenDeck.Add(card);
+                }
+            }
+
+            return givenDeck;
+        }
+
+        foreach (int id in enemyDeck)
+        {
+            GameObject card = theCards.Find(c => c.GetComponent<Card>().cardId == id);
             if (card != null)
             {
                 givenDeck.Add(card);
