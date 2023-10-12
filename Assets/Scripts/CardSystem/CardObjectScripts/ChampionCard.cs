@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,13 @@ public class ChampionCard : MonoBehaviour
     public bool hasBeenPlaced = false;
     public bool isOnBoard = false;
 
+    
+    private GameObject battleSystem;
+    private void Start()
+    {
+        battleSystem = GameObject.Find("Battle System");
+    }
+    
     public void AssignChampionValues()
     {
         powerText.text = cardPower.ToString();
@@ -28,6 +36,7 @@ public class ChampionCard : MonoBehaviour
 
         if (cardHealth <= 0)
         {
+            
             Destroy(gameObject);
         }
     }
@@ -38,6 +47,7 @@ public class ChampionCard : MonoBehaviour
 
         if (cardHealth <= 0)
         {
+            battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
             Destroy(gameObject);
         }
     }

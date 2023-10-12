@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -92,15 +93,6 @@ public class BattleSystem : MonoBehaviour
     {
         ResetCardActions(playerDropZones);
         IncreaseMana(playerAva);
-        
-        
-        foreach (var card in  playerPlayedCards)
-        {
-            if (card == null)
-            {
-                playerPlayedCards.Remove(card);
-            }
-        }
         
 
         Debug.Log("Player Turn");
@@ -195,6 +187,12 @@ public class BattleSystem : MonoBehaviour
             drawCardButton.interactable = false;
             endTurnButton.interactable = false;
         }
+    }
+
+    public void UpdatePLayerHand(GameObject card)
+    {
+        playerPlayedCards.Remove(card);
+        playerPlayedCards.RemoveAll( x => !x);
     }
 
 }
