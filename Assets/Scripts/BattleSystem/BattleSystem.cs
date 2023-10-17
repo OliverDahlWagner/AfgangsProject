@@ -29,9 +29,6 @@ public class BattleSystem : MonoBehaviour
     public List<GameObject> playerDropZonesChildren;
     public List<GameObject> playerPlayedCards;
 
-    public GameObject playerSupportZone;
-    public GameObject enemySupportZone;
-
     public List<GameObject> enemyDropZones;
 
     public GameObject playerHand;
@@ -51,19 +48,11 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.START;
         SetupBattle();
-
-        foreach (GameObject zone in playerDropZones)
-        {
-            if (zone.transform.childCount == 0)
-            {
-            }
-        }
     }
 
     private void Update()
     {
         LockUnlockButtons(state); // this works. the color changes to a lighter grey. We can maybe make a more clear indicator later
-        
     }
 
 
@@ -91,9 +80,9 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayerTurn()
     {
-        ResetCardActions(playerDropZones);
+        ResetCardActions(playerPlayedCards);
         IncreaseMana(playerAva);
-        
+        LastingSupCardUseFunction();
 
         Debug.Log("Player Turn");
     }
@@ -128,14 +117,14 @@ public class BattleSystem : MonoBehaviour
         playerAva.SetCurrentMana(playerAva.currentMana);
     }
 
-    private void ResetCardActions(List<GameObject> dropZoneList)
+    private void ResetCardActions(List<GameObject> playedCards)
     {
-        foreach (GameObject zone in dropZoneList)
+        foreach (GameObject card in playedCards)
         {
-            if (zone.transform.childCount != 0)
+            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                zone.transform.GetChild(0).gameObject.GetComponent<ChampionCard>().hasAttacked = false;
-                zone.transform.GetChild(0).gameObject.GetComponent<ChampionCard>().hasBeenPlaced = false;
+                card.GetComponent<ChampionCard>().hasAttacked = false;
+                card.GetComponent<ChampionCard>().hasBeenPlaced = false;
             }
         }
     }
@@ -149,7 +138,7 @@ public class BattleSystem : MonoBehaviour
 
     public void PlayerWon() // function is fired after every attack at the enemy avatar
     {
-        if(enemyAva.currentHP >= 1)
+        if (enemyAva.currentHP >= 1)
         {
             Debug.Log("enemy not dead yet");
             return;
@@ -160,10 +149,10 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.WON;
         Debug.Log("Player Won");
     }
-    
+
     public void PlayerLost() // this function should be fired at the end of every enemy attacks at the player avatar
     {
-        if(playerAva.currentHP >= 1)
+        if (playerAva.currentHP >= 1)
         {
             Debug.Log("player not dead yet");
             return;
@@ -175,7 +164,9 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Player Lost!! u suck");
     }
 
-    private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
+    private void
+        LockUnlockButtons(
+            BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
     {
         if (state == BattleState.PLAYERTURN)
         {
@@ -192,7 +183,23 @@ public class BattleSystem : MonoBehaviour
     public void UpdatePLayerHand(GameObject card)
     {
         playerPlayedCards.Remove(card);
-        playerPlayedCards.RemoveAll( x => !x);
+        playerPlayedCards.RemoveAll(x => !x);
+    }
+
+    private void LastingSupCardUseFunction()
+    {
+        for (int i = 0; i < playerPlayedCards.Count; i++)   // For loops are goated. fuck for each loops. all my homies hate for each loops
+        {
+            var card = playerPlayedCards[i];
+            if (card.GetComponent<Card>().cardType != CardTypes.CHAMPION && 
+                card.GetComponent<Card>().cardType == CardTypes.SUPPORT && 
+                card.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
+            {
+                card.GetComponent<SupportCard>().SupportFunction(
+                    card.GetComponent<SupportCard>().supportEffect, null,
+                    playerPlayedCards);
+            }
+        }
     }
 
 }

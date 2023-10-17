@@ -23,6 +23,11 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData) // handle the targets    // get en error try some PLAYERTURN State
     {
+        if (gameObject.GetComponent<SupportCard>())
+        {
+            return;
+        }
+        
         if (gameObject.CompareTag("PlayerCard") && collisionTaget.gameObject.CompareTag("EnemyCard") && collisionTaget.gameObject.GetComponent<ChampionCard>().isOnBoard)
         {                                                                                                                                        
             var damageAmount = gameObject.GetComponent<ChampionCard>().cardPower;
