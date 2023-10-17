@@ -18,6 +18,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private Vector3 startPosition;
 
+    private GameObject specificCard;
+
 
     public void Awake() // calls when script/object is instantiated
     {
@@ -66,25 +68,37 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             DropChampionCard();
         }
-        
-        if (transform.GetComponent<Card>().cardType == CardTypes.SUPPORT)
-        {
-            DropSupportCard();
-        }
-        
 
+        if (transform.GetComponent<Card>().cardType == CardTypes.SUPPORT &&
+            transform.GetComponent<SupportCard>().supCardType == SupCardTypes.INSTANT)
+        {
+            DropInstantSupCard();
+        }
+
+        if (transform.GetComponent<Card>().cardType == CardTypes.SUPPORT &&
+            transform.GetComponent<SupportCard>().supCardType == SupCardTypes.SPECIFIC)
+        {
+            DropSpecificSupCard();
+        }
+
+        if (transform.GetComponent<Card>().cardType == CardTypes.SUPPORT &&
+            transform.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
+        {
+            DropLastingSupCard();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((!gameObject.CompareTag("PlayerCard") || !collision.gameObject.CompareTag("PlayerZone")) &&
-            (!gameObject.CompareTag("PlayerCard") || !collision.gameObject.CompareTag("PlayerSupportZone"))) return;
+        if (!gameObject.CompareTag("PlayerCard") || !collision.gameObject.CompareTag("PlayerZone")) return;
 
         isOverDropZone = true;
 
         if (1 == collision.gameObject.transform
                 .childCount) // so there wont be a indicator that it can be dropped if it contains card. Also a good check to have. Not really needed because of the check in endDrag
         {
+            specificCard = collision.gameObject.transform.GetChild(0).GameObject();
+            Debug.Log(specificCard);
             isOverDropZone = false;
             return;
         }
@@ -94,11 +108,6 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         if (dropZone.CompareTag("PlayerZone"))
         {
             dropZone.GetComponent<Image>().color = new Color32(124, 193, 191, 255);
-        }
-
-        if (dropZone.CompareTag("PlayerSupportZone"))
-        {
-            dropZone.GetComponent<Image>().color = new Color32(179, 193, 0, 255);
         }
 
         Debug.Log(dropZone.name);
@@ -111,6 +120,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             isOverDropZone = false;
             if (dropZone != null) dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
             dropZone = null;
+            specificCard = null;
+            Debug.Log(specificCard);
         }
     }
 
@@ -118,7 +129,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         if (isOverDropZone
             && dropZone.transform.childCount < 1 && dropZone.CompareTag("PlayerZone") &&
-            transform.GetComponent<Card>().cardType == CardTypes.CHAMPION) 
+            transform.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
             if (battleSystem.GetComponent<BattleSystem>().playerAva.currentMana >=
                 transform.GetComponent<Card>().cardCost)
@@ -129,52 +140,102 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
                 battleSystem.GetComponent<BattleSystem>().ManaCostHandler(transform.GetComponent<Card>().cardCost);
                 battleSystem.GetComponent<BattleSystem>().playerPlayedCards.Add(transform.GameObject());
-                    
+
                 dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
             }
             else
             {
-                transform.position = startPosition;
-                transform.SetParent(startParent.transform,
-                    false); 
+                ReturnToHand();
             }
         }
         else
         {
-            transform.position = startPosition;
-            transform.SetParent(startParent.transform,
-                false); 
+            ReturnToHand();
         }
     }
-    
-    private void DropSupportCard()
+
+    private void DropInstantSupCard()
     {
         if (isOverDropZone
-            && dropZone.transform.childCount < 1 && dropZone.CompareTag("PlayerSupportZone") &&
-            transform.GetComponent<Card>().cardType == CardTypes.SUPPORT) 
+            && dropZone.transform.childCount < 1 && dropZone.CompareTag("PlayerZone") &&
+            transform.GetComponent<Card>().cardType == CardTypes.SUPPORT)
         {
             if (battleSystem.GetComponent<BattleSystem>().playerAva.currentMana >=
                 transform.GetComponent<Card>().cardCost)
             {
                 transform.SetParent(dropZone.transform, false);
                 battleSystem.GetComponent<BattleSystem>().ManaCostHandler(transform.GetComponent<Card>().cardCost);
-                dropZone.GetComponent<Image>().color = new Color32(166, 156, 43, 255);
-                
-                transform.GetComponent<SupportCard>().SupportFunction(transform.GetComponent<SupportCard>().supportEffect); // this will fire of the support effect
+                dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
+
+                transform.GetComponent<SupportCard>().SupportFunction(
+                    transform.GetComponent<SupportCard>().supportEffect, null,
+                    battleSystem.GetComponent<BattleSystem>()
+                        .playerPlayedCards); // this will fire of the support effect
+
+                Destroy(transform.GameObject());
             }
             else
             {
-                transform.position = startPosition;
-                transform.SetParent(startParent.transform,
-                    false); 
+                ReturnToHand();
             }
         }
         else
         {
-            transform.position = startPosition;
-            transform.SetParent(startParent.transform,
-                false); 
+            ReturnToHand();
         }
+    }
+
+    private void DropSpecificSupCard()
+    {
+        if (specificCard != null)
+        {
+            transform.GetComponent<SupportCard>().SupportFunction(transform.GetComponent<SupportCard>().supportEffect,
+                specificCard, null);
+
+            Destroy(gameObject);
+        }
+        else
+        {
+            ReturnToHand();
+        }
+    }
+
+    private void DropLastingSupCard()
+    {
+        if (isOverDropZone
+            && dropZone.transform.childCount < 1 && dropZone.CompareTag("PlayerZone") &&
+            transform.GetComponent<Card>().cardType == CardTypes.SUPPORT)
+        {
+            if (battleSystem.GetComponent<BattleSystem>().playerAva.currentMana >=
+                transform.GetComponent<Card>().cardCost)
+            {
+                transform.SetParent(dropZone.transform, false);
+                battleSystem.GetComponent<BattleSystem>().ManaCostHandler(transform.GetComponent<Card>().cardCost);
+                battleSystem.GetComponent<BattleSystem>().playerPlayedCards.Add(transform.GameObject());
+                dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
+
+                transform.GetComponent<SupportCard>().SupportFunction(
+                    transform.GetComponent<SupportCard>().supportEffect, null,
+                    battleSystem.GetComponent<BattleSystem>()
+                        .playerPlayedCards); // this will fire of the support effect
+            }
+            else
+            {
+                ReturnToHand();
+            }
+        }
+        else
+        {
+            ReturnToHand();
+        }
+    }
+
+
+    private void ReturnToHand()
+    {
+        transform.position = startPosition;
+        transform.SetParent(startParent.transform,
+            false);
     }
 
     private bool CardNotMove() // if any conditions is true, card wont move

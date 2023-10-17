@@ -105,27 +105,24 @@ public class AiSystem : MonoBehaviour
     {
         
         // Figuring out which playerzones has cards in them, if any.
-        var playerZones = GetComponent<DrawCards>().playerDropZones;
-        List<int> attackableCardIndexes = new List<int>();
-        for (int i = 0; i < playerZones.Count; i++)
+        var playerCards = GetComponent<BattleSystem>().playerPlayedCards;
+        List<GameObject> attackableCards = new List<GameObject>();
+        foreach (var card in playerCards)
         {
-            if (playerZones[i].transform.childCount > 0)
+            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                attackableCardIndexes.Add(i);
+                attackableCards.Add(card);
             }
         }
 
-        if(attackableCardIndexes.Count > 0)
+        if(attackableCards.Count > 0)
         {
             // ATTACK A RANDOM AVAILABLE CARD
             var random = new System.Random();
 
-            int targetIndex = attackableCardIndexes[random.Next(0, attackableCardIndexes.Count)];
-            playerZones[targetIndex].transform.GetChild(0);
-
-
-            Transform childTransform = playerZones[targetIndex].transform.GetChild(0);
-            ChampionCard thisCardComponent = childTransform.GetComponent<ChampionCard>();
+            GameObject targetCard = attackableCards[random.Next(0, attackableCards.Count)];
+            
+            ChampionCard thisCardComponent = targetCard.GetComponent<ChampionCard>();
 
 
             // Call the TakeDamage method on the ThisCard component.
