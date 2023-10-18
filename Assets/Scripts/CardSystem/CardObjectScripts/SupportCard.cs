@@ -84,7 +84,7 @@ public class SupportCard : MonoBehaviour
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                card.GetComponent<ChampionCard>().cardHealth *= 2;
+                card.GetComponent<ChampionCard>().cardHealth *= 15;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
             }
         }

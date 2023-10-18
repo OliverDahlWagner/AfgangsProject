@@ -101,8 +101,11 @@ public class BattleSystem : MonoBehaviour
     private void EndEnemyTurn()
     {
         Debug.Log("Ended EnemyTurn");
-        state = BattleState.PLAYERTURN;
-        PlayerTurn();
+        if (state == BattleState.ENEMYTURN) // wont start a new turn if the player avatar is killed
+        {
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
     }
 
     private void IncreaseMana(Avatar avatar)
@@ -164,9 +167,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Player Lost!! u suck");
     }
 
-    private void
-        LockUnlockButtons(
-            BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
+    private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
     {
         if (state == BattleState.PLAYERTURN)
         {
