@@ -134,13 +134,14 @@ public class AiSystem : MonoBehaviour
             {
                 // Dont know why, but it seems to hit cards that are destroyed? Therefore i added this for now
                 GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
+                GetComponent<BattleSystem>().PlayerLost();
             }
 
             }
         else{
             // ATTACK THE PLAYER CUZ NO PLAYERCARDS ON BOARD'
             GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
-
+            GetComponent<BattleSystem>().PlayerLost();
         }
 
 
