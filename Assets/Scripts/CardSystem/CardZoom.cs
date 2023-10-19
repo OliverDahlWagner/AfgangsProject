@@ -12,14 +12,22 @@ public class CardZoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private GameObject zoomCard;
     
+    public GameObject battleSystem;
+    
 
     public void Awake()
     {
         canvas = GameObject.Find("Main Canvas");
+        battleSystem = GameObject.Find("Battle System");
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+        
         if (!gameObject.CompareTag("PlayerCard")){return;} // this will need changing if the tags change (or end up doing something differnt)
         
         zoomCard = Instantiate(gameObject, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + (float)3.25), Quaternion.identity); // a static position above the card

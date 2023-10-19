@@ -150,6 +150,7 @@ public class BattleSystem : MonoBehaviour
         // when the player lock function is made for enemy turn just use it here;
 
         state = BattleState.WON;
+        GetComponent<WonLostScreenScript>().GameConclusion();
         Debug.Log("Player Won");
     }
 
@@ -164,6 +165,7 @@ public class BattleSystem : MonoBehaviour
         // when the player lock function is made for enemy turn just use it here;
 
         state = BattleState.LOST;
+        GetComponent<WonLostScreenScript>().GameConclusion();
         Debug.Log("Player Lost!! u suck");
     }
 
