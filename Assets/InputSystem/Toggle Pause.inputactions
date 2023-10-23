@@ -1,0 +1,34 @@
+{
+    "name": "Toggle Pause",
+    "maps": [
+        {
+            "name": "Pause",
+            "id": "f862bb73-bab2-4e67-91a4-4328009acac8",
+            "actions": [
+                {
+                    "name": "Toggle Pause",
+                    "type": "Button",
+                    "id": "3796f3ea-8934-4ada-94d6-ee4dd9ee7b5a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a492a9b0-55be-497c-b0b6-c2cd8e252656",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

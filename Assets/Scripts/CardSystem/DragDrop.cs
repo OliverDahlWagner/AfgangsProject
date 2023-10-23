@@ -240,7 +240,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private bool CardNotMove() // if any conditions is true, card wont move
     {
-        return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn();
+        return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn() ||battleSystem.GetComponent<BattleSystem>().isPaused;
     }
 
     private bool HasAttackedThisRound() // condition for not moving
