@@ -39,6 +39,7 @@ public class Card : MonoBehaviour
         nameText.text = cardName;
         descriptionText.text = cardDescription;
         costText.text = cardCost.ToString();
+        cardArtworkShower.sprite = cardArtwork;
         if (cardType == CardTypes.CHAMPION)
         {
             GetComponent<ChampionCard>().AssignChampionValues();

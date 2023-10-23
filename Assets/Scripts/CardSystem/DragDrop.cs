@@ -172,7 +172,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
 
-                Destroy(transform.GameObject());
+                Destroy(this.GameObject());
             }
             else
             {
