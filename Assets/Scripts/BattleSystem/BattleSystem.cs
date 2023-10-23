@@ -38,6 +38,7 @@ public class BattleSystem : MonoBehaviour
     public Avatar enemyAva;
 
     public BattleState state;
+    public bool isPaused;
 
     public Button drawCardButton;
     public Button endTurnButton;
@@ -46,6 +47,7 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
+        isPaused = false;
         state = BattleState.START;
         SetupBattle();
     }
@@ -171,7 +173,7 @@ public class BattleSystem : MonoBehaviour
 
     private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
     {
-        if (state == BattleState.PLAYERTURN)
+        if (state == BattleState.PLAYERTURN && isPaused == false)
         {
             drawCardButton.interactable = true;
             endTurnButton.interactable = true;

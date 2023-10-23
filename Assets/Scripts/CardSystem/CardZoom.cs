@@ -23,7 +23,7 @@ public class CardZoom : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN)
+        if (battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN || battleSystem.GetComponent<BattleSystem>().isPaused)
         {
             return;
         }
