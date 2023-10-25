@@ -43,7 +43,7 @@ public class DrawCards : MonoBehaviour
 
         enemyDeck = new List<int>
         {
-            2, 2, 2, 1, 1, 1 // Example enemyDeck IDs of cards
+            2, 2, 2, 1, 1, 1, 3, 3, 3 // Example enemyDeck IDs of cards
         };
 
 
@@ -80,11 +80,17 @@ public class DrawCards : MonoBehaviour
     {
         if (playerDrawing)
         {
-            DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+            if (playerPlayingDeck.Count > 0)
+            {
+                DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+            }
         }
         else
         {
-            DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);
+            if (enemyPlayingDeck.Count > 0)
+            {
+                DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);
+            }
         }
     }
 
@@ -151,10 +157,8 @@ public class DrawCards : MonoBehaviour
             GameObject dealtCard = Instantiate(theDeck[0], Vector3.zero, Quaternion.identity);
             dealtCard.transform.SetParent(playerArea.transform, false);
             dealtCard.tag = cardTag;
-            /*Debug.Log(dealtCard.GetComponent<ThisCard>().cardId + " --- the instantiated cards id");*/
-
-            theDeck.Remove(
-                theCard); // this removes the first card from the list. so if we use index zero we always get the next card
+            
+            theDeck.Remove(theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
 
@@ -169,6 +173,19 @@ public class DrawCards : MonoBehaviour
             }
 
             playerHandsize = PlayerArea.transform.childCount;
+        }
+    }
+    private void UpdateEnemyHand()
+    {
+        if (enemyHandsize != EnemyArea.transform.childCount)
+        {
+            enemyHand.Clear();
+            foreach (Transform child in EnemyArea.transform)
+            {
+                enemyHand.Add(child.gameObject);
+            }
+
+            enemyHandsize = EnemyArea.transform.childCount;
         }
     }
 }

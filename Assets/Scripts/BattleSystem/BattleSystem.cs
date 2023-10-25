@@ -30,6 +30,7 @@ public class BattleSystem : MonoBehaviour
     public List<GameObject> playerPlayedCards;
 
     public List<GameObject> enemyDropZones;
+    public List<GameObject> enemyPlayedCards;
 
     public GameObject playerHand;
     public GameObject enemyHand;
@@ -74,7 +75,6 @@ public class BattleSystem : MonoBehaviour
 
     public void endPlayerTurn()
     {
-        Debug.Log("end player turn clicked");
         state = BattleState.ENEMYTURN;
         EnemyTurn();
         // Debug.Log(state.ToString());
@@ -85,24 +85,18 @@ public class BattleSystem : MonoBehaviour
         ResetCardActions(playerPlayedCards);
         IncreaseMana(playerAva);
         LastingSupCardUseFunction();
-
-        Debug.Log("Player Turn");
     }
 
     private void EnemyTurn()
     {
         IncreaseMana(enemyAva);
-        Debug.Log("Enemy Turn");
         GetComponent<AiSystem>().playCards();
-        // now just make it do its thing, then end if conditions is meet
 
-
-        EndEnemyTurn(); // might not be a need for endenemyturn()   just a if statement that checks win lost state if not then playerturn
+        EndEnemyTurn();
     }
 
     private void EndEnemyTurn()
     {
-        Debug.Log("Ended EnemyTurn");
         if (state == BattleState.ENEMYTURN) // wont start a new turn if the player avatar is killed
         {
             state = BattleState.PLAYERTURN;
@@ -145,7 +139,6 @@ public class BattleSystem : MonoBehaviour
     {
         if (enemyAva.currentHP >= 1)
         {
-            Debug.Log("enemy not dead yet");
             return;
         }
         // Lock interaction with board and cards.
@@ -153,14 +146,12 @@ public class BattleSystem : MonoBehaviour
 
         state = BattleState.WON;
         GetComponent<WonLostScreenScript>().GameConclusion();
-        Debug.Log("Player Won");
     }
 
     public void PlayerLost() // this function should be fired at the end of every enemy attacks at the player avatar
     {
         if (playerAva.currentHP >= 1)
         {
-            Debug.Log("player not dead yet");
             return;
         }
         // Lock interaction with board and cards.
@@ -168,7 +159,6 @@ public class BattleSystem : MonoBehaviour
 
         state = BattleState.LOST;
         GetComponent<WonLostScreenScript>().GameConclusion();
-        Debug.Log("Player Lost!! u suck");
     }
 
     private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
@@ -189,6 +179,16 @@ public class BattleSystem : MonoBehaviour
     {
         playerPlayedCards.Remove(card);
         playerPlayedCards.RemoveAll(x => !x);
+        /*if (isPlayers) , bool isPlayers
+        {
+            playerPlayedCards.Remove(card);
+            playerPlayedCards.RemoveAll(x => !x);
+        }
+        else
+        {
+            enemyPlayedCards.Remove(card);
+            enemyPlayedCards.RemoveAll(x => !x);
+        }*/
     }
 
     private void LastingSupCardUseFunction()

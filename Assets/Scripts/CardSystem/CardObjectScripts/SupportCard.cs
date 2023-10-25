@@ -43,8 +43,15 @@ public class SupportCard : MonoBehaviour
     {
         if (roundCounter == 0)
         {
-            battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
-            Destroy(gameObject);
+            if (battleSystem.GetComponent<BattleSystem>().state == BattleState.ENEMYTURN)
+            {
+                Destroy(gameObject);
+            }
+            if (battleSystem.GetComponent<BattleSystem>().state == BattleState.PLAYERTURN)
+            {
+                battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
+                Destroy(gameObject);
+            }
         }
     }
     
@@ -79,7 +86,6 @@ public class SupportCard : MonoBehaviour
 
     public void DoubleHealth(List<GameObject> listOfPlayedCards)
     {
-        Debug.Log("Double Health");
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
@@ -92,7 +98,6 @@ public class SupportCard : MonoBehaviour
     
     public void HealTwo(GameObject champCard)
     {
-        Debug.Log("Heal 2");
         if (champCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
             champCard.GetComponent<ChampionCard>().cardHealth += 2;
@@ -102,7 +107,6 @@ public class SupportCard : MonoBehaviour
 
     public void DoubleDamage(List<GameObject> listOfPlayedCards)
     {
-        Debug.Log("Lasting Double Damage");
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
