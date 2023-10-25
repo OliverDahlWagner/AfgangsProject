@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05c39a3955699a4a9ee92c4bbd5988f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 30
-  currentHP: 25
+  maxHP: 300
+  currentHP: 250
   currentMana: 5
   maxHPHUD: {fileID: 4587686186827212160}
   currentHPHUD: {fileID: 4587686187356509506}
