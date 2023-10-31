@@ -616,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   supCardType: 2
   supportEffect: 2
-  roundCounter: 1
+  roundCounter: 3
   yellowContainer: {fileID: 114467164338264758}
   roundsLeftText: {fileID: 6899638378347665948}
 --- !u!114 &1624670502541448259

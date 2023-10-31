@@ -87,10 +87,10 @@ public class BattleSystem : MonoBehaviour
         LastingSupCardUseFunction();
     }
 
-    private void EnemyTurn()
+    private void EnemyTurn() // when I get to it this might need to be a IEnumerator
     {
         IncreaseMana(enemyAva);
-        GetComponent<AiSystem>().playCards();
+        StartCoroutine(GetComponent<AiSystem>().playCards());
 
         EndEnemyTurn();
     }
