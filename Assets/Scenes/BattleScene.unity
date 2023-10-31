@@ -1296,6 +1296,7 @@ MonoBehaviour:
   - {fileID: 397955867}
   - {fileID: 511762912}
   - {fileID: 1495450748}
+  enemyPlayedCards: []
   playerHand: {fileID: 3251457195723849110}
   enemyHand: {fileID: 6784180021040684962}
   playerAva: {fileID: 0}
