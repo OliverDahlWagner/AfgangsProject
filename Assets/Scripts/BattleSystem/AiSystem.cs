@@ -22,28 +22,38 @@ public class AiSystem : MonoBehaviour
         DrawOneCard();
         ResetChampCardActions();
 
+        
+        yield return StartCoroutine(HandleAiTurn());
+    }
+
+    private IEnumerator HandleAiTurn()
+    {
+        yield return StartCoroutine(HandleCardPlacement());
+        yield return new WaitForSeconds(1); 
+        yield return StartCoroutine(ChooseCardForAttack());
+    }
+
+    private IEnumerator HandleCardPlacement()
+    {
         var theChosenCard = ChosenCard();
         if (theChosenCard == null)
         {
             Debug.Log("no cards on hand or no mana for card");
-            ChooseCardForAttack();
             yield break;
         }
 
         if (theChosenCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
-            StartCoroutine(HandleChampionCard(theChosenCard));
+            yield return StartCoroutine(HandleChampionCard(theChosenCard));
         }
-
+        
         if (theChosenCard.GetComponent<Card>().cardType == CardTypes.SUPPORT)
         {
-            StartCoroutine(HandleSupportCard(theChosenCard));
+            yield return StartCoroutine(HandleSupportCard(theChosenCard));
         }
+    }  
 
-        ChooseCardForAttack();
-    }
 
-    
     private IEnumerator HandleChampionCard(GameObject playingCard)
     {
         Debug.Log("played champion card " + playingCard.name);
@@ -69,7 +79,7 @@ public class AiSystem : MonoBehaviour
     private IEnumerator StartPlacementOfCard(GameObject playingCard, GameObject dropzone)
     {
         yield return StartCoroutine(ShowPlacingCard(playingCard));
-        yield return StartCoroutine(MoveCardToDropZone(playingCard, dropzone, 2));
+        yield return StartCoroutine(MoveCardToDropZone(playingCard, dropzone, 1));
         yield return StartCoroutine(SetDropzoneAsParent(playingCard, dropzone));
     }
 
@@ -115,7 +125,7 @@ public class AiSystem : MonoBehaviour
             dropzone.transform.position = new Vector3(dropzone.transform.position.x, dropzone.transform.position.y, 0);
             yield return StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
             yield return StartCoroutine(HandleInstantSupportCard(playingCard));
-            yield break;
+            yield return null;
         }
 
         if (playingCard.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
@@ -124,13 +134,14 @@ public class AiSystem : MonoBehaviour
             dropzone.transform.position = new Vector3(dropzone.transform.position.x, dropzone.transform.position.y, 0);
             StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
             StartCoroutine(HandleLastingSupportCard(playingCard));
-            yield break;
+            yield return null;
         }
 
         if (playingCard.GetComponent<SupportCard>().supCardType == SupCardTypes.SPECIFIC)
         {
             var champCard = GetRandomAIPlayedChampionCard();
             StartCoroutine(HandleSpecificSupportCard(playingCard, champCard));
+            yield return null;
         }
     }
 
@@ -138,12 +149,13 @@ public class AiSystem : MonoBehaviour
     {
         yield return StartCoroutine(SpecificSupportMovement(supportCard, champCard));
         yield return StartCoroutine(SpecificSupportAction(supportCard, champCard));
+        yield return null;
     }
 
     private IEnumerator SpecificSupportMovement(GameObject supportCard, GameObject champCard)
     {
         yield return StartCoroutine(ShowPlacingCard(supportCard));
-        yield return StartCoroutine(SpecificToChamp(supportCard, champCard, 2));
+        yield return StartCoroutine(SpecificToChamp(supportCard, champCard, 1));
         yield return null;
     }
 
@@ -371,12 +383,12 @@ public class AiSystem : MonoBehaviour
                card.GetComponent<ChampionCard>().cardPower * cardPowerWeight;
     }
 
-    private void ChooseCardForAttack() // well it di
+    private IEnumerator ChooseCardForAttack() // well it di
     {
         // nothing to attack with
         if (GetAIPlayedChampionCards().Count == 0)
         {
-            return;
+            yield break;
         }
 
         // Figure out which AICardZones have cards in them and attack for each card out on the board. 
@@ -384,7 +396,8 @@ public class AiSystem : MonoBehaviour
         {
             if (GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>().hasBeenPlaced == false)
             {
-                Attack(GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>().cardPower);
+                yield return StartCoroutine(Attack(GetAIPlayedChampionCards()[i]));
+                yield return new WaitForSeconds(1); 
             }
         }
     }
@@ -394,7 +407,7 @@ public class AiSystem : MonoBehaviour
     // maybe set this as the target card. (so when we attacking starts this be set as the biggest threat)
     // if destroyed set to null, then new highest threat. now just need a way to determine threat  
     // All that this attack does is prioritise to attack cards first. However the cards attacked are random.
-    private void Attack(int damageAmount)
+    private IEnumerator Attack(GameObject attackerCard)
     {
         // Figuring out which playerzones has cards in them, if any.
         var playerCards = GetComponent<BattleSystem>().playerPlayedCards;
@@ -410,16 +423,59 @@ public class AiSystem : MonoBehaviour
 
         if (attackableCards.Count == 0) // attack the player
         {
-            GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
-            GetComponent<BattleSystem>().PlayerLost();
-            return;
+            /*GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
+            GetComponent<BattleSystem>().PlayerLost();*/
+            StartCoroutine(AttackAvatarFunction(attackerCard));
+            yield break;
         }
 
-        // ATTACK A RANDOM AVAILABLE CARD (for now random really hard to fina a way to make it chose)
+        /*// ATTACK A RANDOM AVAILABLE CARD (for now random really hard to fina a way to make it chose)
         var random = new System.Random();
         var targetCard = attackableCards[random.Next(0, attackableCards.Count)];
 
-        targetCard.GetComponent<ChampionCard>().TakeDamage(damageAmount);
+        targetCard.GetComponent<ChampionCard>().TakeDamage(attackerCard);*/
+    }
+
+    private IEnumerator AttackAvatarFunction(GameObject aiCard)
+    {
+        var startPosition = aiCard.transform.position;
+        yield return StartCoroutine(MoveCardToAvatar(aiCard));
+        yield return StartCoroutine(AttackAvatar(aiCard));
+        yield return StartCoroutine(MoveCardBack(aiCard, startPosition));
+    }
+
+    private IEnumerator MoveCardToAvatar(GameObject aiCard)
+    {
+        Vector3 startPoint = aiCard.transform.position;
+        float elapsedTime = 0;
+
+        while (elapsedTime < 1)
+        {
+            // Calculate the current position based on the starting and ending points, based on the time passed
+            aiCard.transform.position = Vector3.Lerp(startPoint, GetComponent<BattleSystem>().playerAva.transform.position, (elapsedTime / 1));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator AttackAvatar(GameObject aiCard)
+    {
+        GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(aiCard.GetComponent<ChampionCard>().cardPower);
+        GetComponent<BattleSystem>().PlayerLost();
+        yield return null;
+    }
+
+    private IEnumerator MoveCardBack(GameObject aiCard, Vector3 startPosition)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < 1)
+        {
+            // Calculate the current position based on the starting and ending points, based on the time passed
+            aiCard.transform.position = Vector3.Lerp(aiCard.transform.position, startPosition, (elapsedTime / 1));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private void DrawOneCard()
