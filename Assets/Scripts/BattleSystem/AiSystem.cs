@@ -396,10 +396,11 @@ public class AiSystem : MonoBehaviour
         {
             if (GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>().hasBeenPlaced == false)
             {
-                yield return StartCoroutine(Attack(GetAIPlayedChampionCards()[i]));
                 yield return new WaitForSeconds(1); 
+                yield return StartCoroutine(Attack(GetAIPlayedChampionCards()[i]));
             }
         }
+        yield return new WaitForSeconds(1); // just for a better feel
     }
 
 
@@ -425,15 +426,43 @@ public class AiSystem : MonoBehaviour
         {
             /*GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(damageAmount);
             GetComponent<BattleSystem>().PlayerLost();*/
-            StartCoroutine(AttackAvatarFunction(attackerCard));
+            yield return StartCoroutine(AttackAvatarFunction(attackerCard));
             yield break;
         }
+        
+        StartCoroutine(AttackPlayerCardFunction(attackerCard, attackableCards));
+    }
 
-        /*// ATTACK A RANDOM AVAILABLE CARD (for now random really hard to fina a way to make it chose)
+    private IEnumerator AttackPlayerCardFunction(GameObject attackCard, List<GameObject> attackableCards)
+    {
         var random = new System.Random();
-        var targetCard = attackableCards[random.Next(0, attackableCards.Count)];
+        var targetCard = attackableCards[random.Next(0, attackableCards.Count)]; // random
+        
+        var startPosition = attackCard.transform.position;
+        yield return StartCoroutine(MoveCardToPlayerCard(attackCard, targetCard));
+        yield return StartCoroutine(AttackPlayerCard(attackCard, targetCard));
+        yield return StartCoroutine(MoveCardBack(attackCard, startPosition));
+    }
 
-        targetCard.GetComponent<ChampionCard>().TakeDamage(attackerCard);*/
+    private IEnumerator AttackPlayerCard(GameObject attackCard, GameObject targetCard)
+    {
+        targetCard.GetComponent<ChampionCard>().TakeDamage(attackCard.GetComponent<ChampionCard>().cardPower);
+        yield return null;
+    }
+
+    private IEnumerator MoveCardToPlayerCard(GameObject attackerCard, GameObject targetCard)
+    {
+        Vector3 startPoint = attackerCard.transform.position;
+        Vector3 endPoint = targetCard.transform.position;
+        float elapsedTime = 0;
+
+        while (elapsedTime < 1)
+        {
+            // Calculate the current position based on the starting and ending points, based on the time passed
+            attackerCard.transform.position = Vector3.Lerp(startPoint, endPoint, (elapsedTime / 1));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private IEnumerator AttackAvatarFunction(GameObject aiCard)
