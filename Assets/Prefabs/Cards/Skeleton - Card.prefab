@@ -417,7 +417,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4307685428629368930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 21.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.41509432, g: 0.2917408, b: 0.2917408, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 70632ddfe8e71b04b8f90ef7e29a9e98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -714,13 +714,13 @@ GameObject:
   - component: {fileID: 2653199489217366208}
   - component: {fileID: 4035410665615318138}
   - component: {fileID: -3028311053922616919}
-  - component: {fileID: 4107814211193031263}
-  - component: {fileID: -3476448113494270494}
-  - component: {fileID: 7803698787899461738}
+  - component: {fileID: -3100075497191852654}
+  - component: {fileID: 6298716395273395989}
+  - component: {fileID: 1624670502541448259}
   - component: {fileID: 4943978669005038851}
   - component: {fileID: 3452907943711315613}
   m_Layer: 5
-  m_Name: Hunter - Card
+  m_Name: Skeleton - Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   battleSystem: {fileID: 0}
---- !u!114 &4107814211193031263
+--- !u!114 &-3100075497191852654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,17 +830,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38be327471b33ee4eadf71a18edc6810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardId: 1
+  cardId: 5
   cardType: 0
-  cardName: Hunter
-  cardDescription: He is a Hunter
+  cardName: Skeleton
+  cardDescription: It is a Skeleton
   cardArtwork: {fileID: 0}
-  cardCost: 2
+  cardCost: 4
   nameText: {fileID: 5195694394035278584}
   descriptionText: {fileID: 1258715492333338103}
   cardArtworkShower: {fileID: 7249365688885880980}
   costText: {fileID: 6083977793243099378}
---- !u!114 &-3476448113494270494
+--- !u!114 &6298716395273395989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -852,14 +852,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b66aa675a39db348a90994924055b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPower: 3
-  cardHealth: 5
+  cardPower: 2
+  cardHealth: 7
   powerText: {fileID: 4902635511352597743}
   healthText: {fileID: 8753876277719779419}
   hasAttacked: 0
   hasBeenPlaced: 0
   isOnBoard: 0
---- !u!114 &7803698787899461738
+--- !u!114 &1624670502541448259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -885,7 +885,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.000030517578, y: 0.43170166}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -896,7 +896,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 151.428, y: 243.784}
+  m_Size: {x: 149.70099, y: 244.64746}
   m_EdgeRadius: 0
 --- !u!50 &3452907943711315613
 Rigidbody2D:

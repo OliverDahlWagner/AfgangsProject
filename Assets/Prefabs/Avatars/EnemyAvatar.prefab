@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 30
-  currentHP: 20
+  currentHP: 30
   currentMana: 5
   maxHPHUD: {fileID: 537258154524355739}
   currentHPHUD: {fileID: 537258153398572885}
