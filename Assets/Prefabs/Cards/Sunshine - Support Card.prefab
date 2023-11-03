@@ -614,9 +614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e60415220af2c45a9bc60bb16acd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supCardType: 1
-  supportEffect: 3
-  roundCounter: 3
+  supCardType: 0
+  supportEffect: 1
+  roundCounter: 0
   yellowContainer: {fileID: 114467164338264758}
   roundsLeftText: {fileID: 6899638378347665948}
 --- !u!114 &1624670502541448259
