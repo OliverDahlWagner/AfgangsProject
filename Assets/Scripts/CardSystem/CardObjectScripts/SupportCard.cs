@@ -101,6 +101,7 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardHealth *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
     }
@@ -111,6 +112,7 @@ public class SupportCard : MonoBehaviour
         {
             champCard.GetComponent<ChampionCard>().cardHealth += 2;
             champCard.GetComponent<ChampionCard>().AssignChampionValues();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
         }
     }
     
@@ -120,6 +122,7 @@ public class SupportCard : MonoBehaviour
         {
             champCard.GetComponent<ChampionCard>().cardPower += 2;
             champCard.GetComponent<ChampionCard>().AssignChampionValues();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
         }
     }
 
@@ -131,6 +134,7 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardPower += 1;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
 
@@ -147,6 +151,8 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardPower *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
     }
@@ -159,6 +165,8 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardHealth += 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
 
