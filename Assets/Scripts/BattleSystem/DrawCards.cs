@@ -38,12 +38,12 @@ public class DrawCards : MonoBehaviour
         // Depending on how we make the game, the way we get the deck will probably change
         playerDeck = new List<int>
         {
-            1, 1, 1, 2, 2, 2, 3, 3 // Example playerDeck IDs of cards
+            1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12 // Example playerDeck IDs of cards
         };
 
         enemyDeck = new List<int>
         {
-            2, 2, 2, 1, 1, 1, 3, 3, 3 // Example enemyDeck IDs of cards
+            1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12 // Example enemyDeck IDs of cards
         };
 
 

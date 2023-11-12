@@ -76,7 +76,7 @@ public class BattleSystem : MonoBehaviour
     public void endPlayerTurn()
     {
         state = BattleState.ENEMYTURN;
-        EnemyTurn();
+        StartCoroutine(EnemyTurn());
         // Debug.Log(state.ToString());
     }
 
@@ -87,10 +87,10 @@ public class BattleSystem : MonoBehaviour
         LastingSupCardUseFunction();
     }
 
-    private void EnemyTurn()
+    private IEnumerator EnemyTurn()
     {
         IncreaseMana(enemyAva);
-        GetComponent<AiSystem>().playCards();
+        yield return StartCoroutine(GetComponent<AiSystem>().playCards());
 
         EndEnemyTurn();
     }

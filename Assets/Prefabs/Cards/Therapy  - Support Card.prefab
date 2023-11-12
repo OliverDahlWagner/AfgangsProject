@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 4943978669005038851}
   - component: {fileID: 3452907943711315613}
   m_Layer: 5
-  m_Name: Sunshine - Support Card
+  m_Name: Therapy  - Support Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,10 +592,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38be327471b33ee4eadf71a18edc6810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardId: 3
+  cardId: 11
   cardType: 1
-  cardName: Sunshine
-  cardDescription: With the power of sunshine double the health of your cards
+  cardName: 'Therapy '
+  cardDescription: Lasting +2 Health
   cardArtwork: {fileID: 0}
   cardCost: 3
   nameText: {fileID: 5195694394035278584}
@@ -614,9 +614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e60415220af2c45a9bc60bb16acd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supCardType: 0
-  supportEffect: 1
-  roundCounter: 0
+  supCardType: 1
+  supportEffect: 5
+  roundCounter: 3
   yellowContainer: {fileID: 114467164338264758}
   roundsLeftText: {fileID: 6899638378347665948}
 --- !u!114 &1624670502541448259

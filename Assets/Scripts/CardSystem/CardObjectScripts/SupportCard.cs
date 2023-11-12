@@ -70,13 +70,22 @@ public class SupportCard : MonoBehaviour
         switch (supportEffectInt)
         {
             case 1:
-                DoubleHealth(listOfPlayedCards);
+                InstantDoubleHealth(listOfPlayedCards);
                 break;
             case 2:
-                HealTwo(theCard);
+                SpecificHealTwo(theCard);
                 break;
             case 3:
-                DoubleDamage(listOfPlayedCards);
+                InstantDoubleDamage(listOfPlayedCards);
+                break;
+            case 4:
+                LastingPlusOnePower(listOfPlayedCards);
+                break;
+            case 5:
+                LastingPlusTwoHealth(listOfPlayedCards);
+                break;
+            case 6:
+                SpecificPowerPlusTwo(theCard);
                 break;
             default:
                 Debug.Log("Support function is not working");
@@ -84,28 +93,57 @@ public class SupportCard : MonoBehaviour
         }
     }
 
-    public void DoubleHealth(List<GameObject> listOfPlayedCards)
+    public void InstantDoubleHealth(List<GameObject> listOfPlayedCards)
     {
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                card.GetComponent<ChampionCard>().cardHealth *= 15;
+                card.GetComponent<ChampionCard>().cardHealth *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
     }
     
-    public void HealTwo(GameObject champCard)
+    public void SpecificHealTwo(GameObject champCard)
     {
         if (champCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
             champCard.GetComponent<ChampionCard>().cardHealth += 2;
             champCard.GetComponent<ChampionCard>().AssignChampionValues();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
+        }
+    }
+    
+    public void SpecificPowerPlusTwo(GameObject champCard)
+    {
+        if (champCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
+        {
+            champCard.GetComponent<ChampionCard>().cardPower += 2;
+            champCard.GetComponent<ChampionCard>().AssignChampionValues();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
         }
     }
 
-    public void DoubleDamage(List<GameObject> listOfPlayedCards)
+    public void LastingPlusOnePower(List<GameObject> listOfPlayedCards)
+    {
+        foreach (GameObject card in listOfPlayedCards)
+        {
+            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
+            {
+                card.GetComponent<ChampionCard>().cardPower += 1;
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+            }
+        }
+
+        roundCounter--;
+        AssignRoundsLeftValues();
+        LastingSupCardHelperFunction();
+    }
+    
+    public void InstantDoubleDamage(List<GameObject> listOfPlayedCards)
     {
         foreach (GameObject card in listOfPlayedCards)
         {
@@ -113,6 +151,22 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardPower *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+            }
+        }
+    }
+    
+    public void LastingPlusTwoHealth(List<GameObject> listOfPlayedCards)
+    {
+        foreach (GameObject card in listOfPlayedCards)
+        {
+            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
+            {
+                card.GetComponent<ChampionCard>().cardHealth += 2;
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().AssignChampionValues();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
             }
         }
 
