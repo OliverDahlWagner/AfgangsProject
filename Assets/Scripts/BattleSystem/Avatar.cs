@@ -19,6 +19,8 @@ public class Avatar : MonoBehaviour
     public GameObject attack1;
     public GameObject attack2;
 
+    public AudioClip hitSound;
+
     public void SetHUD()
     {
         maxHPHUD.text = maxHP.ToString();
@@ -45,6 +47,7 @@ public class Avatar : MonoBehaviour
     
     private IEnumerator TakeDamegeEffect()
     {
+        GetComponent<AudioSource>().PlayOneShot(hitSound);
         attack1.SetActive(true);
         yield return new WaitForSeconds((float)0.5);
         attack1.SetActive(false);
