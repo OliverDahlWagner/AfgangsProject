@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class ChampionCard : MonoBehaviour
 {
     [SerializeField] public int cardPower;
     [SerializeField] public int cardHealth;
 
-    public Text powerText;
-    public Text healthText;
+    public TMP_Text powerText;
+    public TMP_Text healthText;
 
     public bool hasAttacked = false;
     public bool hasBeenPlaced = false;
@@ -34,8 +36,8 @@ public class ChampionCard : MonoBehaviour
     
     public void AssignChampionValues()
     {
-        powerText.text = cardPower.ToString();
-        healthText.text = cardHealth.ToString();
+        powerText.SetText(cardPower.ToString());
+        healthText.SetText(cardHealth.ToString());
     }
     
     [ContextMenu("Take Damage Test")]

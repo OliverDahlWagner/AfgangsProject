@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public enum CardTypes
@@ -19,10 +20,10 @@ public class Card : MonoBehaviour
     [SerializeField] private Sprite cardArtwork;                   
     [SerializeField] public int cardCost;
     
-    public Text nameText;                    
+    public TMP_Text nameText;            
     public Text descriptionText;                    
     public Image cardArtworkShower;                    
-    public Text costText; 
+    public TMP_Text costText; 
     
     private void Start()
     {
@@ -36,9 +37,9 @@ public class Card : MonoBehaviour
     
     private void AssignValuesToCard()                    
     {
-        nameText.text = cardName;
+        nameText.SetText(cardName.ToString());
         descriptionText.text = cardDescription;
-        costText.text = cardCost.ToString();
+        costText.SetText(cardCost.ToString());
         cardArtworkShower.sprite = cardArtwork;
         if (cardType == CardTypes.CHAMPION)
         {
