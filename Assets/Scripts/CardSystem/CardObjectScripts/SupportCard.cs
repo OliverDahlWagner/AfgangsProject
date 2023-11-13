@@ -54,6 +54,13 @@ public class SupportCard : MonoBehaviour
             }
         }
     }
+
+    private float GetAudioLevel(int amountOfCards)
+    {
+        var audioScale = 1.0f / amountOfCards;
+        
+        return audioScale;
+    }
     
     
     ///////////////////////////////////
@@ -101,7 +108,7 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardHealth *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards.Count));
             }
         }
     }
@@ -112,7 +119,7 @@ public class SupportCard : MonoBehaviour
         {
             champCard.GetComponent<ChampionCard>().cardHealth += 2;
             champCard.GetComponent<ChampionCard>().AssignChampionValues();
-            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(1));
         }
     }
     
@@ -122,7 +129,7 @@ public class SupportCard : MonoBehaviour
         {
             champCard.GetComponent<ChampionCard>().cardPower += 2;
             champCard.GetComponent<ChampionCard>().AssignChampionValues();
-            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect();
+            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(1));
         }
     }
 
@@ -134,7 +141,7 @@ public class SupportCard : MonoBehaviour
             {
                 card.GetComponent<ChampionCard>().cardPower += 1;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards.Count));
             }
         }
 
@@ -152,7 +159,7 @@ public class SupportCard : MonoBehaviour
                 card.GetComponent<ChampionCard>().cardPower *= 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
                 card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards.Count));
             }
         }
     }
@@ -166,7 +173,7 @@ public class SupportCard : MonoBehaviour
                 card.GetComponent<ChampionCard>().cardHealth += 2;
                 card.GetComponent<ChampionCard>().AssignChampionValues();
                 card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect();
+                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards.Count));
             }
         }
 

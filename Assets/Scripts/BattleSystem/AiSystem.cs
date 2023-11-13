@@ -125,7 +125,7 @@ public class AiSystem : MonoBehaviour
             dropzone.transform.position = new Vector3(dropzone.transform.position.x, dropzone.transform.position.y, 0);
             yield return StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
             yield return StartCoroutine(HandleInstantSupportCard(playingCard));
-            yield return null;
+            yield break;
         }
 
         if (playingCard.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
@@ -134,15 +134,16 @@ public class AiSystem : MonoBehaviour
             dropzone.transform.position = new Vector3(dropzone.transform.position.x, dropzone.transform.position.y, 0);
             StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
             StartCoroutine(HandleLastingSupportCard(playingCard));
-            yield return null;
+            yield break;
         }
 
         if (playingCard.GetComponent<SupportCard>().supCardType == SupCardTypes.SPECIFIC)
         {
             var champCard = GetRandomAIPlayedChampionCard();
             StartCoroutine(HandleSpecificSupportCard(playingCard, champCard));
-            yield return null;
+            yield break;
         }
+        
     }
 
     private IEnumerator HandleSpecificSupportCard(GameObject supportCard, GameObject champCard)
@@ -199,7 +200,6 @@ public class AiSystem : MonoBehaviour
                 .SupportFunction(supportCard.GetComponent<SupportCard>().supportEffect, null,
                     GetAIPlayedChampionCards());
         }
-
         Destroy(supportCard);
         yield return null;
     }

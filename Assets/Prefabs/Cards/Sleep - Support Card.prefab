@@ -597,7 +597,7 @@ MonoBehaviour:
   cardName: Sleep
   cardDescription: Instant  x2 damage
   cardArtwork: {fileID: 0}
-  cardCost: 5
+  cardCost: 3
   nameText: {fileID: 5195694394035278584}
   descriptionText: {fileID: 1258715492333338103}
   cardArtworkShower: {fileID: 7249365688885880980}
