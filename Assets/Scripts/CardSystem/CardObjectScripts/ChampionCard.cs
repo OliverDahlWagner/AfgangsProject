@@ -20,26 +20,27 @@ public class ChampionCard : MonoBehaviour
 
     public GameObject attack1;
     public GameObject attack2;
-    
+
     public GameObject buff1;
     public GameObject buff2;
 
     public AudioClip hitSound;
     public AudioClip buffSound;
 
-    
+
     private GameObject battleSystem;
+
     private void Start()
     {
         battleSystem = GameObject.Find("Battle System");
     }
-    
+
     public void AssignChampionValues()
     {
         powerText.SetText(cardPower.ToString());
         healthText.SetText(cardHealth.ToString());
     }
-    
+
     [ContextMenu("Take Damage Test")]
     public void TakeSomeDamage()
     {
@@ -47,7 +48,6 @@ public class ChampionCard : MonoBehaviour
 
         if (cardHealth <= 0)
         {
-            
             Destroy(gameObject);
         }
     }
@@ -55,7 +55,7 @@ public class ChampionCard : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         cardHealth -= damageAmount;
-        StartCoroutine(TakeDamegeEffect());
+        StartCoroutine(TakeDamegeEffect(1));
 
         if (cardHealth <= 0)
         {
@@ -64,19 +64,21 @@ public class ChampionCard : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamegeEffect()
+    private IEnumerator TakeDamegeEffect(float audioLevel)
     {
-        GetComponent<AudioSource>().PlayOneShot(hitSound);
+        var settingVolumeScale = SettingsData.settingVolumeScale;
+        
+        GetComponent<AudioSource>().PlayOneShot(hitSound, (float)(audioLevel * settingVolumeScale));
         attack1.SetActive(true);
         yield return new WaitForSeconds((float)0.5);
         attack1.SetActive(false);
         attack2.SetActive(true);
         yield return new WaitForSeconds((float)0.5);
         attack2.SetActive(false);
-        
+
         yield return null;
     }
-    
+
     public void PlayGetBuffEffect(float audioLevel)
     {
         StartCoroutine(GetBuffEffect(audioLevel));
@@ -84,18 +86,17 @@ public class ChampionCard : MonoBehaviour
 
     private IEnumerator GetBuffEffect(float audioLevel)
     {
-        Debug.Log("Audio level " + audioLevel);
-        GetComponent<AudioSource>().PlayOneShot(buffSound, audioLevel);
+        var settingVolumeScale = SettingsData.settingVolumeScale;
+
+        Debug.Log("Audio level " + (float)(audioLevel * settingVolumeScale));
+        GetComponent<AudioSource>().PlayOneShot(buffSound, (float)(audioLevel * settingVolumeScale));
         buff1.SetActive(true);
         yield return new WaitForSeconds((float)0.5);
         buff1.SetActive(false);
         buff2.SetActive(true);
         yield return new WaitForSeconds((float)0.5);
         buff2.SetActive(false);
-        
+
         yield return null;
     }
-    
-    
-    
 }

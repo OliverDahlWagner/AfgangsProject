@@ -28,6 +28,7 @@ public class BattleSystem : MonoBehaviour
     public List<GameObject> playerDropZones;
     public List<GameObject> playerDropZonesChildren;
     public List<GameObject> playerPlayedCards;
+    public List<GameObject> playerPlayedChampionCards;
 
     public List<GameObject> enemyDropZones;
     public List<GameObject> enemyPlayedCards;
