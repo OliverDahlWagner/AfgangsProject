@@ -14,8 +14,12 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/How To Play");
     }
-
-
+    
+    public void Options()
+    {
+        SceneManager.LoadScene("Scenes/Options");
+    }
+    
     public void QuitGame()
     {
         Application.Quit();
