@@ -118,7 +118,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         if (collision.gameObject.CompareTag("PlayerZone"))
         {
             isOverDropZone = false;
-            if (dropZone != null) dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
+            if (dropZone != null) dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
             dropZone = null;
             specificCard = null;
             Debug.Log(specificCard);
