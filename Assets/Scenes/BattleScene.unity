@@ -1134,7 +1134,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.x
-      value: 50
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.y
@@ -1327,6 +1327,7 @@ MonoBehaviour:
   - {fileID: 1591030831}
   playerDropZonesChildren: []
   playerPlayedCards: []
+  playerPlayedChampionCards: []
   enemyDropZones:
   - {fileID: 7235132930248493584}
   - {fileID: 397955867}
@@ -1486,7 +1487,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.x
-      value: 50
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.y
@@ -1803,7 +1804,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.x
-      value: 50
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.y
@@ -3233,7 +3234,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.x
-      value: 50
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -1406144040859476250, guid: 378e06d04daa2ed42b5a40a6c8a8b4b5, type: 3}
       propertyPath: m_Size.y
