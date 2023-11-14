@@ -141,7 +141,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 battleSystem.GetComponent<BattleSystem>().ManaCostHandler(transform.GetComponent<Card>().cardCost);
                 battleSystem.GetComponent<BattleSystem>().playerPlayedCards.Add(transform.GameObject());
 
-                dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
+                dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
             }
             else
             {
