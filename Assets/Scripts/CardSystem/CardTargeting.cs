@@ -82,7 +82,7 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
         if (collision.gameObject.CompareTag("EnemyZone"))
         {
             collision.gameObject.GetComponent<Image>().color =
-                new Color32(202, 126, 112, 255); // this will need to better, it loses the edge
+                new Color32(202, 126, 112, 0); // this will need to better, it loses the edge
 
             collisionTaget = null;
         }

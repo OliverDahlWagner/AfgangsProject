@@ -538,7 +538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce39368e5536e434795fcf9327ef1df7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -912,7 +912,7 @@ MonoBehaviour:
   cardType: 0
   cardName: Goblin
   cardDescription: groo grasdasdgagaga
-  cardArtwork: {fileID: 21300000, guid: ce39368e5536e434795fcf9327ef1df7, type: 3}
+  cardArtwork: {fileID: 21300000, guid: 29523262d8c70814cabae7a37ce8dc16, type: 3}
   cardCost: 2
   nameText: {fileID: 7253382581119529770}
   descriptionText: {fileID: 1258715492333338103}
