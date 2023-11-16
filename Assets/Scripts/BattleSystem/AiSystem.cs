@@ -22,14 +22,14 @@ public class AiSystem : MonoBehaviour
         DrawOneCard();
         ResetChampCardActions();
 
-        
+
         yield return StartCoroutine(HandleAiTurn());
     }
 
     private IEnumerator HandleAiTurn()
     {
         yield return StartCoroutine(HandleCardPlacement());
-        yield return new WaitForSeconds(1); 
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(ChooseCardForAttack());
     }
 
@@ -46,20 +46,20 @@ public class AiSystem : MonoBehaviour
         {
             yield return StartCoroutine(HandleChampionCard(theChosenCard));
         }
-        
+
         if (theChosenCard.GetComponent<Card>().cardType == CardTypes.SUPPORT)
         {
             yield return StartCoroutine(HandleSupportCard(theChosenCard));
         }
-    }  
+    }
 
 
     private IEnumerator HandleChampionCard(GameObject playingCard)
     {
         Debug.Log("played champion card " + playingCard.name);
-        
+
         var dropZone = GetRandomDropzone();
-        
+
         dropZone.transform.position = new Vector3(dropZone.transform.position.x, dropZone.transform.position.y, 0);
 
         StartCoroutine(StartPlacementOfCard(playingCard, dropZone));
@@ -75,7 +75,7 @@ public class AiSystem : MonoBehaviour
     }
 
     public GameObject enemyDropZone;
-    
+
     private IEnumerator StartPlacementOfCard(GameObject playingCard, GameObject dropzone)
     {
         yield return StartCoroutine(ShowPlacingCard(playingCard));
@@ -98,7 +98,8 @@ public class AiSystem : MonoBehaviour
         while (elapsedTime < duration)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            playingCard.transform.position = Vector3.Lerp(startPoint, endPoint.transform.position, (elapsedTime / duration));
+            playingCard.transform.position =
+                Vector3.Lerp(startPoint, endPoint.transform.position, (elapsedTime / duration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -118,12 +119,13 @@ public class AiSystem : MonoBehaviour
         Debug.Log("played Support card " + playingCard.name);
 
         HandleManaCost(playingCard);
-        
+
         if (playingCard.GetComponent<SupportCard>().supCardType == SupCardTypes.INSTANT)
         {
             var dropzone = GetRandomDropzone();
             dropzone.transform.position = new Vector3(dropzone.transform.position.x, dropzone.transform.position.y, 0);
-            yield return StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
+            yield return
+                StartCoroutine(StartPlacementOfCard(playingCard, dropzone)); // can use the same as champcard here
             yield return StartCoroutine(HandleInstantSupportCard(playingCard));
             yield break;
         }
@@ -143,7 +145,6 @@ public class AiSystem : MonoBehaviour
             StartCoroutine(HandleSpecificSupportCard(playingCard, champCard));
             yield break;
         }
-        
     }
 
     private IEnumerator HandleSpecificSupportCard(GameObject supportCard, GameObject champCard)
@@ -162,18 +163,17 @@ public class AiSystem : MonoBehaviour
 
     private IEnumerator SpecificToChamp(GameObject supportCard, GameObject champCard, float time)
     {
-        
         Vector3 startPoint = supportCard.transform.position;
         float elapsedTime = 0;
 
         while (elapsedTime < time)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            supportCard.transform.position = Vector3.Lerp(startPoint, champCard.transform.position, (elapsedTime / time));
+            supportCard.transform.position =
+                Vector3.Lerp(startPoint, champCard.transform.position, (elapsedTime / time));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
     }
 
     private IEnumerator SpecificSupportAction(GameObject supportCard, GameObject champCard)
@@ -185,35 +185,38 @@ public class AiSystem : MonoBehaviour
         }
 
         supportCard.GetComponent<SupportCard>()
-            .SupportFunction(supportCard.GetComponent<SupportCard>().supportEffect, champCard, null);
+            .SupportFunction(champCard, null);
 
         Destroy(supportCard);
         yield return null;
     }
-    
+
 
     private IEnumerator HandleInstantSupportCard(GameObject supportCard)
     {
         if (GetAIPlayedChampionCards().Count != 0)
         {
             supportCard.GetComponent<SupportCard>()
-                .SupportFunction(supportCard.GetComponent<SupportCard>().supportEffect, null,
+                .SupportFunction(null,
                     GetAIPlayedChampionCards());
         }
+
         Destroy(supportCard);
         yield return null;
     }
+
     private IEnumerator HandleLastingSupportCard(GameObject supportCard)
     {
         if (GetAIPlayedChampionCards().Count != 0)
         {
             supportCard.GetComponent<SupportCard>()
-                .SupportFunction(supportCard.GetComponent<SupportCard>().supportEffect, null,
+                .SupportFunction(null,
                     GetAIPlayedChampionCards());
         }
+
         yield return null;
     }
-    
+
 
     private List<int> AvailableDropZonesIndexes()
     {
@@ -354,8 +357,10 @@ public class AiSystem : MonoBehaviour
                 if (card.GetComponent<Card>().cardType ==
                     CardTypes.SUPPORT) // currently no good way to rate supcard. maybe we just give them a value attribute
                     // that we see fit ... OR MAYBE the mana cost just reflect the RATING of the card (I like that)
+                    //  ------ IMPORTANT ------
+                    // MIGHT BE POSSIBLE NOW WITH THE SUPPORT SYSTEM. WE CAN DO THE SAME VALUING AS THE CHAMPCARD(WEIGH STAT VALUES FOR MANA COST)
                 {
-                    if (GetAIPlayedChampionCards().Count >
+                    if (GetAIPlayedChampionCards().Count >=
                         1) // just so it wont play a support without any thing to support (A LOT more can be added here)
                     {
                         var currentCardValue = card.GetComponent<Card>().cardCost;
@@ -396,10 +401,11 @@ public class AiSystem : MonoBehaviour
         {
             if (GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>().hasBeenPlaced == false)
             {
-                yield return new WaitForSeconds(1); 
+                yield return new WaitForSeconds(1);
                 yield return StartCoroutine(Attack(GetAIPlayedChampionCards()[i]));
             }
         }
+
         yield return new WaitForSeconds(1); // just for a better feel
     }
 
@@ -429,7 +435,7 @@ public class AiSystem : MonoBehaviour
             yield return StartCoroutine(AttackAvatarFunction(attackerCard));
             yield break;
         }
-        
+
         StartCoroutine(AttackPlayerCardFunction(attackerCard, attackableCards));
     }
 
@@ -437,7 +443,7 @@ public class AiSystem : MonoBehaviour
     {
         var random = new System.Random();
         var targetCard = attackableCards[random.Next(0, attackableCards.Count)]; // random
-        
+
         var startPosition = attackCard.transform.position;
         yield return StartCoroutine(MoveCardToPlayerCard(attackCard, targetCard));
         yield return StartCoroutine(AttackPlayerCard(attackCard, targetCard));
@@ -481,7 +487,8 @@ public class AiSystem : MonoBehaviour
         while (elapsedTime < 1)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            aiCard.transform.position = Vector3.Lerp(startPoint, GetComponent<BattleSystem>().playerAva.transform.position, (elapsedTime / 1));
+            aiCard.transform.position = Vector3.Lerp(startPoint,
+                GetComponent<BattleSystem>().playerAva.transform.position, (elapsedTime / 1));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -489,7 +496,8 @@ public class AiSystem : MonoBehaviour
 
     private IEnumerator AttackAvatar(GameObject aiCard)
     {
-        GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>().TakeDamage(aiCard.GetComponent<ChampionCard>().cardPower);
+        GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>()
+            .TakeDamage(aiCard.GetComponent<ChampionCard>().cardPower);
         GetComponent<BattleSystem>().PlayerLost();
         yield return null;
     }
@@ -534,9 +542,8 @@ public class AiSystem : MonoBehaviour
 
         for (var i = 0; i < GetAIPlayedLastingSupportCards().Count; i++)
         {
-            var supportEffect = GetAIPlayedLastingSupportCards()[i].GetComponent<SupportCard>().supportEffect;
             GetAIPlayedLastingSupportCards()[i].GetComponent<SupportCard>()
-                .SupportFunction(supportEffect, null, GetAIPlayedChampionCards());
+                .SupportFunction( null, GetAIPlayedChampionCards());
         }
     }
 
@@ -556,5 +563,4 @@ public class AiSystem : MonoBehaviour
             GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>().hasAttacked = false;
         }
     }
-    
 }

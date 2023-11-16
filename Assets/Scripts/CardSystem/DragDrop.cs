@@ -110,6 +110,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             dropZone.GetComponent<Image>().color = new Color32(124, 193, 191, 255);
         }
 
+
         Debug.Log(dropZone.name);
     }
 
@@ -168,7 +169,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
 
                 transform.GetComponent<SupportCard>().SupportFunction(
-                    transform.GetComponent<SupportCard>().supportEffect, null,
+                    null,
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
 
@@ -189,10 +190,17 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         if (specificCard != null)
         {
-            transform.GetComponent<SupportCard>().SupportFunction(transform.GetComponent<SupportCard>().supportEffect,
-                specificCard, null);
-
-            Destroy(gameObject);
+            if (battleSystem.GetComponent<BattleSystem>().playerAva.currentMana >=
+                transform.GetComponent<Card>().cardCost)
+            {
+                battleSystem.GetComponent<BattleSystem>().ManaCostHandler(transform.GetComponent<Card>().cardCost);
+                transform.GetComponent<SupportCard>().SupportFunction(specificCard, null);
+                Destroy(gameObject);
+            }
+            else
+            {
+                ReturnToHand();
+            }
         }
         else
         {
@@ -214,8 +222,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 battleSystem.GetComponent<BattleSystem>().playerPlayedCards.Add(transform.GameObject());
                 dropZone.GetComponent<Image>().color = new Color32(67, 89, 87, 255);
 
-                transform.GetComponent<SupportCard>().SupportFunction(
-                    transform.GetComponent<SupportCard>().supportEffect, null,
+                transform.GetComponent<SupportCard>().SupportFunction(null,
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
             }
@@ -240,7 +247,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private bool CardNotMove() // if any conditions is true, card wont move
     {
-        return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn() ||battleSystem.GetComponent<BattleSystem>().isPaused;
+        return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn() ||
+               battleSystem.GetComponent<BattleSystem>().isPaused;
     }
 
     private bool HasAttackedThisRound() // condition for not moving
