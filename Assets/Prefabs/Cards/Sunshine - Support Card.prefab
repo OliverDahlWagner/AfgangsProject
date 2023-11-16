@@ -727,11 +727,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e60415220af2c45a9bc60bb16acd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  supCardType: 0
-  supportEffect: 1
-  roundCounter: 0
+  supCardType: 2
+  roundCounter: 4
   yellowContainer: {fileID: 114467164338264758}
   roundsLeftText: {fileID: 6899638378347665948}
+  supportModifierType: 0
+  attackModifierValue: 3
+  healthModifierValue: 3
 --- !u!114 &1624670502541448259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,7 +771,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 149.70099, y: 244.64746}
+  m_Size: {x: 149.70099, y: 140}
   m_EdgeRadius: 0
 --- !u!50 &3452907943711315613
 Rigidbody2D:

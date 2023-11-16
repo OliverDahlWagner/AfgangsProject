@@ -28,6 +28,16 @@ public class Card : MonoBehaviour
     private void Start()
     {
         AssignValuesToCard();
+
+        var dnd = GetComponent<DragDrop>();
+        var cardTargeting = GetComponent<CardTargeting>();
+        var boxCollider2D = GetComponent<BoxCollider2D>();
+        if (gameObject.CompareTag("EnemyCard"))  // things enemy cards dont need
+        {
+            dnd.enabled = false;
+            cardTargeting.enabled = false;
+            boxCollider2D.enabled = false;
+        }
     }
 
     private void Update()

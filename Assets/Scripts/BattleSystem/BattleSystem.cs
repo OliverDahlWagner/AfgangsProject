@@ -162,7 +162,9 @@ public class BattleSystem : MonoBehaviour
         GetComponent<WonLostScreenScript>().GameConclusion();
     }
 
-    private void LockUnlockButtons(BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
+    private void
+        LockUnlockButtons(
+            BattleState battleState) // no need to add locking of cards. they cant move if it ain't player turn anyway
     {
         if (state == BattleState.PLAYERTURN && isPaused == false)
         {
@@ -194,18 +196,17 @@ public class BattleSystem : MonoBehaviour
 
     private void LastingSupCardUseFunction()
     {
-        for (int i = 0; i < playerPlayedCards.Count; i++)   // For loops are goated. fuck for each loops. all my homies hate for each loops
+        for (int i = 0;
+             i < playerPlayedCards.Count;
+             i++) // For loops are goated. fuck for each loops. all my homies hate for each loops
         {
             var card = playerPlayedCards[i];
-            if (card.GetComponent<Card>().cardType != CardTypes.CHAMPION && 
-                card.GetComponent<Card>().cardType == CardTypes.SUPPORT && 
+            if (card.GetComponent<Card>().cardType != CardTypes.CHAMPION &&
+                card.GetComponent<Card>().cardType == CardTypes.SUPPORT &&
                 card.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
             {
-                card.GetComponent<SupportCard>().SupportFunction(
-                    card.GetComponent<SupportCard>().supportEffect, null,
-                    playerPlayedCards);
+                card.GetComponent<SupportCard>().SupportFunction(null, playerPlayedCards);
             }
         }
     }
-
 }

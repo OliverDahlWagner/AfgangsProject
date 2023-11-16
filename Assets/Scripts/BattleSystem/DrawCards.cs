@@ -38,12 +38,13 @@ public class DrawCards : MonoBehaviour
         // Depending on how we make the game, the way we get the deck will probably change
         playerDeck = new List<int>
         {
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105,
+            106
         };
 
         enemyDeck = new List<int>
         {
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106
+            1, 2, 3, 4, 5, 6, 7, 8, 9
         };
 
 
@@ -157,8 +158,9 @@ public class DrawCards : MonoBehaviour
             GameObject dealtCard = Instantiate(theDeck[0], Vector3.zero, Quaternion.identity);
             dealtCard.transform.SetParent(playerArea.transform, false);
             dealtCard.tag = cardTag;
-            
-            theDeck.Remove(theCard); // this removes the first card from the list. so if we use index zero we always get the next card
+
+            theDeck.Remove(
+                theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
 
@@ -175,6 +177,7 @@ public class DrawCards : MonoBehaviour
             playerHandsize = PlayerArea.transform.childCount;
         }
     }
+
     private void UpdateEnemyHand()
     {
         if (enemyHandsize != EnemyArea.transform.childCount)

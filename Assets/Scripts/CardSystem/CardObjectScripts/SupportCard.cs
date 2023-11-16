@@ -11,17 +11,28 @@ public enum SupCardTypes
     LASTING,
     SPECIFIC
 }
+
+public enum SupportModifierType
+{
+    PLUS,
+    MULTIPLY
+}
+
 public class SupportCard : MonoBehaviour
 {
     public SupCardTypes supCardType;
-    public int supportEffect;
     public int roundCounter;
 
     public Image yellowContainer;
     public Text roundsLeftText;
-    
+
+    [SerializeField] private SupportModifierType supportModifierType;
+    [SerializeField] private int attackModifierValue;
+    [SerializeField] private int healthModifierValue;
+
 
     private GameObject battleSystem;
+
     private void Start()
     {
         battleSystem = GameObject.Find("Battle System");
@@ -31,9 +42,10 @@ public class SupportCard : MonoBehaviour
             yellowContainer.enabled = false;
             roundsLeftText.enabled = false;
         }
+
         AssignRoundsLeftValues();
     }
-    
+
     public void AssignRoundsLeftValues()
     {
         roundsLeftText.text = roundCounter.ToString();
@@ -47,6 +59,7 @@ public class SupportCard : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+
             if (battleSystem.GetComponent<BattleSystem>().state == BattleState.PLAYERTURN)
             {
                 battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
@@ -55,10 +68,12 @@ public class SupportCard : MonoBehaviour
         }
     }
 
-    private float GetAudioLevel(List<GameObject> playedCards) // needed if type instant or lasting (in order to get the right audio level)
-    { 
+    private float
+        GetAudioLevel(
+            List<GameObject> playedCards) // needed if type instant or lasting (in order to get the right audio level)
+    {
         var cardCount = 0;
-        
+
         for (int i = 0; i < playedCards.Count; i++)
         {
             var card = playedCards[i];
@@ -67,92 +82,80 @@ public class SupportCard : MonoBehaviour
                 cardCount++;
             }
         }
-        
+
         var audioScale = 1.0f / cardCount;
-        
+
         return audioScale;
     }
-    
-    
+
+
     ///////////////////////////////////
     /// ///////////////////////////////////
     /// ///////////////////////////////////   all support happens under here
-
-
-    public void SupportFunction(int supportEffectInt, GameObject theCard, List<GameObject> listOfPlayedCards) 
-                                                      // ok, now support cards work. but dont know how they should work.
-                                                      // should they be on the playing field for a couple of rounds(depending on card).
-                                                      // or should they just deliver the buff and be removed(then it can a stack buffs kinda game).
-                                                      // Maybe a mix of both (some cards are instant and some have a lasting effect)
+    public void SupportFunction(GameObject theCard, List<GameObject> listOfPlayedCards)
     {
-        switch (supportEffectInt)
+        if (supCardType == SupCardTypes.INSTANT)
         {
-            case 1:
-                InstantDoubleHealth(listOfPlayedCards);
-                break;
-            case 2:
-                SpecificHealTwo(theCard);
-                break;
-            case 3:
-                InstantDoubleDamage(listOfPlayedCards);
-                break;
-            case 4:
-                LastingPlusOnePower(listOfPlayedCards);
-                break;
-            case 5:
-                LastingPlusTwoHealth(listOfPlayedCards);
-                break;
-            case 6:
-                SpecificPowerPlusTwo(theCard);
-                break;
-            default:
-                Debug.Log("Support function is not working");
-                break;
+            InstantSupportCardHelperFunction(listOfPlayedCards);
+        }
+
+        if (supCardType == SupCardTypes.LASTING)
+        {
+            LastingSupportCardHelperFunction(listOfPlayedCards);
+        }
+
+        if (supCardType == SupCardTypes.SPECIFIC)
+        {
+            SpecificSupportCardHelperFunction(theCard);
         }
     }
 
-    public void InstantDoubleHealth(List<GameObject> listOfPlayedCards)
+    private void InstantSupportCardHelperFunction(List<GameObject> listOfPlayedCards)
     {
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                card.GetComponent<ChampionCard>().cardHealth *= 2;
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
+                var championCard = card.GetComponent<ChampionCard>();
+
+                if (supportModifierType == SupportModifierType.PLUS)
+                {
+                    championCard.cardHealth += healthModifierValue;
+                    championCard.cardPower += attackModifierValue;
+                }
+                else if (supportModifierType == SupportModifierType.MULTIPLY)
+                {
+                    championCard.cardHealth += healthModifierValue;
+                    championCard.cardPower += attackModifierValue;
+                }
+
+                championCard.AssignChampionValues();
+                championCard.PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
             }
         }
     }
-    
-    public void SpecificHealTwo(GameObject champCard)
-    {
-        if (champCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-        {
-            champCard.GetComponent<ChampionCard>().cardHealth += 2;
-            champCard.GetComponent<ChampionCard>().AssignChampionValues();
-            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect(1);
-        }
-    }
-    
-    public void SpecificPowerPlusTwo(GameObject champCard)
-    {
-        if (champCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-        {
-            champCard.GetComponent<ChampionCard>().cardPower += 2;
-            champCard.GetComponent<ChampionCard>().AssignChampionValues();
-            champCard.GetComponent<ChampionCard>().PlayGetBuffEffect(1);
-        }
-    }
 
-    public void LastingPlusOnePower(List<GameObject> listOfPlayedCards)
+    private void LastingSupportCardHelperFunction(List<GameObject> listOfPlayedCards)
     {
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                card.GetComponent<ChampionCard>().cardPower += 1;
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
+                var championCard = card.GetComponent<ChampionCard>();
+
+                if (supportModifierType == SupportModifierType.PLUS)
+                {
+                    championCard.cardHealth += healthModifierValue;
+                    championCard.cardPower += attackModifierValue;
+                }
+                else if (supportModifierType == SupportModifierType.MULTIPLY)
+                {
+                    championCard.cardHealth += healthModifierValue;
+                    championCard.cardPower += attackModifierValue;
+                }
+
+                championCard.AssignChampionValues();
+                championCard.PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
             }
         }
 
@@ -160,42 +163,27 @@ public class SupportCard : MonoBehaviour
         AssignRoundsLeftValues();
         LastingSupCardHelperFunction();
     }
-    
-    public void InstantDoubleDamage(List<GameObject> listOfPlayedCards)
-    {
-        foreach (GameObject card in listOfPlayedCards)
-        {
-            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-            {
-                card.GetComponent<ChampionCard>().cardPower *= 2;
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
-            }
-        }
-    }
-    
-    public void LastingPlusTwoHealth(List<GameObject> listOfPlayedCards)
-    {
-        foreach (GameObject card in listOfPlayedCards)
-        {
-            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-            {
-                card.GetComponent<ChampionCard>().cardHealth += 2;
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().AssignChampionValues();
-                card.GetComponent<ChampionCard>().PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
-            }
-        }
 
-        roundCounter--;
-        AssignRoundsLeftValues();
-        LastingSupCardHelperFunction();
+    private void SpecificSupportCardHelperFunction(GameObject theCard)
+    {
+        if (theCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
+        {
+            var championCard = theCard.GetComponent<ChampionCard>();
+            if (supportModifierType == SupportModifierType.PLUS)
+            {
+                championCard.cardHealth += healthModifierValue;
+                championCard.cardPower += attackModifierValue;
+            }
+            else if (supportModifierType == SupportModifierType.MULTIPLY)
+            {
+                championCard.cardHealth += healthModifierValue;
+                championCard.cardPower += attackModifierValue;
+            }
+
+            championCard.AssignChampionValues();
+            championCard.PlayGetBuffEffect(1);
+        }
     }
-    
-    
-    
-    
-    
+
     
 }
