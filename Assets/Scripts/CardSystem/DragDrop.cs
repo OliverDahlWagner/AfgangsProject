@@ -29,6 +29,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right) // now right clicks wont do shit
+        {
+            return;
+        }
         if (CardNotMove())
         {
             return;
@@ -40,6 +44,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right) // now right clicks wont do shit
+        {
+            return;
+        }
         if (CardNotMove())
         {
             return;
@@ -59,6 +67,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right) // now right clicks wont do shit
+        {
+            return;
+        }
         if (CardNotMove())
         {
             return;
@@ -267,4 +279,5 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         return battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN;
     }
+    
 }

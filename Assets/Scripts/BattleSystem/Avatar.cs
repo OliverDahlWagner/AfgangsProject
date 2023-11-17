@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Avatar : MonoBehaviour
 {
+    public GameObject avatarHalfCircle;
+    
     public int maxHP;
     public int currentHP;
 

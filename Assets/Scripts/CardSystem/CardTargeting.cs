@@ -73,6 +73,7 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
         if (collision.gameObject.CompareTag("EnemyAvatar"))
         {
             collisionTaget = collision.gameObject;
+            collision.gameObject.GetComponent<Avatar>().avatarHalfCircle.SetActive(false);
             Debug.Log(collisionTaget.name);
         }
     }
@@ -89,6 +90,7 @@ public class CardTargeting : MonoBehaviour, IEndDragHandler
         
         if (collision.gameObject.CompareTag("EnemyAvatar"))
         {
+            collision.gameObject.GetComponent<Avatar>().avatarHalfCircle.SetActive(true);
             collisionTaget = null;
         }
     }

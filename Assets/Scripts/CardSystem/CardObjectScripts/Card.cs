@@ -23,7 +23,9 @@ public class Card : MonoBehaviour
     public TMP_Text nameText;            
     public Text descriptionText;                    
     public Image cardArtworkShower;                    
-    public TMP_Text costText; 
+    public TMP_Text costText;
+
+    public GameObject cardBackSide;
     
     private void Start()
     {
@@ -37,6 +39,7 @@ public class Card : MonoBehaviour
             dnd.enabled = false;
             cardTargeting.enabled = false;
             boxCollider2D.enabled = false;
+            /*cardBackSide.SetActive(false);*/  // this bad boy of a line will override everything to do with control of the cards backside (FOR TESTING)
         }
     }
 
@@ -55,5 +58,15 @@ public class Card : MonoBehaviour
         {
             GetComponent<ChampionCard>().AssignChampionValues();
         }
+    }
+
+    public void SetBackSideFalse()
+    {
+        cardBackSide.SetActive(false);
+    }
+    
+    public void SetBackSideTrue()
+    {
+        cardBackSide.SetActive(true);
     }
 }

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class DrawCards : MonoBehaviour
@@ -29,9 +31,11 @@ public class DrawCards : MonoBehaviour
     private String playerTag = "PlayerCard";
     private String enemyTag = "EnemyCard";
 
-
     private int playerHandsize = 4;
     private int enemyHandsize = 4;
+
+    public Text playerCardCount;
+    public Text enemyCardCount;
 
     void Awake()
     {
@@ -44,7 +48,8 @@ public class DrawCards : MonoBehaviour
 
         enemyDeck = new List<int>
         {
-            1, 2, 3, 4, 5, 6, 7, 8, 9
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105,
+            106
         };
 
 
@@ -74,6 +79,7 @@ public class DrawCards : MonoBehaviour
     private void Update()
     {
         UpdatePlayerHand();
+        SetDeckCounts();
     }
 
 
@@ -159,6 +165,11 @@ public class DrawCards : MonoBehaviour
             dealtCard.transform.SetParent(playerArea.transform, false);
             dealtCard.tag = cardTag;
 
+            if (dealtCard.tag == "EnemyCard")
+            {
+                dealtCard.GetComponent<Card>().SetBackSideTrue();
+            }
+
             theDeck.Remove(
                 theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
@@ -176,6 +187,14 @@ public class DrawCards : MonoBehaviour
 
             playerHandsize = PlayerArea.transform.childCount;
         }
+    }
+
+    private void SetDeckCounts()
+    {
+        var playerDeckCount = playerPlayingDeck.Count;
+        playerCardCount.text = playerDeckCount.ToString();
+        var enemyDeckCount = enemyPlayingDeck.Count;
+        enemyCardCount.text = enemyDeckCount.ToString();
     }
 
     private void UpdateEnemyHand()

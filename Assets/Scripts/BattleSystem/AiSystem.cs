@@ -326,6 +326,8 @@ public class AiSystem : MonoBehaviour
 
         GetComponent<DrawCards>().enemyHand.Remove(playingCard);
         Destroy(playingCard);
+        
+        theChosenCard.GetComponent<Card>().SetBackSideFalse();
         return theChosenCard;
     }
 
@@ -543,7 +545,7 @@ public class AiSystem : MonoBehaviour
         for (var i = 0; i < GetAIPlayedLastingSupportCards().Count; i++)
         {
             GetAIPlayedLastingSupportCards()[i].GetComponent<SupportCard>()
-                .SupportFunction( null, GetAIPlayedChampionCards());
+                .SupportFunction(null, GetAIPlayedChampionCards());
         }
     }
 
