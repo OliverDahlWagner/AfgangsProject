@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,13 +25,25 @@ public class SupportCard : MonoBehaviour
     public SupCardTypes supCardType;
     public int roundCounter;
 
-    public Image yellowContainer;
-    public Text roundsLeftText;
+    public GameObject lastingTypeBorder;
+    public TMP_Text roundsLeftText;
 
     [SerializeField] private SupportModifierType supportModifierType;
     [SerializeField] private int attackModifierValue;
     [SerializeField] private int healthModifierValue;
 
+    private List<SupCardTypes> listOfSupCardTypesList;
+
+    [SerializedDictionary("Support card type", "Icon object")]
+    public SerializedDictionary<SupCardTypes, GameObject> supportIcons;
+
+
+    [SerializeField] private GameObject attackBuffIcon;
+    [SerializeField] private GameObject healthBuffIcon;
+    [SerializeField] private Text attackBuffText;
+    [SerializeField] private Text healthBuffText;
+    [SerializeField] private GameObject attackBuffTextContainer;
+    [SerializeField] private GameObject healthBuffTextContainer;
 
     private GameObject battleSystem;
 
@@ -37,10 +51,12 @@ public class SupportCard : MonoBehaviour
     {
         battleSystem = GameObject.Find("Battle System");
 
-        if (supCardType != SupCardTypes.LASTING)
+        AssignSupportIcons();
+
+        if (supCardType == SupCardTypes.LASTING)
         {
-            yellowContainer.enabled = false;
-            roundsLeftText.enabled = false;
+            roundsLeftText.SetText(roundCounter.ToString());
+            lastingTypeBorder.SetActive(true);
         }
 
         AssignRoundsLeftValues();
@@ -49,6 +65,43 @@ public class SupportCard : MonoBehaviour
     public void AssignRoundsLeftValues()
     {
         roundsLeftText.text = roundCounter.ToString();
+    }
+
+    private void AssignSupportIcons()
+    {
+        supportIcons[supCardType].SetActive(true);
+
+        if (supportModifierType == SupportModifierType.PLUS)
+        {
+            if (attackModifierValue > 0)
+            {
+                attackBuffIcon.SetActive(true);
+                attackBuffTextContainer.SetActive(true);
+                attackBuffText.text = $"+{attackModifierValue}";
+            }
+            if (healthModifierValue > 0)
+            {
+                healthBuffIcon.SetActive(true);
+                healthBuffTextContainer.SetActive(true);
+                healthBuffText.text = $"+{healthModifierValue}";
+            }
+        }
+
+        if (supportModifierType == SupportModifierType.MULTIPLY)
+        {
+            if (attackModifierValue > 1)
+            {
+                attackBuffIcon.SetActive(true);
+                attackBuffTextContainer.SetActive(true);
+                attackBuffText.text = $"x{attackModifierValue}";
+            }
+            if (healthModifierValue > 1)
+            {
+                healthBuffIcon.SetActive(true);
+                healthBuffTextContainer.SetActive(true);
+                healthBuffText.text = $"x{healthModifierValue}";
+            }
+        }
     }
 
     private void LastingSupCardHelperFunction()
@@ -125,8 +178,8 @@ public class SupportCard : MonoBehaviour
                 }
                 else if (supportModifierType == SupportModifierType.MULTIPLY)
                 {
-                    championCard.cardHealth += healthModifierValue;
-                    championCard.cardPower += attackModifierValue;
+                    championCard.cardHealth *= healthModifierValue;
+                    championCard.cardPower *= attackModifierValue;
                 }
 
                 championCard.AssignChampionValues();
@@ -150,8 +203,8 @@ public class SupportCard : MonoBehaviour
                 }
                 else if (supportModifierType == SupportModifierType.MULTIPLY)
                 {
-                    championCard.cardHealth += healthModifierValue;
-                    championCard.cardPower += attackModifierValue;
+                    championCard.cardHealth *= healthModifierValue;
+                    championCard.cardPower *= attackModifierValue;
                 }
 
                 championCard.AssignChampionValues();
@@ -176,14 +229,12 @@ public class SupportCard : MonoBehaviour
             }
             else if (supportModifierType == SupportModifierType.MULTIPLY)
             {
-                championCard.cardHealth += healthModifierValue;
-                championCard.cardPower += attackModifierValue;
+                championCard.cardHealth *= healthModifierValue;
+                championCard.cardPower *= attackModifierValue;
             }
 
             championCard.AssignChampionValues();
             championCard.PlayGetBuffEffect(1);
         }
     }
-
-    
 }

@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void HowToPlay()
     {
-        SceneManager.LoadScene("Scenes/How To Play");
+        SceneManager.LoadScene("Scenes/Pick a learning path");
     }
     
     public void Options()

@@ -14,6 +14,8 @@ public class WonLostScreenScript : MonoBehaviour
     public void GameConclusion()
     {
         wonLostScreen.gameObject.SetActive(true);
+        
+        Time.timeScale = 0f; // so other cards wont attack while you have lost
 
         if (GetComponent<BattleSystem>().state == BattleState.WON)
         {
