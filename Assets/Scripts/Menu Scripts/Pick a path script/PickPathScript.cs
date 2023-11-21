@@ -20,6 +20,11 @@ public class PickPathScript : MonoBehaviour
         SceneManager.LoadScene("Scenes/Learning Paths/Learn About the cards");
     }
     
+    public void LearnAboutTheRules()
+    {
+        SceneManager.LoadScene("Scenes/Learning Paths/Learn About the rules");
+    }
+    
 
     
     

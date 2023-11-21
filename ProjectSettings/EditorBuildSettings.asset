@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Learning Paths/Learn About the cards.unity
     guid: 20ccdac25893ff04ba8acfc04b725710
+  - enabled: 1
+    path: Assets/Scenes/Learning Paths/Learn About the rules.unity
+    guid: b1cb0975262fd8c40a68e35e5e36049c
   m_configObjects: {}
