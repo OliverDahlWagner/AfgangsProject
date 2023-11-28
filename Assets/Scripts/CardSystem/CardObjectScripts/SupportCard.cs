@@ -28,9 +28,9 @@ public class SupportCard : MonoBehaviour
     public GameObject lastingTypeBorder;
     public TMP_Text roundsLeftText;
 
-    [SerializeField] private SupportModifierType supportModifierType;
-    [SerializeField] private int attackModifierValue;
-    [SerializeField] private int healthModifierValue;
+    public SupportModifierType supportModifierType;
+    public int attackModifierValue;
+    public int healthModifierValue;
 
     private List<SupCardTypes> listOfSupCardTypesList;
 

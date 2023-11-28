@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -45,6 +46,8 @@ public class BattleSystem : MonoBehaviour
     public Button drawCardButton;
     public Button endTurnButton;
 
+    public TMP_Text turnText;
+
     private int totalTurnActions = 3; // just an idea for now. DRAW, PLACE, ATTACK (any combination)
 
     void Start()
@@ -71,12 +74,14 @@ public class BattleSystem : MonoBehaviour
         enemyAva.SetHUD();
 
         state = BattleState.PLAYERTURN;
+        turnText.SetText("Player turn");
         PlayerTurn();
     }
 
-    public void endPlayerTurn()
+    public void EndPlayerTurn()
     {
         state = BattleState.ENEMYTURN;
+        turnText.SetText("Enemy turn");
         StartCoroutine(EnemyTurn());
         // Debug.Log(state.ToString());
     }
@@ -90,9 +95,7 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator EnemyTurn()
     {
-        IncreaseMana(enemyAva);
         yield return StartCoroutine(GetComponent<AiSystem>().playCards());
-
         EndEnemyTurn();
     }
 
@@ -101,11 +104,12 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.ENEMYTURN) // wont start a new turn if the player avatar is killed
         {
             state = BattleState.PLAYERTURN;
+            turnText.SetText("Player turn");
             PlayerTurn();
         }
     }
 
-    private void IncreaseMana(Avatar avatar)
+    public void IncreaseMana(Avatar avatar)
     {
         avatar.currentMana += 1;
         avatar.SetCurrentMana(avatar.currentMana);
