@@ -28,7 +28,7 @@ public class AiCardPlacementHandler : MonoBehaviour
             }
         }
     }
-    
+
     ///////////////////////////////////////
     ///////////////////////////////////////    Choose Card/s
     ///////////////////////////////////////
@@ -37,14 +37,16 @@ public class AiCardPlacementHandler : MonoBehaviour
     {
         var cardsOnHand = GetComponent<DrawCards>().enemyHand; // this is a list of gameobjects
 
-        if (cardsOnHand.Count == 0 || GetComponent<AiBasicFunctions>().AvailableDropZonesIndexes().Count == 0) // no card to place or nowhere to place
+        if (cardsOnHand.Count == 0 ||
+            GetComponent<AiBasicFunctions>().AvailableDropZonesIndexes().Count ==
+            0) // no card to place or nowhere to place
         {
             return null; // not to play
         }
 
         var playingCards = SelectBestCardToPlay(GetComponent<DrawCards>().enemyHand); // no more random
 
-        if (playingCards.Count == 0)   // sometimes a null error arrives here
+        if (playingCards.Count == 0 || playingCards == null) // sometimes a null error arrives here. but it doesnt look to mess with anything
         {
             return null; // not to play
         }
@@ -67,7 +69,7 @@ public class AiCardPlacementHandler : MonoBehaviour
 
         return chosenCards;
     }
-    
+
 
     private List<GameObject> SelectBestCardToPlay(List<GameObject> aiHand)
     {
@@ -82,8 +84,9 @@ public class AiCardPlacementHandler : MonoBehaviour
         var playableCards = new List<GameObject>();
         GameObject bestCard = null;
 
-        foreach (var card in aiHand)
+        for (var index = 0; index < aiHand.Count; index++)
         {
+            var card = aiHand[index];
             if (card.GetComponent<Card>().cardCost <= GetComponent<AiSystem>().battleSystem.GetComponent<BattleSystem>()
                     .enemyAva.currentMana)
             {
@@ -133,20 +136,21 @@ public class AiCardPlacementHandler : MonoBehaviour
 
         yield return null;
     }
-    
+
     private IEnumerator StartPlacementOfCard(GameObject playingCard, GameObject dropzone)
     {
         yield return StartCoroutine(ShowPlacingCard(playingCard));
         yield return StartCoroutine(MoveCardToDropZone(playingCard, dropzone, 1));
         yield return StartCoroutine(SetDropzoneAsParent(playingCard, dropzone));
     }
+
     private IEnumerator ShowPlacingCard(GameObject playingCard)
     {
         playingCard.transform.position = new Vector3(-190, 410, 0);
         playingCard.transform.SetParent(GetComponent<AiSystem>().enemyDropZone.transform, false);
         yield return null;
     }
-    
+
     private IEnumerator MoveCardToDropZone(GameObject playingCard, GameObject endPoint, float duration)
     {
         Vector3 startPoint = playingCard.transform.position;
@@ -161,7 +165,7 @@ public class AiCardPlacementHandler : MonoBehaviour
             yield return null;
         }
     }
-    
+
     private IEnumerator SetDropzoneAsParent(GameObject playingCard, GameObject dropzone)
     {
         playingCard.transform.SetParent(dropzone.transform, false);
@@ -169,12 +173,12 @@ public class AiCardPlacementHandler : MonoBehaviour
             new Vector3(playingCard.transform.position.x, playingCard.transform.position.y, 0);
         yield return null;
     }
-    
+
     ///////////////////////////////////////
     ///////////////////////////////////////    Support Card
     ///////////////////////////////////////
-    
-    
+
+
     private IEnumerator HandleSupportCard(GameObject playingCard)
     {
         Debug.Log("played Support card " + playingCard.name);
@@ -207,7 +211,7 @@ public class AiCardPlacementHandler : MonoBehaviour
             yield break;
         }
     }
-    
+
     private IEnumerator HandleInstantSupportCard(GameObject supportCard)
     {
         if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count != 0)
@@ -220,7 +224,7 @@ public class AiCardPlacementHandler : MonoBehaviour
         Destroy(supportCard);
         yield return null;
     }
-    
+
     private IEnumerator HandleLastingSupportCard(GameObject supportCard)
     {
         if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count != 0)
@@ -232,20 +236,21 @@ public class AiCardPlacementHandler : MonoBehaviour
 
         yield return null;
     }
-    
+
     private IEnumerator HandleSpecificSupportCard(GameObject supportCard, GameObject champCard)
     {
         yield return StartCoroutine(SpecificSupportMovement(supportCard, champCard));
         yield return StartCoroutine(SpecificSupportAction(supportCard, champCard));
         yield return null;
     }
-    
+
     private IEnumerator SpecificSupportMovement(GameObject supportCard, GameObject champCard)
     {
         yield return StartCoroutine(ShowPlacingCard(supportCard));
         yield return StartCoroutine(SpecificToChamp(supportCard, champCard, 1));
         yield return null;
     }
+
     private IEnumerator SpecificSupportAction(GameObject supportCard, GameObject champCard)
     {
         if (champCard == null)
@@ -260,7 +265,7 @@ public class AiCardPlacementHandler : MonoBehaviour
         Destroy(supportCard);
         yield return null;
     }
-    
+
     private IEnumerator SpecificToChamp(GameObject supportCard, GameObject champCard, float time)
     {
         Vector3 startPoint = supportCard.transform.position;
@@ -275,6 +280,4 @@ public class AiCardPlacementHandler : MonoBehaviour
             yield return null;
         }
     }
-    
-
 }
