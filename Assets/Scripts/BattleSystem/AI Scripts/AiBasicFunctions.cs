@@ -139,4 +139,54 @@ public class AiBasicFunctions : MonoBehaviour
 
         return aiChampionCards[index]; // a random champ for specific
     }
+
+
+    public List<GameObject> GetAttackReadyAiCards()
+    {
+        var readyChamps = new List<GameObject>();
+        var champList = GetAIPlayedChampionCards();
+
+        for (int i = 0; i < champList.Count; i++)
+        {
+            if (champList[i].GetComponent<ChampionCard>().hasAttacked == false && champList[i].GetComponent<ChampionCard>().hasBeenPlaced == false)
+            {
+                readyChamps.Add(champList[i]);
+            }
+
+        }
+
+        return readyChamps;
+    }
+    
+    public int GetAttackReadyAiCardsTotalPower()
+    {
+        var totalPower = 0;
+        var champList = GetAttackReadyAiCards();
+
+        for (int i = 0; i < champList.Count; i++)
+        {
+            totalPower += champList[i].GetComponent<ChampionCard>().cardPower;
+        }
+
+        return totalPower;
+    }
+    
+    public int GetAttackReadyAiCardsTotalHealth()
+    {
+        var totalHealth = 0;
+        var champList = GetAttackReadyAiCards();
+
+        for (int i = 0; i < champList.Count; i++)
+        {
+            totalHealth += champList[i].GetComponent<ChampionCard>().cardHealth;
+        }
+
+        return totalHealth;
+    }
+    
+    
+    
+    
+    
+    
 }

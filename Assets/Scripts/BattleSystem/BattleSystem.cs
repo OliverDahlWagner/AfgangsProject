@@ -52,6 +52,7 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         isPaused = false;
         state = BattleState.START;
         SetupBattle();
