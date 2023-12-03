@@ -15,8 +15,8 @@ public class Card : MonoBehaviour
     public int cardId;
     public CardTypes cardType;
 
-    [SerializeField] private string cardName;                    
-    [SerializeField] private string cardDescription;                   
+    [SerializeField] public string cardName;                    
+    [SerializeField] public string cardDescription;                   
     [SerializeField] private Sprite cardArtwork;                   
     [SerializeField] public int cardCost;
     

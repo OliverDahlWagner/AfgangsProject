@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -47,6 +48,8 @@ public class BattleSystem : MonoBehaviour
     public Button endTurnButton;
 
     public TMP_Text turnText;
+
+    public GameObject zoomCard;
 
     private int totalTurnActions = 3; // just an idea for now. DRAW, PLACE, ATTACK (any combination)
 
