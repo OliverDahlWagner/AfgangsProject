@@ -20,6 +20,10 @@ PrefabInstance:
       value: Healthy Diet
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: cardArtwork
+      value: 
+      objectReference: {fileID: 21300000, guid: b292690fa5538ae4b9d3602ad756dfa6, type: 3}
+    - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
       value: Healthy Diet Description
       objectReference: {fileID: 0}

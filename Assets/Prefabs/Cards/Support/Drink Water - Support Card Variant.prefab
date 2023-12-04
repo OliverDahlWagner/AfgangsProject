@@ -20,6 +20,10 @@ PrefabInstance:
       value: Drink Water
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: cardArtwork
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d0955d02ae3ec347b386c15328cf686, type: 3}
+    - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
       value: Drink Water Description
       objectReference: {fileID: 0}

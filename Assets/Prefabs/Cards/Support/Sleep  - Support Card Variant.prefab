@@ -20,6 +20,10 @@ PrefabInstance:
       value: Sleep
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: cardArtwork
+      value: 
+      objectReference: {fileID: 21300000, guid: 37f2ff3dcba47404aa673f3c325b4619, type: 3}
+    - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
       value: Sleep Description
       objectReference: {fileID: 0}

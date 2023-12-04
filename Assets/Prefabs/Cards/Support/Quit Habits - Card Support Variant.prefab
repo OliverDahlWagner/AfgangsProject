@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7538986498600785591
+--- !u!1001 &4750621669431772482
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,23 +9,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardId
-      value: 102
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardCost
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardName
-      value: Exercise
+      value: Quit harmful substances
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardArtwork
       value: 
-      objectReference: {fileID: 21300000, guid: 8c625964cf28d1341b6f9b146c761cfd, type: 3}
+      objectReference: {fileID: 21300000, guid: 542e12e9a4174cc40a68b4c4b32ee7ad, type: 3}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
-      value: Exercise Description
+      value: A lot of substances might give momentarily relief, but it is a fact
+        for many that it might do way more damage on the psyche than help.
       objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x
@@ -113,14 +114,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285546800131638688, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Name
-      value: Exercise  - Support Card Variant
+      value: Quit Habits - Card Support Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: supCardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: roundCounter
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: attackModifierValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
-      propertyPath: healthModifierValue
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
