@@ -17,6 +17,7 @@ public class DrawCards : MonoBehaviour
     private int playerHandCount;
     private int playerDropZonesChildren = 0;
     private int playerManaInPlay = 0;
+    private int maxHandSize = 7;
 
     private List<int> enemyDeck;
     public List<GameObject> enemyPlayingDeck;
@@ -87,14 +88,14 @@ public class DrawCards : MonoBehaviour
     {
         if (playerDrawing)
         {
-            if (playerPlayingDeck.Count > 0)
+            if (playerPlayingDeck.Count > 0 && playerHandsize < maxHandSize)
             {
                 DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
             }
         }
         else
         {
-            if (enemyPlayingDeck.Count > 0)
+            if (enemyPlayingDeck.Count > 0 && enemyHandsize < maxHandSize)
             {
                 DrawCard(enemyPlayingDeck, 1, EnemyArea, enemyTag);
             }
