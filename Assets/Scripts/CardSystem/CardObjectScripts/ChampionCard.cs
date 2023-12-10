@@ -56,12 +56,6 @@ public class ChampionCard : MonoBehaviour
     {
         cardHealth -= damageAmount;
         StartCoroutine(TakeDamegeEffect(1));
-
-        if (cardHealth <= 0)
-        {
-            battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
-            Destroy(gameObject);
-        }
     }
 
     private IEnumerator TakeDamegeEffect(float audioLevel)
@@ -70,13 +64,17 @@ public class ChampionCard : MonoBehaviour
         
         GetComponent<AudioSource>().PlayOneShot(hitSound, (float)(audioLevel * settingVolumeScale));
         attack1.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
+        yield return new WaitForSeconds((float)0.5f);
         attack1.SetActive(false);
         attack2.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
+        yield return new WaitForSeconds((float)0.5f);
         attack2.SetActive(false);
 
-        yield return null;
+        if (cardHealth <= 0)
+        {
+            battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
+            Destroy(gameObject);
+        }
     }
 
     public void PlayGetBuffEffect(float audioLevel)
