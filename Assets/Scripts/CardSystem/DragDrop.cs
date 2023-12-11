@@ -38,7 +38,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             return;
         }
 
-        startParent = transform.parent.gameObject; // when we start dragging save the parent object
+        startParent = transform.parent.gameObject; 
         startPosition = transform.position;
     }
 
@@ -53,15 +53,11 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             return;
         }
 
-
         Vector3 v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        transform.position = v3;
-
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.position = new Vector3(v3.x, v3.y, 0); // so the z value wont stays 0
 
         transform.SetParent(canvas.transform,
-            true); // here we pull the card out of hand zone, in unity you can see the card in main canvas
+            true); 
     }
 
 
@@ -237,6 +233,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 transform.GetComponent<SupportCard>().SupportFunction(null,
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
+                
+                dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
             }
             else
             {
