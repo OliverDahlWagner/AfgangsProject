@@ -37,7 +37,7 @@ public class AiCardAttackHandler : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1); // just for a better feel
+        yield return new WaitForSeconds(1.5f); // just for a better feel
     }
 
     private GameObject threatCardObject = null;

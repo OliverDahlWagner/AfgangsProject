@@ -18,8 +18,7 @@ public class Avatar : MonoBehaviour
     public Text currentHPHUD;
     public Text currentManaHUD;
 
-    public GameObject attack1;
-    public GameObject attack2;
+    public List<GameObject> attackEffects;
 
     public AudioClip hitSound;
 
@@ -50,13 +49,14 @@ public class Avatar : MonoBehaviour
     private IEnumerator TakeDamegeEffect()
     {
         GetComponent<AudioSource>().PlayOneShot(hitSound);
-        attack1.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
-        attack1.SetActive(false);
-        attack2.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
-        attack2.SetActive(false);
-        
+
+        for (int i = 0; i < attackEffects.Count; i++)
+        {
+            attackEffects[i].SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            attackEffects[i].SetActive(false);
+        }
+
         yield return null;
     }
     

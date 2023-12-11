@@ -18,11 +18,8 @@ public class ChampionCard : MonoBehaviour
     public bool hasBeenPlaced = false;
     public bool isOnBoard = false;
 
-    public GameObject attack1;
-    public GameObject attack2;
-
-    public GameObject buff1;
-    public GameObject buff2;
+    public List<GameObject> attackEffects;
+    public List<GameObject> buffEffects;
 
     public AudioClip hitSound;
     public AudioClip buffSound;
@@ -40,7 +37,7 @@ public class ChampionCard : MonoBehaviour
         powerText.SetText(cardPower.ToString());
         healthText.SetText(cardHealth.ToString());
     }
-
+    
     [ContextMenu("Take Damage Test")]
     public void TakeSomeDamage()
     {
@@ -63,18 +60,23 @@ public class ChampionCard : MonoBehaviour
         var settingVolumeScale = SettingsData.settingVolumeScale;
         
         GetComponent<AudioSource>().PlayOneShot(hitSound, (float)(audioLevel * settingVolumeScale));
-        attack1.SetActive(true);
-        yield return new WaitForSeconds((float)0.5f);
-        attack1.SetActive(false);
-        attack2.SetActive(true);
-        yield return new WaitForSeconds((float)0.5f);
-        attack2.SetActive(false);
 
+        for (int i = 0; i < attackEffects.Count; i++)
+        {
+            attackEffects[i].SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            attackEffects[i].SetActive(false);
+        }
+
+        
         if (cardHealth <= 0)
         {
             battleSystem.GetComponent<BattleSystem>().UpdatePLayerHand(this.GameObject());
             Destroy(gameObject);
         }
+
+        yield return null;
+
     }
 
     public void PlayGetBuffEffect(float audioLevel)
@@ -88,12 +90,13 @@ public class ChampionCard : MonoBehaviour
 
         Debug.Log("Audio level " + (float)(audioLevel * settingVolumeScale));
         GetComponent<AudioSource>().PlayOneShot(buffSound, (float)(audioLevel * settingVolumeScale));
-        buff1.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
-        buff1.SetActive(false);
-        buff2.SetActive(true);
-        yield return new WaitForSeconds((float)0.5);
-        buff2.SetActive(false);
+        
+        for(int i=0; i<buffEffects.Count; i++)
+        {
+            buffEffects[i].SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            buffEffects[i].SetActive(false);
+        }
 
         yield return null;
     }
