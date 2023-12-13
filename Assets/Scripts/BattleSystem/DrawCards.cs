@@ -32,7 +32,7 @@ public class DrawCards : MonoBehaviour
     private String playerTag = "PlayerCard";
     private String enemyTag = "EnemyCard";
 
-    private int playerHandsize = 4;
+    public int playerHandsize = 4;
     private int enemyHandsize = 4;
 
     public Text playerCardCount;
@@ -54,22 +54,16 @@ public class DrawCards : MonoBehaviour
         };
 
 
-        playerPlayingDeck = GetMatchingCards(playerPlayingDeck, true);
-        enemyPlayingDeck = GetMatchingCards(enemyPlayingDeck, false);
+        playerPlayingDeck = GetMatchingCards(playerDeck);
+        enemyPlayingDeck = GetMatchingCards(enemyDeck);
 
         Shuffle(playerPlayingDeck);
         Shuffle(enemyPlayingDeck);
 
         DrawCard(playerPlayingDeck, 4, PlayerArea, playerTag);
         DrawCard(enemyPlayingDeck, 4, EnemyArea, enemyTag);
-
-        playerHandsize = PlayerArea.transform.childCount;
+        
         enemyHandsize = EnemyArea.transform.childCount;
-
-        foreach (Transform child in PlayerArea.transform)
-        {
-            playerHand.Add(child.gameObject);
-        }
 
         foreach (Transform child in EnemyArea.transform)
         {
@@ -79,10 +73,8 @@ public class DrawCards : MonoBehaviour
 
     private void Update()
     {
-        UpdatePlayerHand();
         SetDeckCounts();
     }
-
 
     public void OnClick(bool playerDrawing) // The playerDrawing is true when button is clicked.
     {
@@ -104,41 +96,26 @@ public class DrawCards : MonoBehaviour
 
 
     // Function to get the GameObjects that match the IDs in playingDeck   (the shuffle could be placed in here)
-    private List<GameObject> GetMatchingCards(List<GameObject> givenDeck, bool isPlayer)
+    private List<GameObject> GetMatchingCards(List<int> cardIdList)
     {
-        givenDeck = new List<GameObject>();
-
-        if (isPlayer)
-        {
-            foreach (int id in playerDeck)
-            {
-                GameObject card = theCards.Find(c => c.GetComponent<Card>().cardId == id);
-                if (card != null)
-                {
-                    givenDeck.Add(card);
-                }
-            }
-
-            return givenDeck;
-        }
-
-        foreach (int id in enemyDeck)
+        var list = new List<GameObject>();
+        
+        foreach (int id in cardIdList)
         {
             GameObject card = theCards.Find(c => c.GetComponent<Card>().cardId == id);
             if (card != null)
             {
-                givenDeck.Add(card);
+                list.Add(card);
             }
         }
 
-        return givenDeck;
+        return list;
     }
 
     // need to give the cards a shuffle after they have been placed in the playing decks. because the are placed in order by id
     private static void Shuffle(List<GameObject> aList)
     {
         var random = new System.Random();
-
         var n = aList.Count;
         while (n > 1)
         {
@@ -152,7 +129,7 @@ public class DrawCards : MonoBehaviour
     // this function can be used for the starting draw. And a single draw
     private void DrawCard(List<GameObject> theDeck, int cardAmount, GameObject playerArea, String cardTag)
     {
-        if (theDeck.Count == 0) // so we dont take cards that does exits. and wont fuck up
+        if (theDeck.Count == 0)
         {
             Debug.Log("out of cards");
             return;
@@ -171,22 +148,14 @@ public class DrawCards : MonoBehaviour
                 dealtCard.GetComponent<Card>().SetBackSideTrue();
             }
 
-            theDeck.Remove(
-                theCard); // this removes the first card from the list. so if we use index zero we always get the next card
-        }
-    }
-
-    private void UpdatePlayerHand()
-    {
-        if (playerHandsize != PlayerArea.transform.childCount)
-        {
-            playerHand.Clear();
-            foreach (Transform child in PlayerArea.transform)
+            if (dealtCard.tag == "PlayerCard")
             {
-                playerHand.Add(child.gameObject);
+                playerHand.Add(dealtCard);
+                playerHandsize = playerHand.Count;
             }
 
-            playerHandsize = PlayerArea.transform.childCount;
+            theDeck.Remove(
+                theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
 

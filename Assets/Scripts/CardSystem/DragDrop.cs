@@ -52,6 +52,9 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             return;
         }
+        
+        battleSystem.GetComponent<DrawCards>().playerHand.Remove(transform.gameObject);
+        battleSystem.GetComponent<DrawCards>().playerHandsize = battleSystem.GetComponent<DrawCards>().playerHand.Count;
 
         Vector3 v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(v3.x, v3.y, 0); // so the z value wont stays 0
@@ -63,7 +66,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right) // now right clicks wont do shit
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             return;
         }
@@ -94,6 +97,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             DropLastingSupCard();
         }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -253,6 +257,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         transform.position = startPosition;
         transform.SetParent(startParent.transform,
             false);
+        battleSystem.GetComponent<DrawCards>().playerHand.Add(transform.gameObject);
+        battleSystem.GetComponent<DrawCards>().playerHandsize = battleSystem.GetComponent<DrawCards>().playerHand.Count;
     }
 
     private bool CardNotMove() // if any conditions is true, card wont move

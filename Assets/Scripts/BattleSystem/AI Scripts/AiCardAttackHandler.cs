@@ -296,4 +296,5 @@ public class AiCardAttackHandler : MonoBehaviour
         targetCard.GetComponent<ChampionCard>().TakeDamage(attackCard.GetComponent<ChampionCard>().cardPower);
         yield return null;
     }
+    
 }
