@@ -4311,6 +4311,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 992011159}
     m_Modifications:
+    - target: {fileID: 707105701643472254, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee6e0753246026f4d856c363f2cf2760, type: 3}
+    - target: {fileID: 707105701643472254, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 707105701643472254, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 707105701643472254, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325268850547567181, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 08985085a62403b4184c700a606a2f5f, type: 3}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4341,11 +4361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 429.08
+      value: 446
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 555
+      value: 560
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4377,11 +4397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 679.54
+      value: 683
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4395,6 +4415,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7426678825007993563, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 011bd97056fc05645a988a465d62afd8, type: 3}
+    - target: {fileID: 8490231210340573896, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72194fad647347d4698268052be69a7f, type: 3}
     - target: {fileID: 8853519717125265915, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_Name
       value: ZoomCard
