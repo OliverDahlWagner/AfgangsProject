@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardName
-      value: Quit harmful substances
+      value: Quit substances
       objectReference: {fileID: 0}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardArtwork
@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: cardDescription
       value: A lot of substances might give momentarily relief, but it is a fact
         for many that it might do way more damage on the psyche than help.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258715492333338103, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: m_Text
+      value: Do not create habits out of using various substances. They might alleviate
+        for the minute, but can lead to bigger issues down the lane.
       objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x

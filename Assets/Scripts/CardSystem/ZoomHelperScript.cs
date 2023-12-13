@@ -130,6 +130,7 @@ public class ZoomHelperScript : MonoBehaviour
         supportTypeInstant.SetActive(false);
         supportTypeSpecific.SetActive(false);
         supportTypeLasting.SetActive(false);
+        lastingBrick.SetActive(false);
 
         
     }

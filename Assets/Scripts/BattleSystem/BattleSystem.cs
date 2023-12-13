@@ -51,6 +51,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject zoomCard;
 
+    private bool turnOne = true;
+
     private int totalTurnActions = 3; // just an idea for now. DRAW, PLACE, ATTACK (any combination)
 
     void Start()
@@ -93,7 +95,10 @@ public class BattleSystem : MonoBehaviour
     private void PlayerTurn()
     {
         ResetCardActions(playerPlayedCards);
-        IncreaseMana(playerAva);
+        if (turnOne != true) {
+            IncreaseMana(playerAva);
+        }
+        turnOne = false;
         LastingSupCardUseFunction();
     }
 
@@ -115,7 +120,7 @@ public class BattleSystem : MonoBehaviour
 
     public void IncreaseMana(Avatar avatar)
     {
-        avatar.currentMana += 1;
+        avatar.currentMana += 5;
         avatar.SetCurrentMana(avatar.currentMana);
     }
 

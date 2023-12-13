@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: cardDescription
       value: Easy to do, easy to follow, might make a difference
       objectReference: {fileID: 0}
+    - target: {fileID: 1258715492333338103, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: m_Text
+      value: 'Take a deep controlled breath using your abdomen. In through your nose,
+        out of your mouth. '
+      objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

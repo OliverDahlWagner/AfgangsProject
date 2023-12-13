@@ -25,7 +25,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 37f2ff3dcba47404aa673f3c325b4619, type: 3}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
-      value: Sleep Description
+      value: Get some sleep. Lack of sleep can make you feel various negative emotions,
+        making stress hit harder.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258715492333338103, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: m_Text
+      value: Get some sleep. Lack of sleep can make you feel various negative emotions,
+        making stress hit harder.
       objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x

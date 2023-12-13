@@ -25,7 +25,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8c625964cf28d1341b6f9b146c761cfd, type: 3}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
-      value: Exercise Description
+      value: Plain old exercise helps protect against feelings of negative emotional
+        consequences of stress. Therefore do any sort of exercise to keep being mentally
+        fit.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258715492333338103, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: m_Text
+      value: Plain old exercise helps protect against feelings of negative emotional
+        consequences of stress. Therefore do any sort of exercise to keep being mentally
+        fit.
       objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x

@@ -25,7 +25,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: b74632905de9f9149a8b788040d8641c, type: 3}
     - target: {fileID: -3100075497191852654, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: cardDescription
-      value: Meditate something something
+      value: Stop for a second, sit down breathe and focus your attention on getting
+        rid of jumbled thoughts.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258715492333338103, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: m_Text
+      value: Stop for a second, sit down breathe and focus your attention on getting
+        rid of jumbled thoughts.
       objectReference: {fileID: 0}
     - target: {fileID: 3033550128282808595, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: m_Pivot.x
