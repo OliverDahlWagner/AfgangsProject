@@ -48,7 +48,8 @@ public class Avatar : MonoBehaviour
     
     private IEnumerator TakeDamegeEffect()
     {
-        GetComponent<AudioSource>().PlayOneShot(hitSound);
+        var settingVolumeScale = SettingsData.settingVolumeScale;
+        GetComponent<AudioSource>().PlayOneShot(hitSound, (float) settingVolumeScale);
 
         for (int i = 0; i < attackEffects.Count; i++)
         {
