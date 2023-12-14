@@ -122,6 +122,10 @@ PrefabInstance:
       value: Meditation - Support card variant
       objectReference: {fileID: 0}
     - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
+      propertyPath: attackModifierValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948654324670645875, guid: 9645fabe5926b074f87444140b949122, type: 3}
       propertyPath: healthModifierValue
       value: 2
       objectReference: {fileID: 0}
