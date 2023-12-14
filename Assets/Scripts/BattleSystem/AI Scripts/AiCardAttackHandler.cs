@@ -142,7 +142,6 @@ public class AiCardAttackHandler : MonoBehaviour
             powerBalanceInt++;
         }
 
-
         return powerBalanceInt > 1; // if 2 conditions is meet it will attack the player avatar (things can be added, modified and removed)
     }
 

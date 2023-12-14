@@ -33,12 +33,13 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             return;
         }
+
         if (CardNotMove())
         {
             return;
         }
 
-        startParent = transform.parent.gameObject; 
+        startParent = transform.parent.gameObject;
         startPosition = transform.position;
     }
 
@@ -48,19 +49,20 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             return;
         }
+
         if (CardNotMove())
         {
             return;
         }
-        
-        battleSystem.GetComponent<DrawCards>().playerHand.Remove(transform.gameObject);
-        battleSystem.GetComponent<DrawCards>().playerHandsize = battleSystem.GetComponent<DrawCards>().playerHand.Count;
+
+        /*battleSystem.GetComponent<DrawCards>().playerHand.Remove(transform.gameObject);
+        battleSystem.GetComponent<DrawCards>().playerHandsize = battleSystem.GetComponent<DrawCards>().playerHand.Count;*/
 
         Vector3 v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(v3.x, v3.y, 0); // so the z value wont stays 0
 
         transform.SetParent(canvas.transform,
-            true); 
+            true);
     }
 
 
@@ -70,6 +72,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             return;
         }
+
         if (CardNotMove())
         {
             return;
@@ -97,7 +100,6 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             DropLastingSupCard();
         }
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -144,6 +146,13 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             && dropZone.transform.childCount < 1 && dropZone.CompareTag("PlayerZone") &&
             transform.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
+            if (transform.gameObject.GetComponent<ChampionCard>().isOnBoard)
+            {
+                transform.SetParent(dropZone.transform, false);
+                dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
+                return;
+            }
+
             if (battleSystem.GetComponent<BattleSystem>().playerAva.currentMana >=
                 transform.GetComponent<Card>().cardCost)
             {
@@ -237,7 +246,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 transform.GetComponent<SupportCard>().SupportFunction(null,
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
-                
+
                 dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
             }
             else
@@ -251,14 +260,11 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         }
     }
 
-
     private void ReturnToHand()
     {
         transform.position = startPosition;
         transform.SetParent(startParent.transform,
             false);
-        battleSystem.GetComponent<DrawCards>().playerHand.Add(transform.gameObject);
-        battleSystem.GetComponent<DrawCards>().playerHandsize = battleSystem.GetComponent<DrawCards>().playerHand.Count;
     }
 
     private bool CardNotMove() // if any conditions is true, card wont move
@@ -283,5 +289,4 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         return battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN;
     }
-    
 }
