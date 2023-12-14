@@ -32,8 +32,6 @@ public class SupportCard : MonoBehaviour
     public int attackModifierValue;
     public int healthModifierValue;
 
-    private List<SupCardTypes> listOfSupCardTypesList;
-
     [SerializedDictionary("Support card type", "Icon object")]
     public SerializedDictionary<SupCardTypes, GameObject> supportIcons;
 
@@ -122,8 +120,7 @@ public class SupportCard : MonoBehaviour
     }
 
     private float
-        GetAudioLevel(
-            List<GameObject> playedCards) // needed if type instant or lasting (in order to get the right audio level)
+        GetAudioLevel(List<GameObject> playedCards) // needed if type instant or lasting (in order to get the right audio level)
     {
         var cardCount = 0;
 
@@ -149,27 +146,35 @@ public class SupportCard : MonoBehaviour
     {
         if (supCardType == SupCardTypes.INSTANT)
         {
-            InstantSupportCardHelperFunction(listOfPlayedCards);
+            BuffChampionCards(listOfPlayedCards);
         }
 
         if (supCardType == SupCardTypes.LASTING)
         {
-            LastingSupportCardHelperFunction(listOfPlayedCards);
+            BuffChampionCards(listOfPlayedCards);
+
+            roundCounter--;
+            AssignRoundsLeftValues();
+            LastingSupCardHelperFunction();
         }
 
         if (supCardType == SupCardTypes.SPECIFIC)
         {
-            SpecificSupportCardHelperFunction(theCard);
+            // Put the single card in a list, cause we deal with it as a list in BuffChampionCards.
+            List<GameObject> theCardInList = new List<GameObject> {theCard};
+            BuffChampionCards(theCardInList);
         }
     }
 
-    private void InstantSupportCardHelperFunction(List<GameObject> listOfPlayedCards)
+
+    private void BuffChampionCards(List<GameObject> listOfPlayedCards)
     {
         foreach (GameObject card in listOfPlayedCards)
         {
             if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
                 var championCard = card.GetComponent<ChampionCard>();
+
 
                 if (supportModifierType == SupportModifierType.PLUS)
                 {
@@ -181,61 +186,10 @@ public class SupportCard : MonoBehaviour
                     championCard.cardHealth *= healthModifierValue;
                     championCard.cardPower *= attackModifierValue;
                 }
-
                 championCard.AssignChampionValues();
                 championCard.PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
             }
-        }
-    }
 
-    private void LastingSupportCardHelperFunction(List<GameObject> listOfPlayedCards)
-    {
-        foreach (GameObject card in listOfPlayedCards)
-        {
-            if (card.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-            {
-                var championCard = card.GetComponent<ChampionCard>();
-
-                if (supportModifierType == SupportModifierType.PLUS)
-                {
-                    championCard.cardHealth += healthModifierValue;
-                    championCard.cardPower += attackModifierValue;
-                }
-                else if (supportModifierType == SupportModifierType.MULTIPLY)
-                {
-                    championCard.cardHealth *= healthModifierValue;
-                    championCard.cardPower *= attackModifierValue;
-                }
-
-                championCard.AssignChampionValues();
-                championCard.PlayGetBuffEffect(GetAudioLevel(listOfPlayedCards));
-            }
-        }
-
-        roundCounter--;
-        AssignRoundsLeftValues();
-        LastingSupCardHelperFunction();
-    }
-
-    private void SpecificSupportCardHelperFunction(GameObject theCard)
-    {
-        if (theCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
-        {
-            var championCard = theCard.GetComponent<ChampionCard>();
-            
-            if (supportModifierType == SupportModifierType.PLUS)
-            {
-                championCard.cardHealth += healthModifierValue;
-                championCard.cardPower += attackModifierValue;
-            }
-            else if (supportModifierType == SupportModifierType.MULTIPLY)
-            {
-                championCard.cardHealth *= healthModifierValue;
-                championCard.cardPower *= attackModifierValue;
-            }
-
-            championCard.AssignChampionValues();
-            championCard.PlayGetBuffEffect(1);
         }
     }
 }
