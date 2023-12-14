@@ -74,6 +74,7 @@ public class DrawCards : MonoBehaviour
     private void Update()
     {
         SetDeckCounts();
+        UpdatePlayerHand();
     }
 
     public void OnClick(bool playerDrawing) // The playerDrawing is true when button is clicked.
@@ -178,6 +179,20 @@ public class DrawCards : MonoBehaviour
             }
 
             enemyHandsize = EnemyArea.transform.childCount;
+        }
+    }
+    
+    private void UpdatePlayerHand()
+    {
+        if (playerHandsize != PlayerArea.transform.childCount)
+        {
+            playerHand.Clear();
+            foreach (Transform child in PlayerArea.transform)
+            {
+                playerHand.Add(child.gameObject);
+            }
+
+            playerHandsize = PlayerArea.transform.childCount;
         }
     }
 }

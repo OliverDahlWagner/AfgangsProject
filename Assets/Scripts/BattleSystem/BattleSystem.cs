@@ -89,7 +89,6 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.ENEMYTURN;
         turnText.SetText("Enemy turn");
         StartCoroutine(EnemyTurn());
-        // Debug.Log(state.ToString());
     }
 
     private void PlayerTurn()

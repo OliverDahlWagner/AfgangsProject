@@ -222,6 +222,7 @@ public class SupportCard : MonoBehaviour
         if (theCard.GetComponent<Card>().cardType == CardTypes.CHAMPION)
         {
             var championCard = theCard.GetComponent<ChampionCard>();
+            
             if (supportModifierType == SupportModifierType.PLUS)
             {
                 championCard.cardHealth += healthModifierValue;

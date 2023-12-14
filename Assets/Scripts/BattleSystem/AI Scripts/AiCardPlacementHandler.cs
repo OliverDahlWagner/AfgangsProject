@@ -125,7 +125,7 @@ public class AiCardPlacementHandler : MonoBehaviour
 
         dropZone.transform.position = new Vector3(dropZone.transform.position.x, dropZone.transform.position.y, 0);
 
-        StartCoroutine(StartPlacementOfCard(playingCard, dropZone));
+        yield return StartCoroutine(StartPlacementOfCard(playingCard, dropZone));
 
         playingCard.transform.GetComponent<ChampionCard>().isOnBoard = true;
         playingCard.transform.GetComponent<ChampionCard>().hasBeenPlaced = true;
