@@ -984,8 +984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.5051, y: -151.4039}
-  m_SizeDelta: {x: 1204.0671, y: 341.34}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 960, y: 266.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &353418898
 MonoBehaviour:
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2cf8dcd337ebbd047a6108b09c7a78f2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c0c7aa9ec5ce2b4daf08fc1228d0ba2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1052,7 +1052,7 @@ RectTransform:
   m_GameObject: {fileID: 383842313}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1316144713}
@@ -1061,7 +1061,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -254, y: -45}
-  m_SizeDelta: {x: 357.52, y: 240}
+  m_SizeDelta: {x: 420, y: 214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &383842315
 MonoBehaviour:
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 511b4f753becd9f488fe48c980d25721, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11f47d840d97a9b4499ba0c93a868633, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1159,8 +1159,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The blue playareas are where the player will drop their cards to put them
-    into play
+  m_text: 'The red rectangles are where the enemy will play their cards.
+
+    You,
+    the player place your cards on the blue rectangles'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2077,7 +2079,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -123}
-  m_SizeDelta: {x: 565.43, y: 240}
+  m_SizeDelta: {x: 461.5, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &789125579
 MonoBehaviour:
@@ -2099,7 +2101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0903c318ecfaf004285c23c8e29bbe21, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b34d8be959d80964a9f794c32768e126, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2181,7 +2183,7 @@ MonoBehaviour:
     placing cards."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2874,8 +2876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the players hand hand and it contains the cards that the player
-    can play
+  m_text: This is your hand, it contains your cards.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3353,7 +3354,7 @@ RectTransform:
   m_GameObject: {fileID: 1241933065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1664779764}
@@ -3362,7 +3363,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -368, y: -41}
-  m_SizeDelta: {x: 226.1, y: 240}
+  m_SizeDelta: {x: 262, y: 278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241933067
 MonoBehaviour:
@@ -3384,7 +3385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b6540fe79092c44da4e67dd9c8d75ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a488907b2d9dd5499ebef49f6c9ab6f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4075,8 +4076,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -205}
-  m_SizeDelta: {x: 1200, y: 240}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 1780, y: 254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818949072
 MonoBehaviour:
@@ -4098,7 +4099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7adb9ae8977cef548bdd515e03bbe08b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f809e3da5ecbda489babf582f6a437f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4309,12 +4310,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is the player deck.
+  m_text: 'This is your deck.
 
-    Clicking the card will add 1 card you the
-    players hand.
+    Clicking the deck will add 1 card to your hand.
 
-    The number represents the number of card left in the deck.'
+    There
+    are 24 cards left in the deck here.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -394,7 +394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: de82683d2afa12c44b518ee2f8fb145c, type: 3}
+  m_Sprite: {fileID: -428223679, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2414,7 +2414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 25a2c0a5fdcd6a6499861b1891e7bbf4, type: 3}
+  m_Sprite: {fileID: 1632539149, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5b900ca0fcee5774191431037e00a77b, type: 3}
+  m_Sprite: {fileID: -433178946, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3370,7 +3370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bb47d13654a0654986931edec21ebbf, type: 3}
+  m_Sprite: {fileID: 1632539149, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4629,7 +4629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 25a2c0a5fdcd6a6499861b1891e7bbf4, type: 3}
+  m_Sprite: {fileID: 1632539149, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5198,7 +5198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5b900ca0fcee5774191431037e00a77b, type: 3}
+  m_Sprite: {fileID: -433178946, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6533,7 +6533,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: The Specific type support is not placed on the board like the other types.
     This type you place on a champion card you have placed. And only that card will
-    get the enhancement.
+    get the enhancement once.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6668,7 +6668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89bd64a2e2fa00040889d29ece16abdf, type: 3}
+  m_Sprite: {fileID: -533428510, guid: 6c9916627ada11b4fbee554b2a96800c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

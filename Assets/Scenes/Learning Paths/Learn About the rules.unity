@@ -859,7 +859,7 @@ MonoBehaviour:
     You can play as many cards as you have
     mana for.
 
-    You gain 1 mana at the start of each of your turns.
+    You gain mana at the start of each of your turns.
 
 
     A card
@@ -1120,11 +1120,12 @@ MonoBehaviour:
 
 
     Pause
-    the game by pressing "p"
+    the game by pressing "p" or the "esc" button
 
 
-    (When placing or attacking a color change will
-    occur to indicate it will happen when you stop holding left click)
+    (When placing or attacking
+    a color change will occur to indicate it will happen when you stop holding left
+    click)
 
 '
   m_isRightToLeft: 0
