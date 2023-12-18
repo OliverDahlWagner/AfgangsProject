@@ -39,7 +39,6 @@ public class CardValueFunctions : MonoBehaviour
                 bestCardList.Add(card1);
                 bestCardList.Add(card2);
             }
-            Debug.Log(comboValue + " Card 1: " + card1.name + " Card 2: " + card2.name);
         }
         
         // this is fine just make sure too place a champion card first

@@ -20,20 +20,17 @@ public class AiCardAttackHandler : MonoBehaviour
         // how IDK yet but this is better then before
 
         // ask about a rule change
-
-
-        // Figure out which AICardZones have cards in them and attack for each card out on the board. 
-        for (int i = 0; i < GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count; i++)
+        
+        if (GetComponent<AiBasicFunctions>().GetAIReadyToAttackCards().Count > 0)
         {
-            if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards()[i].GetComponent<ChampionCard>()
-                    .hasBeenPlaced == false)
+            // Figure out which AICardZones have cards in them and attack for each card out on the board. 
+            for (int i = 0; i < GetComponent<AiBasicFunctions>().GetAIReadyToAttackCards().Count; i++)
             {
                 var cardList = GetAttackAndTargetCard();
 
                 yield return new WaitForSeconds(1);
 
-                yield return
-                    StartCoroutine(Attack(cardList[0], cardList[1])); // ------- then make take it list item like now
+                yield return StartCoroutine(Attack(cardList[0], cardList[1])); // ------- then make take it list item like now
             }
         }
 
@@ -44,7 +41,7 @@ public class AiCardAttackHandler : MonoBehaviour
 
     private List<GameObject> GetAttackAndTargetCard()
     {
-        var aiCards = GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards();
+        var aiCards = GetComponent<AiBasicFunctions>().GetAIReadyToAttackCards();
         var playerCards = GetPlayerChampionCards(GetComponent<BattleSystem>().playerPlayedCards);
         Debug.Log(playerCards.Count + "---------------------");
 
@@ -65,7 +62,7 @@ public class AiCardAttackHandler : MonoBehaviour
 
             return cardAndTargetList;
         }
-        
+
         // the ai will either win    or is ahead of the player
         if (AttackPlayerForWin(aiCards) || BalanceInFavorOfAI())
         {
@@ -126,7 +123,7 @@ public class AiCardAttackHandler : MonoBehaviour
         {
             powerBalanceInt++;
         }
-        
+
         if (GetComponent<BattleSystem>().playerAva.currentMana < GetComponent<BattleSystem>().enemyAva.currentMana)
         {
             powerBalanceInt++;
@@ -142,7 +139,9 @@ public class AiCardAttackHandler : MonoBehaviour
             powerBalanceInt++;
         }
 
-        return powerBalanceInt > 1; // if 2 conditions is meet it will attack the player avatar (things can be added, modified and removed)
+        return
+            powerBalanceInt >
+            1; // if 2 conditions is meet it will attack the player avatar (things can be added, modified and removed)
     }
 
     private List<GameObject> GetPlayerChampionCards(List<GameObject> playerPlayedCards)
@@ -171,7 +170,7 @@ public class AiCardAttackHandler : MonoBehaviour
 
         return totalPower;
     }
-    
+
     private int GetTotalPlayerHealth()
     {
         var totalHealth = 0;
@@ -217,15 +216,15 @@ public class AiCardAttackHandler : MonoBehaviour
         }
 
         // attack player cards
-        StartCoroutine(AttackPlayerCardFunction(attackerCard, targetGameObject));
+        yield return StartCoroutine(AttackPlayerCardFunction(attackerCard, targetGameObject));
     }
 
     private IEnumerator AttackAvatarFunction(GameObject aiCard)
     {
         var startPosition = aiCard.transform.position;
         yield return StartCoroutine(MoveCardToAvatar(aiCard));
-        yield return StartCoroutine(AttackAvatar(aiCard));
-        yield return StartCoroutine(MoveCardBack(aiCard, startPosition));
+        AttackAvatar(aiCard);
+        yield return StartCoroutine(MoveCardBack(aiCard));
     }
 
     private IEnumerator MoveCardToAvatar(GameObject aiCard)
@@ -236,8 +235,7 @@ public class AiCardAttackHandler : MonoBehaviour
         while (elapsedTime < 1)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            aiCard.transform.position = Vector3.Lerp(startPoint,
-                GetComponent<BattleSystem>().playerAva.transform.position, (elapsedTime / 1));
+            aiCard.transform.position = Vector3.Lerp(startPoint, GetComponent<BattleSystem>().playerAva.transform.position, (elapsedTime / 1));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -245,31 +243,31 @@ public class AiCardAttackHandler : MonoBehaviour
 
     private IEnumerator AttackPlayerCardFunction(GameObject attackCard, GameObject targetCard)
     {
-        var random = new System.Random();
-
-        var startPosition = attackCard.transform.position;
         yield return StartCoroutine(MoveCardToPlayerCard(attackCard, targetCard));
-        yield return StartCoroutine(AttackPlayerCard(attackCard, targetCard));
-        yield return StartCoroutine(MoveCardBack(attackCard, startPosition));
+        AttackPlayerCard(attackCard, targetCard);
+        yield return StartCoroutine(MoveCardBack(attackCard));
     }
 
-    private IEnumerator AttackAvatar(GameObject aiCard)
+    private void AttackAvatar(GameObject aiCard)
     {
         aiCard.GetComponent<ChampionCard>().hasAttacked = true;
+        
         GetComponent<BattleSystem>().playerAva.GetComponent<Avatar>()
             .TakeDamage(aiCard.GetComponent<ChampionCard>().cardPower);
+        
         GetComponent<BattleSystem>().PlayerLost();
-        yield return null;
+        
     }
 
-    private IEnumerator MoveCardBack(GameObject aiCard, Vector3 startPosition)
+    private IEnumerator MoveCardBack(GameObject aiCard)
     {
+        Debug.Log("move back action");
         float elapsedTime = 0;
 
         while (elapsedTime < 1)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            aiCard.transform.position = Vector3.Lerp(aiCard.transform.position, startPosition, (elapsedTime / 1));
+            aiCard.transform.position = Vector3.Lerp(aiCard.transform.position, aiCard.transform.parent.gameObject.transform.position, (elapsedTime / 1));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -278,22 +276,23 @@ public class AiCardAttackHandler : MonoBehaviour
     private IEnumerator MoveCardToPlayerCard(GameObject attackerCard, GameObject targetCard)
     {
         Vector3 startPoint = attackerCard.transform.position;
-        Vector3 endPoint = targetCard.transform.position;
         float elapsedTime = 0;
 
         while (elapsedTime < 1)
         {
             // Calculate the current position based on the starting and ending points, based on the time passed
-            attackerCard.transform.position = Vector3.Lerp(startPoint, endPoint, (elapsedTime / 1));
+            attackerCard.transform.position = Vector3.Lerp(startPoint, targetCard.transform.parent.position, (elapsedTime / 1));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
     }
 
-    private IEnumerator AttackPlayerCard(GameObject attackCard, GameObject targetCard)
+    private void AttackPlayerCard(GameObject attackCard, GameObject targetCard)
     {
+        attackCard.GetComponent<ChampionCard>().hasAttacked = true;
+        
+        Debug.Log("Attack action");
         targetCard.GetComponent<ChampionCard>().TakeDamage(attackCard.GetComponent<ChampionCard>().cardPower);
-        yield return null;
+        /*yield return null;*/
     }
-    
 }

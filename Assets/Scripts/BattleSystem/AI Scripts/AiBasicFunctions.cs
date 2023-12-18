@@ -83,7 +83,25 @@ public class AiBasicFunctions : MonoBehaviour
             if (dropZone.transform.childCount > 0 &&
                 dropZone.transform.GetChild(0).gameObject.GetComponent<Card>().cardType == CardTypes.CHAMPION)
             {
-                listOfChamps.Add(dropZone.transform.GetChild(0).gameObject);
+                if (dropZone.transform.GetChild(0).gameObject.GetComponent<ChampionCard>().cardHealth > 0)
+                {
+                    listOfChamps.Add(dropZone.transform.GetChild(0).gameObject);
+                }
+            }
+        }
+
+        return listOfChamps;
+    }
+    
+    public List<GameObject> GetAIReadyToAttackCards()
+    {
+        var listOfChamps = new List<GameObject>(); // Initialize the list
+
+        foreach (var card in GetAIPlayedChampionCards())
+        {
+            if (card.GetComponent<ChampionCard>().hasBeenPlaced == false)
+            {
+                listOfChamps.Add(card);
             }
         }
 
