@@ -51,8 +51,9 @@ public class ChampionCard : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        cardHealth -= damageAmount;
         StartCoroutine(TakeDamegeEffect(1));
+        cardHealth -= damageAmount;
+        AssignChampionValues();
     }
 
     private IEnumerator TakeDamegeEffect(float audioLevel)
@@ -67,7 +68,6 @@ public class ChampionCard : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             attackEffects[i].SetActive(false);
         }
-
         
         if (cardHealth <= 0)
         {
@@ -76,7 +76,6 @@ public class ChampionCard : MonoBehaviour
         }
 
         yield return null;
-
     }
 
     public void PlayGetBuffEffect(float audioLevel)

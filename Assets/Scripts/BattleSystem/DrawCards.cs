@@ -47,10 +47,14 @@ public class DrawCards : MonoBehaviour
             106, 107, 108, 109, 110
         };
 
-        enemyDeck = new List<int>
+        /*enemyDeck = new List<int>
         {
             1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105,
             106, 107, 108, 109, 110
+        };*/
+        enemyDeck = new List<int>
+        {
+            1, 2, 3, 4, 101, 102, 103, 104, 105
         };
 
 

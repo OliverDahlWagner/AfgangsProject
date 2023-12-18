@@ -73,13 +73,6 @@ public class AiCardPlacementHandler : MonoBehaviour
 
     private List<GameObject> SelectBestCardToPlay(List<GameObject> aiHand)
     {
-        if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count > 1 &&
-            GetComponent<AiSystem>().battleSystem.GetComponent<BattleSystem>().playerPlayedCards.Count <=
-            1) // this might be faulty if the player attack power is greater then the ai's
-        {
-            return null; // the ai is ahead and can charge mana
-        }
-
         var currentMana = GetComponent<AiSystem>().battleSystem.GetComponent<BattleSystem>().enemyAva.currentMana;
         var playableCards = new List<GameObject>();
         GameObject bestCard = null;
@@ -94,23 +87,7 @@ public class AiCardPlacementHandler : MonoBehaviour
             }
         }
 
-        // make it so it will always try to place to cards. but if a manacombo is to big it will place one card.
-        // that way it one function
-        // --- when placing one card make it look at the cards with one more mana to determan if its better to wait for 1 more mana
-
-        var bestCardsList =
-            GetComponent<SelectCards>()
-                .ChooseTwoCardsToPlay(playableCards, currentMana); // add mana looking to this function
-
-        Debug.Log(bestCardsList.Count);
-
-        if (bestCardsList.Count == 0) // this can be made bigger select 3-4-5 cards
-        {
-            var oneCardList = GetComponent<SelectCards>().ChooseOneCardToPlay(playableCards, currentMana);
-            Debug.Log(oneCardList.Count + " single card list");
-            return oneCardList;
-        }
-
+        var bestCardsList = GetComponent<SelectCards>().NewWayOfPicking(playableCards,currentMana);
         return bestCardsList;
     }
 

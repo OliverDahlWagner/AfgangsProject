@@ -19,7 +19,6 @@ public class AiSystem : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GetComponent<AiBasicFunctions>().ResetChampCardActions();
 
-
         yield return StartCoroutine(HandleAiTurn());
     }
 
