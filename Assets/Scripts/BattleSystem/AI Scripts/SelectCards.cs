@@ -123,26 +123,23 @@ public class SelectCards : MonoBehaviour
                 }
             }
         }
-
-
-        // Custom sorting algorithm to prioritize champion types
+        
         chosenCards.Sort((card1, card2) =>
         {
             var type1 = card1.GetComponent<Card>().cardType;
             var type2 = card2.GetComponent<Card>().cardType;
-
-            // Prioritize champion types
+            
             if (type1 == CardTypes.CHAMPION && type2 != CardTypes.CHAMPION)
             {
-                return -1; // card1 comes first
+                return -1; 
             }
 
             if (type1 != CardTypes.CHAMPION && type2 == CardTypes.CHAMPION)
             {
-                return 1; // card2 comes first
+                return 1; 
             }
    
-            return 0; // maintain the existing order
+            return 0; 
             
         });
         
