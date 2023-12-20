@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AiCardAttackHandler : MonoBehaviour
 {
-    public IEnumerator ChooseCardForAttack() // well it di
+    public IEnumerator ChooseCardForAttack()
     {
         // nothing to attack with
         if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count == 0)
@@ -14,16 +14,8 @@ public class AiCardAttackHandler : MonoBehaviour
             yield break;
         }
 
-        // this is the wrong approach. down under here. add it to the for loop.
-        // make it so that inb the for loop it doesnt card from where i is and assign proper attack and target.
-        // Remenber to set HasAttacked to keep track, that will help
-        // how IDK yet but this is better then before
-
-        // ask about a rule change
-        
         if (GetComponent<AiBasicFunctions>().GetAIReadyToAttackCards().Count > 0)
         {
-            // Figure out which AICardZones have cards in them and attack for each card out on the board. 
             for (int i = 0; i < GetComponent<AiBasicFunctions>().GetAIReadyToAttackCards().Count; i++)
             {
                 var cardList = GetAttackAndTargetCard();

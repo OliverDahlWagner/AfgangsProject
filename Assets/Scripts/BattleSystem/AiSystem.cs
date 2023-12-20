@@ -16,7 +16,7 @@ public class AiSystem : MonoBehaviour
         GetComponent<BattleSystem>().IncreaseMana( GetComponent<BattleSystem>().enemyAva);
         GetComponent<AiBasicFunctions>().LastingSupCardUseFunction();
         GetComponent<AiBasicFunctions>().DrawOneCard();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); // for the feel
         GetComponent<AiBasicFunctions>().ResetChampCardActions();
 
         yield return StartCoroutine(HandleAiTurn());

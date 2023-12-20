@@ -124,17 +124,18 @@ public class SelectCards : MonoBehaviour
             }
         }
         
+        
         chosenCards.Sort((card1, card2) =>
         {
             var type1 = card1.GetComponent<Card>().cardType;
             var type2 = card2.GetComponent<Card>().cardType;
             
-            if (type1 == CardTypes.CHAMPION && type2 != CardTypes.CHAMPION)
+            if (type1 == CardTypes.CHAMPION && type2 == CardTypes.SUPPORT)
             {
                 return -1; 
             }
 
-            if (type1 != CardTypes.CHAMPION && type2 == CardTypes.CHAMPION)
+            if (type1 == CardTypes.SUPPORT && type2 == CardTypes.CHAMPION)
             {
                 return 1; 
             }
