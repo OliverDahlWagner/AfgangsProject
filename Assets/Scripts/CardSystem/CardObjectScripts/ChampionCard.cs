@@ -41,12 +41,12 @@ public class ChampionCard : MonoBehaviour
     [ContextMenu("Take Damage Test")]
     public void TakeSomeDamage()
     {
-        cardHealth -= 1; // Reduce the health of the specific card instance. now it works
+        cardHealth -= 1; 
 
         if (cardHealth <= 0)
         {
             Destroy(gameObject);
-        }
+        }   
     }
 
     public void TakeDamage(int damageAmount)
