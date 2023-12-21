@@ -11,9 +11,7 @@ public enum CardTypes
 public class Card : MonoBehaviour
 {
     public GameObject battleSystem;
-    
-    
-    
+
     public int cardId;
     public CardTypes cardType;
 
