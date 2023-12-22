@@ -1656,12 +1656,11 @@ GameObject:
   - component: {fileID: 756561036}
   - component: {fileID: 756561037}
   - component: {fileID: 756561038}
-  - component: {fileID: 756561039}
   - component: {fileID: 756561040}
   - component: {fileID: 756561041}
   - component: {fileID: 756561042}
-  - component: {fileID: 756561043}
   - component: {fileID: 756561044}
+  - component: {fileID: 756561039}
   - component: {fileID: 756561045}
   - component: {fileID: 756561046}
   - component: {fileID: 756561047}
@@ -1775,6 +1774,7 @@ MonoBehaviour:
   - {fileID: 230995708790307414, guid: d33e460f7c8e8d04cba034e5544ed95e, type: 3}
   PlayerArea: {fileID: 3251457195723849110}
   EnemyArea: {fileID: 6784180021040684962}
+  playerHandsize: 4
   playerCardCount: {fileID: 655179628}
   enemyCardCount: {fileID: 690464224}
 --- !u!114 &756561039
@@ -1864,18 +1864,6 @@ MonoBehaviour:
   m_DefaultActionMap: Pause
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &756561043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756561035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb13f8db91924e540a0b24865ac8edcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &756561044
 MonoBehaviour:
   m_ObjectHideFlags: 0
