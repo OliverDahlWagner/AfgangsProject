@@ -85,9 +85,13 @@ public class DrawCards : MonoBehaviour
     {
         if (playerDrawing)
         {
-            if (playerPlayingDeck.Count > 0 && playerHandsize < maxHandSize)
+            if (GetComponent<BattleSystem>().playerCanDraw)
             {
-                DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+                if (playerPlayingDeck.Count > 0 && playerHandsize < maxHandSize)
+                {
+                    DrawCard(playerPlayingDeck, 1, PlayerArea, playerTag);
+                    GetComponent<BattleSystem>().playerCanDraw = false;
+                }
             }
         }
         else

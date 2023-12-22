@@ -52,6 +52,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject zoomCard;
 
     private bool turnOne = true;
+    public bool playerCanDraw = true;
+    public GameObject drawIndicator;
 
     private int totalTurnActions = 3; // just an idea for now. DRAW, PLACE, ATTACK (any combination)
 
@@ -65,6 +67,7 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
+        ShowThePickCardIndicator(playerCanDraw);
         LockUnlockButtons(state); // this works. the color changes to a lighter grey. We can maybe make a more clear indicator later
     }
 
@@ -93,12 +96,18 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayerTurn()
     {
+        SetCanDrawTrue();
         ResetCardActions(playerPlayedCards);
         if (turnOne != true) {
             IncreaseMana(playerAva);
         }
         turnOne = false;
         LastingSupCardUseFunction();
+    }
+
+    private void SetCanDrawTrue()
+    {
+        playerCanDraw = true;
     }
 
     private IEnumerator EnemyTurn()
@@ -219,6 +228,18 @@ public class BattleSystem : MonoBehaviour
             {
                 card.GetComponent<SupportCard>().SupportFunction(null, playerPlayedCards);
             }
+        }
+    }
+
+    private void ShowThePickCardIndicator(bool indicator)
+    {
+        if (indicator)
+        {
+            drawIndicator.SetActive(true);
+        }
+        else
+        {
+            drawIndicator.SetActive(false);
         }
     }
     
