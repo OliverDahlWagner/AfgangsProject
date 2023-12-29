@@ -32,6 +32,8 @@ public class SupportCard : MonoBehaviour
     public int attackModifierValue;
     public int healthModifierValue;
 
+    public bool hasBeenPlaced = false;
+
     [SerializedDictionary("Support card type", "Icon object")]
     public SerializedDictionary<SupCardTypes, GameObject> supportIcons;
 

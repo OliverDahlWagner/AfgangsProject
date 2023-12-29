@@ -18,6 +18,8 @@ public class SelectCards : MonoBehaviour
 
         var cardsSorted = CardsSortedByValue(playableCards);
 
+        
+        
         for (int i = 0; i < cardsSorted.Count; i++)
         {
             manaLimit -= cardsSorted[i].GetComponent<Card>().cardCost;
@@ -51,6 +53,9 @@ public class SelectCards : MonoBehaviour
                 }
             }
         }
+        
+        
+        
         chosenCards.Sort((card1, card2) =>
         {
             var type1 = card1.GetComponent<Card>().cardType;
@@ -69,6 +74,8 @@ public class SelectCards : MonoBehaviour
             return 0; 
             
         });
+        
+        
         var champCount = 0;
         foreach (var card in chosenCards)
         {

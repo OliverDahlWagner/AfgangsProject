@@ -247,6 +247,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                     battleSystem.GetComponent<BattleSystem>()
                         .playerPlayedCards); // this will fire of the support effect
 
+                transform.GetComponent<SupportCard>().hasBeenPlaced = true;
+
                 dropZone.GetComponent<Image>().color = new Color32(1, 1, 1, 0);
             }
             else
@@ -270,7 +272,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     private bool CardNotMove() // if any conditions is true, card wont move
     {
         return HasAttackedThisRound() || HasBeenPlacedThisRound() || IsNotPlayerTurn() ||
-               battleSystem.GetComponent<BattleSystem>().isPaused;
+               battleSystem.GetComponent<BattleSystem>().isPaused || NotMoveLasting();
     }
 
     private bool HasAttackedThisRound() // condition for not moving
@@ -288,5 +290,16 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     private bool IsNotPlayerTurn() // condition for not moving
     {
         return battleSystem.GetComponent<BattleSystem>().state != BattleState.PLAYERTURN;
+    }
+    
+    private bool NotMoveLasting() // condition for not moving
+    {
+        if (transform.GetComponent<Card>().cardType == CardTypes.SUPPORT && transform.GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING &&
+            transform.GetComponent<SupportCard>().hasBeenPlaced)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
