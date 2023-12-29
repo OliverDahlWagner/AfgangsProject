@@ -47,15 +47,12 @@ public class DrawCards : MonoBehaviour
             106, 107, 108, 109, 110
         };
 
-        /*enemyDeck = new List<int>
+        enemyDeck = new List<int>
         {
             1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 102, 103, 104, 105,
             106, 107, 108, 109, 110
-        };*/
-        enemyDeck = new List<int>
-        {
-            1, 2, 3, 4, 101, 102, 103, 104, 105
         };
+
 
 
         playerPlayingDeck = GetMatchingCards(playerDeck);
@@ -140,7 +137,6 @@ public class DrawCards : MonoBehaviour
     {
         if (theDeck.Count == 0)
         {
-            Debug.Log("out of cards");
             return;
         }
 
@@ -148,7 +144,7 @@ public class DrawCards : MonoBehaviour
         {
             var theCard = theDeck[0];
 
-            GameObject dealtCard = Instantiate(theDeck[0], Vector3.zero, Quaternion.identity);
+            GameObject dealtCard = Instantiate(theCard, Vector3.zero, Quaternion.identity);
             dealtCard.transform.SetParent(playerArea.transform, false);
             dealtCard.tag = cardTag;
 
@@ -163,8 +159,7 @@ public class DrawCards : MonoBehaviour
                 playerHandsize = playerHand.Count;
             }
 
-            theDeck.Remove(
-                theCard); // this removes the first card from the list. so if we use index zero we always get the next card
+            theDeck.Remove(theCard); // this removes the first card from the list. so if we use index zero we always get the next card
         }
     }
 

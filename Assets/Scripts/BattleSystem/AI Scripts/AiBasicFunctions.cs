@@ -141,7 +141,7 @@ public class AiBasicFunctions : MonoBehaviour
         var dropZone =
             dropZones[
                 AvailableDropZonesIndexes()[
-                    indexDropZone]]; // ok so it chooses a random index and only if empty will play a card
+                    indexDropZone]];
 
         return dropZone;
     }

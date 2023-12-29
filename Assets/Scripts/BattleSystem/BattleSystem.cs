@@ -86,6 +86,11 @@ public class BattleSystem : MonoBehaviour
         turnText.SetText("Player turn");
         PlayerTurn();
     }
+    
+    private void SetCanDrawTrue()
+    {
+        playerCanDraw = true;
+    }
 
     public void EndPlayerTurn()
     {
@@ -103,11 +108,6 @@ public class BattleSystem : MonoBehaviour
         }
         turnOne = false;
         LastingSupCardUseFunction();
-    }
-
-    private void SetCanDrawTrue()
-    {
-        playerCanDraw = true;
     }
 
     private IEnumerator EnemyTurn()
