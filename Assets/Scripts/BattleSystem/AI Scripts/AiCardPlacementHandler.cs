@@ -66,7 +66,6 @@ public class AiCardPlacementHandler : MonoBehaviour
             chosenCards.Add(theChosenCard);
         }
 
-
         return chosenCards;
     }
 
@@ -99,8 +98,9 @@ public class AiCardPlacementHandler : MonoBehaviour
         Debug.Log("played champion card " + playingCard.name);
 
         var dropZone = GetComponent<AiBasicFunctions>().GetRandomDropzone();
-
-        dropZone.transform.position = new Vector3(dropZone.transform.position.x, dropZone.transform.position.y, 0);
+        
+        // Dette gjorde ikke noget
+        /*dropZone.transform.position = new Vector3(dropZone.transform.position.x, dropZone.transform.position.y, 0);*/
 
         yield return StartCoroutine(StartPlacementOfCard(playingCard, dropZone));
 
