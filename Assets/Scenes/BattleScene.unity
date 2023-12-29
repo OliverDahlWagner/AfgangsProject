@@ -238,7 +238,7 @@ RectTransform:
   - {fileID: 1816547284}
   - {fileID: 1273993463}
   m_Father: {fileID: 992011159}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -312,7 +312,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 992011159}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2448,7 +2448,7 @@ RectTransform:
   - {fileID: 655179627}
   - {fileID: 1517863948}
   m_Father: {fileID: 992011159}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2569,7 +2569,7 @@ RectTransform:
   - {fileID: 453476322}
   - {fileID: 233501108}
   m_Father: {fileID: 992011159}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2645,7 +2645,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 992011159}
-  m_RootOrder: 15
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2865,12 +2865,12 @@ RectTransform:
   - {fileID: 675202739}
   - {fileID: 438990525}
   - {fileID: 268411851}
+  - {fileID: 952919494}
   - {fileID: 944364045}
   - {fileID: 179871484}
   - {fileID: 918374859}
   - {fileID: 222993579}
   - {fileID: 608575027}
-  - {fileID: 952919494}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4525,7 +4525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5664862108656941155, guid: 114384af9253d4d40906c8a722b47efa, type: 3}
       propertyPath: m_AnchorMax.x

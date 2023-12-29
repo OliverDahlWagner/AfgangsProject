@@ -18,8 +18,37 @@ public class SelectCards : MonoBehaviour
 
         var cardsSorted = CardsSortedByValue(playableCards);
 
-        
-        
+
+        if (GetComponent<AiBasicFunctions>().GetAIPlayedChampionCards().Count == 0)
+        {
+            var bestChampCard = new GameObject();
+            
+            for (int i = 0; i < cardsSorted.Count; i++)
+            {
+                if (cardsSorted[i].GetComponent<Card>().cardType == CardTypes.CHAMPION)
+                {
+
+                    if (bestChampCard.GetComponent<Card>() == null)
+                    {
+                        bestChampCard = cardsSorted[i].gameObject;
+                    }
+                    else
+                    {
+                        if (bestChampCard.GetComponent<Card>().GetValue() < cardsSorted[i].GetComponent<Card>().GetValue())
+                        {
+                            bestChampCard = cardsSorted[i].gameObject;
+                        }
+                    }
+                    
+                }
+                
+            }
+
+            cardsSorted.Remove(bestChampCard);
+            chosenCards.Add(bestChampCard);
+            manaLimit -= bestChampCard.GetComponent<Card>().cardCost;
+        }
+
         for (int i = 0; i < cardsSorted.Count; i++)
         {
             manaLimit -= cardsSorted[i].GetComponent<Card>().cardCost;
@@ -27,34 +56,24 @@ public class SelectCards : MonoBehaviour
             {
                 if (cardsSorted[i].GetComponent<Card>().cardType == CardTypes.CHAMPION)
                 {
-                    spotsLeft -= 1;
-                    if (spotsLeft > 0)
-                    {
+           
+                        Debug.Log("added a champ");
                         chosenCards.Add(cardsSorted[i]);
-                    }
+                    
                 }
                 
                 if (cardsSorted[i].GetComponent<Card>().cardType == CardTypes.SUPPORT)
                 {
-                    if (cardsSorted[i].GetComponent<SupportCard>().supCardType == SupCardTypes.INSTANT ||
-                        cardsSorted[i].GetComponent<SupportCard>().supCardType == SupCardTypes.SPECIFIC)
-                    {
-                        chosenCards.Add(cardsSorted[i]);
-                    }
-
-                    spotsLeft -= 1;
-                    if (cardsSorted[i].GetComponent<SupportCard>().supCardType == SupCardTypes.LASTING)
-                    {
-                        if (spotsLeft > 0)
-                        {
-                            chosenCards.Add(cardsSorted[i]);
-                        }
-                    }
+                    chosenCards.Add(cardsSorted[i]);
+                    Debug.Log("added a sup");
                 }
             }
         }
-        
-        
+
+        for (int i = 0; i < chosenCards.Count; i++)
+        {
+            Debug.Log(chosenCards[i].name);
+        }
         
         chosenCards.Sort((card1, card2) =>
         {
@@ -90,6 +109,7 @@ public class SelectCards : MonoBehaviour
         }
 
         Debug.Log(chosenCards.Count + "count of picked cards");
+        Debug.Log(spotsLeft + "  spot lefttttttttttttttttttttttttttttttttttttt");
         return chosenCards;
     }
 

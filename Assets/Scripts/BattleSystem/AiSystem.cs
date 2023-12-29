@@ -15,7 +15,12 @@ public class AiSystem : MonoBehaviour
     {
         GetComponent<BattleSystem>().IncreaseMana( GetComponent<BattleSystem>().enemyAva);
         GetComponent<AiBasicFunctions>().LastingSupCardUseFunction();
-        GetComponent<AiBasicFunctions>().DrawOneCard();
+
+        if (GetComponent<DrawCards>().enemyHand.Count < 7)
+        {
+            GetComponent<AiBasicFunctions>().DrawOneCard();
+        }
+        
         yield return new WaitForSeconds(0.5f); // for the feel
         GetComponent<AiBasicFunctions>().ResetChampCardActions();
 
